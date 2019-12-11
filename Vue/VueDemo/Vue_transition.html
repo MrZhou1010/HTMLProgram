@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>transition</title>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.9/vue.min.js"></script>
+    <style type="text/css">
+        .fade-enter-active {
+            transition: all .3s ease;
+        }
+        .fade-leave-active {
+            transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+        }
+        .fade-enter,.fade-leave-to /* .fade-leave-active in below version 2.1.8 */ {
+            transform: translateX(10px);
+            opacity: 0;
+        }
+        .bounce-enter-active {
+            animation: bounce-in .5s;
+        }
+        .bounce-leave-active {
+            animation: bounce-in .5s reverse;
+        }
+        @keyframes bounce-in {
+            0% {
+                transform: scale(0);
+            }
+            50% {
+                transform: scale(1.5);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+<div id="transition">
+    <button v-on:click="show = !show">toggle</button>
+    <transition name="fade">
+        <p v-show="show" style="background-color: #f122f1">显示</p>
+    </transition>
+</div>
+
+<script type="text/javascript">
+    // 创建根实例
+    new Vue({
+        el: '#transition',
+        data: {
+            show: true,
+        }
+    })
+</script>
+<div id="transition_animation">
+    <button @click="show = !show">Toggle show</button>
+    <transition name="bounce">
+        <p v-if="show">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris facilisis enim libero, at lacinia diam fermentum id. Pellentesque habitant morbi tristique senectus et netus.</p>
+    </transition>
+</div>
+<script>
+    // 创建根实例
+    new Vue({
+        el: '#transition_animation',
+        data: {
+            show: true,
+        }
+    })
+</script>
+<link href="https://cdn.jsdelivr.net/npm/animate.css@3.5.1" rel="stylesheet" type="text/css">
+<div id="animate_css">
+    <button @click="show = !show">
+        Toggle render
+    </button>
+    <transition
+            name="custom-classes-transition"
+            enter-active-class="animated tada"
+            leave-active-class="animated bounceOutRight"
+    >
+        <p v-if="show">hello</p>
+    </transition>
+</div>
+<script>
+    new Vue({
+        el: '#animate_css',
+        data: {
+            show: true
+        }
+    })
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.min.js"></script>
+<div id="velocity">
+    <button @click="show = !show">
+        Toggle
+    </button>
+    <transition
+            v-on:before-enter="beforeEnter"
+            v-on:enter="enter"
+            v-on:leave="leave"
+            v-bind:css="false"
+    >
+        <p v-if="show">
+            velocity demo
+        </p>
+    </transition>
+</div>
+<script>
+    new Vue({
+        el: '#velocity',
+        data: {
+            show: false
+        },
+        methods: {
+            beforeEnter: function (el) {
+                el.style.opacity = 0;
+                el.style.transformOrigin = 'left';
+            },
+            enter: function (el,done) {
+                Velocity(el, { opacity: 1, fontSize: '1.4em' }, { duration: 300 });
+                Velocity(el, { fontSize: '1em' }, { complete: done });
+            },
+            leave: function (el, done) {
+                Velocity(el, { translateX: '15px', rotateZ: '50deg' }, { duration: 600 })
+                Velocity(el, { rotateZ: '100deg' }, { loop: 2 })
+                Velocity(el, {
+                    rotateZ: '45deg',
+                    translateY: '30px',
+                    translateX: '30px',
+                    opacity: 0
+                }, { complete: done })
+            }
+        }
+    })
+</script>
+<div id="transition-components-demo">
+    <button @click="toggleView">Toggle</button>
+    <transition name="component-fade" mode="out-in">
+        <component v-bind:is="view"></component>
+    </transition>
+    </transition>
+</div>
+<style>
+    .component-fade-enter-active, .component-fade-leave-active {
+        transition: opacity .3s ease;
+    }
+    .component-fade-enter, .component-fade-leave-to
+        /* .component-fade-leave-active for below version 2.1.8 */ {
+        opacity: 0;
+    }
+</style>
+<script>
+    new Vue({
+        el: '#transition-components-demo',
+        data: {
+            view: 'view-a',
+        },
+        components: {
+            'view-a': {
+                template: '<div>Component A</div>'
+            },
+            'view-b': {
+                template: '<div>Component B</div>'
+            }
+        },
+        methods: {
+            toggleView: function () {
+                if (this.view == 'view-a') {
+                    this.view = 'view-b';
+                }
+                else {
+                    this.view = 'view-a';
+                }
+            }
+        }
+    })
+</script>
+<div id="list-demo" class="demo">
+    <button v-on:click="add">Add</button>
+    <button v-on:click="remove">Remove</button>
+    <transition-group name="list" tag="p">
+        <li v-for="item in items" v-bind:key="item" class="list-item">
+          {{ item }}
+        </li>
+    </transition-group>
+</div>
+<style>
+    .list-item {
+        display: inline-block;
+        margin-right: 10px;
+    }
+    .list-enter-active, .list-leave-active {
+        transition: all 1s;
+    }
+    .list-enter, .list-leave-to
+        /* .list-leave-active for below version 2.1.8 */ {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+</style>
+
+<script>
+    new Vue({
+        el: '#list-demo',
+        data: {
+            items: [1,2,3,4,5,6,7,8,9],
+            nextNum: 10,
+        },
+        methods: {
+            randomIndex: function () {
+                return Math.floor(Math.random() * this.items.length)
+            },
+            add: function () {
+                this.items.splice(this.randomIndex(), 0, this.nextNum++)
+            },
+            remove: function () {
+                this.items.splice(this.randomIndex(), 1)
+            },
+        }
+    })
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.14.1/lodash.min.js"></script>
+<div id="flip-list-demo" class="demo">
+    <button v-on:click="shuffle">Shuffle</button>
+    <transition-group name="flip-list" tag="ul">
+        <li v-for="item in items" v-bind:key="item">
+            {{ item }}
+        </li>
+    </transition-group>
+</div>
+<style>
+    .demo li{
+        display: inline-block;
+        margin-right: 10px;
+    }
+    .flip-list-move {
+        transition: transform 1s;
+    }
+</style>
+<script>
+    new Vue({
+        el: '#flip-list-demo',
+        data: {
+            items: [1,2,3,4,5,6,7,8,9]
+        },
+        methods: {
+            shuffle: function () {
+                this.items = _.shuffle(this.items)
+                //this.items.reverse();
+            }
+        }
+    });
+</script>
+<div id="flip-table-demo">
+    <button v-on:click="shuffle">Shuffle</button>
+    <transition-group name="flip-table" tag="table" class="container">
+        <div v-for="item in items" v-bind:key="item.id" class="cell">
+                {{ item.number }}
+        </div>
+    </transition-group>
+</div>
+<style>
+    .container {
+        display: flex;
+        flex-wrap: wrap;
+        width: 160px;
+        margin-top: 10px;
+        margin-left: 20px;
+    }
+    .cell {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        width: 30px;
+        height: 30px;
+        border: 1px solid #aaa;
+        margin-right: -1px;
+        margin-bottom: -1px;
+    }
+    .flip-table-move {
+        transition: transform 1s;
+    }
+</style>
+<script>
+    var vue = new Vue({
+        el: '#flip-table-demo',
+        data: {
+            items: Array.apply(null, { length: 25 })
+                .map(function (_, index) {
+                    return {
+                        id: index,
+                        number: index % 5 + 1
+                    }
+                })
+        },
+        methods: {
+            shuffle: function () {
+                this.items = _.shuffle(this.items)
+            }
+        },
+    });
+</script>
+<div id="staggered-list-demo">
+    <input v-model="query">
+    <transition-group
+            name="staggered-fade"
+            tag="ul"
+            v-bind:css="false"
+            v-on:before-enter="beforeEnter"
+            v-on:enter="enter"
+            v-on:leave="leave"
+    >
+        <li
+                v-for="(item, index) in computedList"
+                v-bind:key="item.msg"
+                v-bind:data-index="index"
+        >{{ item.msg }}</li>
+    </transition-group>
+</div>
+<script>
+    new Vue({
+        el: '#staggered-list-demo',
+        data: {
+            query: '',
+            list: [
+                { msg: 'Bruce Lee' },
+                { msg: 'Jackie Chan' },
+                { msg: 'Chuck Norris' },
+                { msg: 'Jet Li' },
+                { msg: 'Kung Fury' }
+            ]
+        },
+        computed: {
+            computedList: function () {
+                var vm = this
+                return this.list.filter(function (item) {
+                    return item.msg.toLowerCase().indexOf(vm.query.toLowerCase()) !== -1
+                })
+            }
+        },
+        methods: {
+            beforeEnter: function (el) {
+                el.style.opacity = 0
+                el.style.height = 0
+            },
+            enter: function (el, done) {
+                var delay = el.dataset.index * 150
+                setTimeout(function () {
+                    Velocity(
+                        el,
+                        { opacity: 1, height: '1.6em' },
+                        { complete: done }
+                    )
+                }, delay)
+            },
+            leave: function (el, done) {
+                var delay = el.dataset.index * 150
+                setTimeout(function () {
+                    Velocity(
+                        el,
+                        { opacity: 0, height: 0 },
+                        { complete: done }
+                    )
+                }, delay)
+            }
+        }
+    })
+</script>
+</body>
+</html>

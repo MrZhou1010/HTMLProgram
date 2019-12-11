@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript中内建对象之Error对象</title>
+</head>
+<body>
+    <script type="text/javascript">
+        try {
+            notExists();
+        } catch(error){
+            console.log(error.name+':'+error.message);
+        }
+
+        try {
+            var n = 0;
+            if (n == 0) {
+                throw new Error('0不能作为除数');
+            } else {
+                alert(1/n);
+            }
+        } catch(error){
+            console.log(error.name+':'+error.message);
+        } finally {
+            console.log('finally总被调用');
+        }
+
+        try {
+            notExists();
+        } catch(error){
+            if (error instanceof EvalError) {
+                console.log('EvalError:'+error.message);
+            } else if (error instanceof RangeError) {
+                console.log('RangeError:'+error.message);
+            } else if (error instanceof TypeError) {
+                console.log('TypeError:'+error.message);
+            } else if (error instanceof ReferenceError) {
+                console.log('ReferenceError:'+error.message);
+            } else {
+                console.log('其他Error');
+            }
+        }
+
+        function MyError(msg) {
+            this.name = '这是自定义的错误名字';
+            this.message = msg||'默认的错误信息';
+        }
+        MyError.prototype = Object.create(Error.prototype);
+        MyError.prototype.constructor = MyError;
+        try {
+            throw new MyError()
+        } catch(error){
+            console.log(error.name+':'+error.message);
+        }
+
+    </script>
+</body>
+</html>

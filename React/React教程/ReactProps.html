@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React</title>
+    <script src="https://www.w3cschool.cn/statics/assets/react/react.min.js"></script>
+    <script src="https://www.w3cschool.cn/statics/assets/react/react-dom.min.js"></script>
+    <script src="https://www.w3cschool.cn/statics/assets/react/babel.min.js"></script>
+</head>
+<body>
+<section>
+    <div id="example1"></div>
+    <div id="example2"></div>
+</section>
+<script type="text/babel">
+    /*
+     state 和 props 主要的区别在于 props 是不可变的，而 state 可以根据与用户交互来改变。
+     这就是为什么有些容器组件需要定义 state 来更新和修改数据。
+     而子组件只能通过 state 来传递数据。
+    */
+    var HelloMessage = React.createClass({
+        getDefaultProps: function () {
+            return {
+                name: 'king',
+            }
+        },
+        propTypes: {
+
+        },
+        render: function () {
+            return <p>{this.props.name}</p>;
+        }
+    });
+    ReactDOM.render(
+        <HelloMessage name="otherName"/>,
+        document.getElementById('example1')
+    );
+
+    var WebSite = React.createClass({
+        getInitialState: function() {
+            return {
+                name: "W3Cschool教程",
+                site: "http://www.w3cschool.cn"
+            };
+        },
+        render: function () {
+            return <div>
+                <Name name={this.state.name} />
+                <Link site={this.state.site} />
+            </div>;
+        }
+    });
+    var Name = React.createClass({
+        render: function() {
+            return (
+                <h1>{this.props.name}</h1>
+            );
+        }
+    });
+    var Link = React.createClass({
+        render: function() {
+            return (
+                <a href={this.props.site}>
+                    {this.props.site}
+                </a>
+            );
+        }
+    });
+    ReactDOM.render(<WebSite />,
+        document.getElementById('example2')
+    );
+</script>
+</body>
+</html>

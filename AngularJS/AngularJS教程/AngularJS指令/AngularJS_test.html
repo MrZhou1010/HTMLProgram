@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"></script>
+    <title>angular</title>
+</head>
+<body>
+
+<div ng-app="">
+    <div  ng-init="firstName='John'">
+        <p>在输入框中尝试输入:</p>
+        <p>姓名: <input type="text" ng-model="firstName"></p>
+        <p>你输入的为: {{ firstName }}</p>
+    </div>
+
+    <div data-ng-init="quantity=1;price=5">
+        <h2>价格计算器</h2>
+        数量： <input type="number" ng-model="quantity">
+        价格： <input type="number" ng-model="price">
+        <p><b>总价：</b> {{ quantity * price }}</p>
+    </div>
+
+    <div data-ng-init="names=['Jani','Hege','Kai']">
+        <p>使用 ng-repeat 来循环数组</p>
+        <ul>
+            <li data-ng-repeat="x in names">
+                {{ x }}
+            </li>
+        </ul>
+    </div>
+</div>
+
+<script>
+    /*
+     AngularJS 指令是扩展的 HTML 属性，带有前缀 ng-。
+     ng-app 指令初始化一个 AngularJS 应用程序。
+     ng-init 指令初始化应用程序数据。
+     ng-model 指令把元素值（比如输入域的值）绑定到应用程序。
+     */
+</script>
+</body>
+</html>

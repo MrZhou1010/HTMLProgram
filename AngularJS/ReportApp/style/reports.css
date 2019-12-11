@@ -1,0 +1,14 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.reportsConfigure {
+    width: 200px;
+    height: 300px;
+    padding-left: 20px;
+    border: solid 1px #9c9da1;
+    background-color: red;
+}

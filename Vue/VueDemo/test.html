@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>custom-select</title>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.9/vue.min.js"></script>
+    <style type="text/css">
+        *{
+            margin: 0;padding: 0;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <my-component :data="message"></my-component>
+</div>
+<script>
+    Vue.component('my-component',{
+        template: '<div>' +
+            '<input type="text" v-model="data" @changeValue="changeValue">' +
+            '<span>{{ message }}</span>' +
+        '</div>',
+        props:['data'],
+        methods: {
+            changeValue: function () {
+                
+            }
+        }
+    });
+    new Vue({
+        el: '#app',
+        data: {
+            message: '',
+        },
+        watch: {
+            message: function () {
+                this.$on('changeValue');
+            }
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Extjs_test2</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/extjs/6.2.0/classic/theme-classic/resources/theme-classic-all.css" rel="stylesheet">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/extjs/6.2.0/ext-all.js"></script>    <script type="text/javascript">
+        Ext.onReady(function () {
+            var component1 = Ext.create('Ext.Component', {
+                html:'First Component'
+            });
+
+            var component2 = Ext.create('Ext.Component', {
+                html: 'Second Component'
+            });
+
+            var component3 = Ext.create('Ext.Component', {
+                html: 'Third Component'
+            });
+
+            var component4 = Ext.create('Ext.Component', {
+                html: 'Fourth Component'
+            });
+
+            var container = Ext.create('Ext.container.Container', {
+                style: {borderStyle: 'solid', borderWidth: '2px' },
+                width: '50%',
+                items: [component3, component4]
+            });
+
+            Ext.create('Ext.container.Container', {
+                renderTo: 'container',
+                title: 'Container',
+                border: 1,
+                width: '50%',
+                style: {borderStyle: 'solid', borderWidth: '2px' },
+                items: [component1, component2,  container]
+            });
+
+            var childPanel1 = Ext.create('Ext.Panel', {
+                title:'childPanel1',
+                html: 'First Panel'
+            });
+
+            var childPanel2 = Ext.create('Ext.Panel', {
+                title:'childPanel2',
+                html: 'Another Panel'
+            });
+
+            Ext.create('Ext.panel.Panel', {
+                renderTo: 'panel',
+                width: 200,
+                height : 200,
+                border : true,
+                frame : true,
+                items: [childPanel1, childPanel2]
+            });
+
+            var child1 = Ext.create('Ext.Panel',{
+                html: 'Text field'
+            });
+
+            var child2 = Ext.create('Ext.Panel',{
+                html: 'Text field'
+            });
+            Ext.create('Ext.form.Panel', {
+                renderTo: 'form',
+                width: 100,
+                height : 100,
+                border : true,
+                frame : true,
+                layout: 'auto',// auto is one of the layout type.
+                items: [child1, child2]
+            });
+
+            Ext.create('Ext.tab.Panel', {
+                renderTo: 'tab',
+                height: 100,
+                width: 200,
+                items: [{
+                    xtype: 'panel',
+                    title: 'Tab One',
+                    html: 'The first tab',
+                    listeners: {
+                        render: function() {
+                            Ext.MessageBox.alert('Tab one', 'Tab One was clicked.');
+                        }
+                    }
+                },{
+                    // xtype for all Component configurations in a Container
+                    title: 'Tab Two',
+                    html: 'The second tab',
+                    listeners: {
+                        render: function() {
+                            Ext.MessageBox.alert('Tab two', 'Tab Two was clicked.');
+                        }
+                    }
+                }]
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="container"></div>
+    <div id="panel"></div>
+    <div id="form"></div>
+    <div id="tab"></div>
+
+
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery遍历</title>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        function getParent(elementName) {
+           return $(elementName).parent().css("border","2px solid red");
+        }
+        function getParents(elementName) {
+            return $(elementName).parents().css("border","2px solid red");
+        }
+        function getParents(elementName,parentName) {
+            return $(elementName).parents(parentName).css("border","2px solid red");
+        }
+        function getParentsUntil(elementName,parentName) {
+            return $(elementName).parentsUntil(parentName).css("border","2px solid red");
+        }
+        function getChildren(elementName) {
+            return $(elementName).children().css("border","2px solid red");
+        }
+        function getChildren(elementName,childrenName) {
+            return $(elementName).children(childrenName).css("border","2px solid red");
+        }
+        function getFindChildren(elementName,childrenName) {
+            return $(elementName).find(childrenName).css("border","2px solid red");
+        }
+        function getSiblings(elementName) {
+            return $(elementName).siblings().css("border","2px solid red");
+        }
+        function getSiblings(elementName,siblingsName) {
+            return $(elementName).siblings(siblingsName).css("border","2px solid red");
+        }
+        function getNext(elementName) {
+            return $(elementName).next().css("border","2px solid red");
+        }
+        function getNextAll(elementName) {
+            return $(elementName).nextAll().css("border","2px solid red");
+        }
+        function getNextUntil(elementName,nextName) {
+            return $(elementName).nextUntil(nextName).css("border","2px solid red");
+        }
+        $(document).ready(function(){
+            $("div p").first();
+        });
+        $(document).ready(function(){
+            $("div p").last().css("background-color","yellow");
+        });
+        $(document).ready(function(){
+            $("p").eq(1).css("background-color","yellow");
+        });
+        $(document).ready(function(){
+            $("p").filter(".p1").css("background-color","yellow");
+        });
+        $(document).ready(function(){
+            $("p").not(".p1").css("background-color","yellow");
+        });
+        $(document).ready(function () {
+            //getParent("span");
+            //getParents("span");
+            //getParents("span","ul");
+            //getParentsUntil("span","div");
+            //getChildren("div");
+            //getChildren("div",".t1");
+            //getFindChildren("div","span");
+            //getSiblings("ul.t1");
+            //getSiblings("ul.t1","ul");
+            //getNext("ul");
+            //getNextAll("p.p1");
+            //getNextUntil("ul",".p2");
+        });
+    </script>
+    <style>
+        .ancestors * {
+            display: block;
+            border: 1px solid lightgrey;
+            color: lightgrey;
+            padding: 5px;
+            margin: 15px;
+        }
+    </style>
+
+</head>
+<body class="ancestors">body (曾曾祖父)
+    <div style="width:500px;">div (曾祖父)
+        <ul class="t1">ul (祖父)
+            <li>li (直接父)
+                <span>span</span>
+            </li>
+        </ul>
+        <p class="p1">other</p>
+        <ul>ul (祖父)
+            <li>li (直接父)
+                <span>span</span>
+            </li>
+        </ul>
+        <p class="p2">other</p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery</title>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        function myfunction() {
+            $("#div1").attr("style","color:red").html("Hello jQuery");
+        }
+        $(document).ready(myfunction);
+
+        $(document).ready(function () {
+            $("p").click(function () {
+                $(this).hide();
+            })
+        });
+        $(document).ready(function () {
+            $(".div2").click(function () {
+                $(this).hide();
+            })
+        });
+        /*
+        $(document).ready(function () {
+            $("button").click(function () {
+                $("p").hide("slow",function () {
+                    $("button").html("消失了!");
+                });
+            });
+        });
+        */
+        /*
+        $(document).ready(function () {
+            var flag = 0;
+
+            $("button").click(function () {
+                $("p").toggle("slow",function () {
+                    if (flag == 0) {
+                        flag = 1;
+                        $("button").html("点击显示");
+                    }
+                    else {
+                        flag = 0;
+                        $("button").html("点击消失");
+                    }
+                });
+            });
+        });
+        */
+        $(document).ready(function () {
+            var params1 = {
+                left:'200px',
+                opacity:'0.5',
+                /*
+                height:'+=150px',
+                width:'+=150px'
+                */
+            };
+            var params2 = {
+                top:'200px',
+                opacity:'0.8',
+            };
+            var params3 = {
+                left:'20px',
+                opacity:'0.5',
+            };
+            var params4 = {
+                top:'20px',
+                opacity:'0.8',
+            };
+            $("#div3").mouseover(function () {
+                $("#div3").animate(params1,1000,function () {
+
+                });
+                $("#div3").animate(params2,1000,function () {
+
+                });
+                $("#div3").animate(params3,1000,function () {
+
+                });
+                $("#div3").animate(params4,1000,function () {
+
+                });
+            });
+        });
+        $(document).ready(function () {
+            $("#btn_text").click(function () {
+                alert("text:" + $("p").text());
+            });
+            $("#btn_html").click(function () {
+                alert("html:" + $("p").html());
+            });
+            $("#btn_val").click(function () {
+                alert("val:"+$("#text1").val());
+            });
+            $("#btn_attr").click(function () {
+                alert("attr:"+$("#text1").attr("value")+",id:"+$("#text1").attr("id"));
+            });
+            $("#btn_text_set").click(function () {
+                //$("p").text("hello orld!");
+                $("p").text(function (i,orgText) {
+                    return "oldText:"+orgText+",newText:"+"Hello!"+",index:"+i;
+                });
+            });
+            $("#btn_html_set").click(function () {
+                //$("p").html("<b>hello orld!</b>");
+                $("p").html(function (i,orgText) {
+                    return "oldText:"+orgText+",newText:"+"<b>Hello!</b>"+",index:"+i;
+                });
+            });
+            $("#btn_val_set").click(function () {
+                $("#text1").val("名子");
+            });
+            $("#btn_attr_set").click(function () {
+                //$("#text1").attr("style","background-color:red");
+                var param = {
+                "style":"color:red;width:200px",
+                "value":"新名字"
+                }
+                $("#text1").attr(param);
+                /*
+                var params = {
+                    "style": "color:red;width:300px",
+                    "value": function (i, oldAttr) {
+                        alert(i+":"+oldAttr);
+                        return "oldAttr_value:" + oldAttr + ",newAttr_value:" + "HTML" + ",index:" + i;
+                    }
+                }
+                $("#text1").attr(params);
+                */
+            });
+            $("#btn_append").click(function () {
+                //$("p").append("<b>Appended text</b>.");
+                $("ol").append("<li>Appended text</li>");
+
+                var text1 = "<p><b>Text.</b></p>";
+                var text2 = $("<p id='append_1'></p>").text("New Text!");
+                var text3 = document.createElement("p").innerHTML = "New msg!";
+                $("p").append(text1,text2,text3);
+            });
+            $("#btn_prepend").click(function () {
+                $("p").prepend("<b>Prepended text</b>.");
+                $("ol").prepend("<li>Prepended text</li>");
+            });
+            $("#btn_remove").click(function () {
+                $("#p_remove").remove();
+            });$("#btn_empty").click(function () {
+                $("#div_empty").empty();
+            });
+            $("#btn_addClass").click(function () {
+                $(".div2").addClass("font-color");
+                $(".div2").addClass("font-blod");
+            });
+            $("#btn_removeClass").click(function () {
+                $(".div2").removeClass("font-color font-blod");
+            });
+            $("#btn_toggleClass").click(function () {
+                $(".div2").toggleClass("font-color font-blod");
+            });
+        });
+    </script>
+    <style type="text/css">
+        .font-color {
+            color: green;
+        }
+        .font-blod {
+            font-weight: bolder;
+            font-size: larger;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1"></div>
+    <p><a href="jQuery.html">点击<b>消失</b></a></p>
+    <div class="div2">点击消失</div>
+    <button type="button" value="消失" id="btn">点击消失</button>
+    <div id="div3" style="width: 120px;height: 100px; background-color: #ff22ff;position: relative;">动画效果</div>
+    <input type="text" id="text1" value="name">
+    <ol id="ol_test">
+        <li>line1</li>
+        <li>line2</li>
+        <li>line3</li>
+        <li>line4</li>
+    </ol>
+    <div id="div_empty" style="background-color: orange;width: 200px;height: 80px">
+        <p id="p_remove">删除测试</p>
+    </div>
+    <br/>
+    <button id="btn_text" type="button">显示text</button>
+    <button id="btn_html" type="button">显示html</button>
+    <button id="btn_val" type="button">显示val</button>
+    <button id="btn_attr" type="button">显示attr</button>
+    <br/>
+    <button id="btn_text_set" type="button">设置text</button>
+    <button id="btn_html_set" type="button">设置html</button>
+    <button id="btn_val_set" type="button">设置val</button>
+    <button id="btn_attr_set" type="button">设置attr</button>
+    <br/>
+    <button id="btn_append" type="button">追加append</button>
+    <button id="btn_prepend" type="button">追加prepend</button>
+    <button id="btn_remove" type="button">删除remove元素</button>
+    <button id="btn_empty" type="button">删除empty子元素</button>
+    <br/>
+    <button id="btn_addClass" type="button">向元素添加css类</button>
+    <button id="btn_removeClass" type="button">向元素删除css类</button>
+    <button id="btn_toggleClass" type="button">添加删除切换css类</button>
+</body>
+</html>

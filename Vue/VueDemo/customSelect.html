@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>custom-select</title>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.9/vue.min.js"></script>
+    <style type="text/css">
+        *{
+            margin: 0;padding: 0;
+        }
+        .select-input {
+            width: 120px;
+            height: 22px;
+            line-height: 22px;
+            border: 1px solid #2e3133;
+            background-color: #ffffff;
+            padding-left: 8px;
+        }
+        .select-input input {
+            width: 90px;
+            height: 18px;
+            border: none;
+            margin-right: 4px;
+            outline: none;
+            cursor: text;
+        }
+        .select-input span {
+            display: inline-block;
+            width: 26px;
+            text-align: center;
+            cursor: pointer;
+        }
+        .select-wrapper {
+            width: 130px;
+            height: 30px;
+            margin-top: 100px;
+            margin-left: 100px;
+        }
+        .select-list {
+            list-style: none;
+            border: 1px solid #2e3133;
+            margin-top: -1px;
+        }
+        .select-list li {
+            height: 22px;
+            padding-left: 8px;
+            cursor: pointer;
+        }
+        .select-list li:hover {
+            background-color: #b3d7ff;
+        }
+    </style>
+</head>
+<body>
+    <div id="custom-select">
+        <custom-select :listdata="listData" :readonly="isReadonly" :placeholder="placeholderValue"></custom-select>
+    </div>
+    <script>
+        Vue.component('custom-select',{
+            template: '<div class="select-wrapper">' +
+                '<div class="select-input" @click="showListHandle">' +
+                    '<input type="text" v-model="value" :readonly="readonly" :placeholder="placeholder"/>' +
+                    '<span>v</span>' +
+                '</div>' +
+                '<ul v-show="selectShow" class="select-list">' +
+                    '<li v-for="item in items" @click="selectValueHandle(item)">{{ item }}</li>' +
+                '</ul>'+'</div>',
+            props: ['listdata','readonly','placeholder'],
+            data: function () {
+                return {
+                    selectShow: false,
+                    value: '',
+                    items: this.listdata,
+              }
+            },
+            methods: {
+                showListHandle: function () {
+                    this.selectShow = !this.selectShow;
+                    this.items = this.listdata;
+                },
+                selectValueHandle: function (value) {
+                    this.value = value;
+                    this.selectShow = false;
+                }
+            },
+            watch: {
+                value: function (newValue,oldValue) {
+                    console.log(newValue);
+                    console.log(oldValue);
+                    if (newValue) {
+                        this.items = this.listdata.filter(function (data) {
+                            return data.toLowerCase().indexOf(newValue.toLowerCase()) !== -1;
+                        })
+                    } else {
+                        this.items = this.listdata;
+                    }
+                }
+            }
+        });
+        var vue = new Vue({
+            el: '#custom-select',
+            data: {
+                typeData: ['Rount', 'Events', 'Chart', 'History','Rount', 'Events', 'Chart', 'History','Rount', 'Events', 'Chart', 'History'],
+                isReadonly: false,
+                placeholderValue: 'select type',
+            },
+            computed: {
+                listData: function () {
+                    return this.typeData;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript函数</title>
+</head>
+<body>
+    <script type="text/javascript">
+        function test() {
+            return true;
+        }
+        //alert(test());
+
+        function test2(num1,num2) {
+            return num1+num2;
+        }
+        //alert(test2());
+        //alert(window.test2(2,3));
+
+        function test3(num1,num2) {
+            num1 = num1||1;
+            num2 = num2||2;
+            return num1+num2;
+        }
+        //alert(test3());
+
+        function test4(num1,num2) {
+            num1 = arguments[0]?arguments[0]:0;//arguments[n]为传入n个参数的集合
+            num2 = arguments[1]?arguments[1]:0;
+            return num1+num2;
+        }
+        //alert(test4());
+        //alert(test4(5,7));
+        //arguments实现可变参数形式的函数
+        function test5() {
+            var paramsNum = arguments.length;
+            var sum=0;
+            for (var i=0;i<paramsNum;i++) {
+                sum += arguments[i];
+            }
+            return sum;
+        }
+        //alert(test5(1,2,3,4,5,6,7,8,9,10));
+
+        var url1 = encodeURI('https://pan.baidu.com/play/video#video/path=%2F新建文件夹%2F微信小程序视频等多个文件%2FH5-PHP%2F01.第一阶段：页面制作基础等多个文件%2F01.第一阶段：页面制作基础%2F04.Web前端开发之JavaScript快速入门%2F01.JavaScript初步%2F14.JavaScript中的全局函数.mp4&t=5');
+        document.write(url1+'<br/>');
+        document.write(decodeURI(url1)+'<br/>');
+
+        var bl1 = new Boolean(123);
+        var date = new Date();
+        //alert(Number(date));
+
+        //匿名函数
+        var test7 = function(x,y) {
+            return x+y;
+        }
+        //alert(test7(10,2));
+
+        //回调函数
+        function calc(x,y) {
+            return x()+y();
+        }
+        var res1 = function (){
+            return 3;
+        }
+        var res2 = function (){
+            return 5;
+        }
+        //alert(calc(res1,res2));
+
+        function test8(a,b,c,callback) {
+            var i,arr = [];
+            for (i=0;i<3;i++) {
+                arr[i] = callback(arguments[i]*2);
+            }
+            return arr;
+        }
+        function addOne(a) {
+            return a+1;
+        }
+        alert(test8(10,20,30,addOne));
+        alert(test8.call(test8,10,20,30,addOne));
+        var param = [10,20];
+        alert(test2.apply(test2,param));
+
+        //自调函数
+        (function(a,b){alert(a+b);})(2,3);
+    </script>
+</body>
+</html>

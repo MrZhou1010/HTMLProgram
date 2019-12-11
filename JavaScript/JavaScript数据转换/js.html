@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript数据转换</title>
+</head>
+<body>
+    <script type="text/javascript">
+     //隐式转换
+        //undefined、null、NaN、0、0.0、空字符串->false
+        //undefined->NaN null->0 false->0 字符串为数字->数字，否则NaN
+        //其他转换字符串，转换为其字符对应的字符串
+     //显示转换
+        var test = Boolean(0);
+            test = Boolean(undefined);
+            test = Boolean(0.0);
+            test = Boolean(NaN);
+            test = Boolean(null);
+            test = Boolean('');
+            //alert(test);
+        var str = String(undefined);
+            str = String(NaN);
+            str = String(null);
+            str = String(false);
+            str = String(123.2);
+            document.write(str);
+        var num = Number(undefined);
+            num = Number(NaN);
+            num = Number(null);
+            num = Number(false);
+            num = Number('12.3');
+            alert(num);
+        var test2 = parseInt(123,0);
+            test2 = parseInt(0xf);
+            test2 = parseInt('123king');
+            //alert(test2);
+        var test = parseFloat('1.25');
+    </script>
+
+</body>
+</html>

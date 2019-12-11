@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript扩展内建对象</title>
+</head>
+<body>
+    <script type="text/javascript">
+        //字符串反转
+        String.prototype.reverse = function () {
+            return Array.prototype.reverse.apply(this.split('')).join('');
+        }
+        console.log('牛奶,奶牛'.reverse());
+
+        //检测方法是否存在,不存在则扩展
+        if (!Array.prototype.inArray) {
+            Array.prototype.inArray = function (needle) {
+                for (var i=0;i<this.length;i++) {
+                    if (this[i] === needle) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+        }
+        var  arr = ['a','b','c','d','e','f'];
+        console.log(arr.inArray('e'));
+        console.log(arr.inArray('ee'));
+
+        function Person() {
+            this.mouth = true;
+        }
+        var p1 = new Person();
+        Person.prototype.say = function () {
+            return 'hello';
+        }
+        console.log(p1.mouth);
+        console.log(p1.say());
+        console.log(p1.constructor);
+        console.log(p1.constructor.prototype.constructor);
+        console.log(p1.constructor.prototype.mouth);
+        Person.prototype = {
+            hair:true,
+            face:true
+        }
+        console.log(p1.hair);
+        console.log(p1.say());
+        console.log(typeof p1.__proto__.hair);
+        console.log(typeof p1.__proto__.say());
+        console.log(p1.constructor);
+        console.log(p1.constructor.prototype.constructor);
+        var p2 = new Person();
+        console.log(typeof p2.__proto__.hair);
+        console.log(typeof p2.__proto__.say);
+        console.log(p2.constructor);
+        console.log(p2.constructor.prototype);
+
+        console.log(p2.constructor.prototype.hair);
+        console.log(p1.constructor.prototype.hair);
+        //重置constructor
+        Person.prototype.constructor = Person;
+        console.log(p2.constructor.prototype);
+        console.log(p1.constructor.prototype);
+    </script>
+</body>
+</html>

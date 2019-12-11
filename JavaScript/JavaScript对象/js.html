@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript对象</title>
+</head>
+<body>
+    //自定义对象（对象字面量、new Object()、构造函数、Object.create()）
+    <script type="text/javascript">
+        var obj1 = {};
+        obj1 = {
+            x:1,
+            y:2,
+            z:3
+        };
+        //alert(typeof obj);
+
+        var obj2 = new Object();
+        //alert(typeof obj2);
+        var date = new Date();
+
+        function test(num1,num2){
+            this.n1 = num1;
+            this.n3 = num2;
+        }
+        var obj3 = new test(2,3);
+        //alert(typeof obj3);
+
+        var obj4 = Object.create({x:1});
+        obj4 = Object.create(null);
+
+        //属性的相关操作
+        var person = {
+            username:'king',
+            age:12,
+            salary:123.56,
+            addr:'北极',
+            sex:'男'
+        }
+        console.log('用户名:'+person.username+'\n'+'性别:'+person.sex);
+        console.log('年龄:'+person['age']);
+        var key = 'username';
+        console.log(person[key]);
+
+        function PersonInfo(name,age,sex) {
+            this.name = name;
+            this.age = age;
+            this.sex = sex;
+        }
+        var person1 = new PersonInfo('king',25,'男');
+        console.log(person1.name+person1['sex']);
+
+        var obj = {};
+        obj.username = 'steven';
+        obj.age = 30;
+        obj.addr = '上海';
+        obj['work'] = 'android';
+        console.log(obj.username+' '+obj['work']);
+    //通过delet删除属性
+        delete obj.work;
+        console.log(obj.username+' '+obj['work']);
+
+    //通过for in遍历属性
+    for(var p in obj) {
+        console.log(p+'\n');
+    }
+
+    function foo() {};
+    foo.prototype.z = 3;//对象原型
+    var objZ = new foo();
+    objZ.x = 1;
+    objZ.y = 2;
+    console.log(objZ.z+objZ.x+objZ.y);
+    //通过in检测对象是否有某个属性
+    console.log('z' in objZ);
+    //通过hasOwnProperty检测对象本身是否有某个属性(不包括其原型及父对象)
+    console.log(objZ.hasOwnProperty('z'));
+
+    var obj5 = Object.create({x:8,y:9});//Object.create()创建的对象内的属性是其原型的属性
+    obj5.z = 10;
+    console.log('y' in obj5);
+    console.log(obj5.hasOwnProperty('y'));
+    //getOwnPropertyNames、keys返回对象自有的属性名称(不包括其原型及父对象)
+    console.log(Object.getOwnPropertyNames(obj5));
+    console.log(Object.keys(obj5));
+
+    var obj6 = {};
+    Object.defineProperty(obj6,'x',{
+        value:12,               //代表属性及值，默认undefined
+        writable:true,          //代表是否可修改，默认false
+        configurable:true,      //代表是否可配置，默认false
+        enumerable:true         //代表是否可枚举，默认false
+    });
+    console.log('修改前x的值:'+obj6.x);
+    obj6.x = 22;
+    console.log('修改后x的值:'+obj6.x);
+    for (var p in obj6) {
+        console.log(p);
+    }
+    console.log(Object.keys(obj6));                 //enumerable:false无法枚举属性
+    console.log(Object.getOwnPropertyNames(obj6));  //enumerable:false可以获取属性
+
+    delete obj6.x;              //onfigurable:false不可删除
+    console.log('删除后x的值:'+obj6.x);
+
+    Object.defineProperty(obj6,'x',{   //configurable:true可以重新配置对象的属性特性描述；否则会error
+        writable:false,
+        enumerable:false
+    });
+    obj6.x = 22;
+    console.log('修改后x的值:'+obj6.x);
+
+    var obj7 = {};
+    Object.defineProperty(obj7,'k',{
+        get : function (){
+                return 666;
+            }
+    });
+    console.log(obj7.k);
+
+    var obj8 = {
+        __proto__:null,     //没有继承而来的属性
+        value:1
+    };
+
+    //如果属性不可配置,可以把writable的true变为false,但不能将false变为true
+    Object.defineProperty(obj8,'y',{
+        value:5,
+        writable:true,
+        enumerable:true,
+        configurable:false
+    });
+    obj8.y = 10;
+    console.log(obj8.y);
+    Object.defineProperty(obj8,'y',{
+        writable:false
+    });
+    obj8.y = 0;
+    console.log(obj8.y);
+
+    var obj9 = {
+        username:'king',
+        sex:'男',
+        get age() {
+            return 12;
+        },
+        set age(val) {
+            console.log(val);
+        }
+    }
+    console.log(obj9.age);
+    obj9.age = 15;
+
+    var person2 = {};
+    Object.defineProperties(person2,{
+        'username':{
+            value:'ming',
+            writable:true,
+            enumerable:true,
+            configurable:false
+        },
+        age:{
+            value:66,
+            writable:true,
+            enumerable:true,
+            configurable:false
+        }
+    });
+    console.log(person2.username+'\n'+person2.age);
+    console.log(Object.getOwnPropertyDescriptor(person2,'username'));
+    console.log(Object.getOwnPropertyDescriptor(person2,'age'));
+
+    //检测一个对象是否是另外一个对象的原型（或处于原型链）
+    var obj10 = {x:1};
+    var obj11 = Object.create(obj10);
+    console.log(obj10.isPrototypeOf(obj11));
+    console.log(Object.prototype.isPrototypeOf(obj11));
+
+    function classOf(obj) {
+        if(obj===null) {
+            return 'NULL';
+        }
+        if(obj===undefined) {
+            return 'Undefined';
+        }
+        return Object.prototype.toString.call(obj).slice(8,-1);
+    }
+    var x = 'king';
+        x = new Date();
+        x = new Array();
+        x = function(){};
+        function cale() {};
+        x = new cale();
+    console.log(classOf(x));
+    </script>
+</body>
+</html>

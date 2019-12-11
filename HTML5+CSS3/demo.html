@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<meta charset="utf-8">
+	<title>HTML5+CSS3</title>
+	<style type="text/css">
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		body {
+			font-family: "微软雅黑";
+			text-align: center;
+		}
+		.clearfloat {
+			clear: both;
+		}
+		a {
+			color: #f60;
+			text-decoration: none;
+		}
+		hgroup {
+			margin-bottom: 10px;
+		}
+		.nav {
+			height: 45px;
+			background-color: #f60;
+		}
+		nav .li {
+			float: left;
+			background-color: black;
+			border-radius: 5px;
+			padding: 5px 10px;
+			margin: 7px 10px;
+			list-style-type: none;
+		}
+	</style>
+</head>
+<body>
+	<!-- article元素 -->
+	<article>
+		<header>
+			<h1 >this is a article</h1>
+			<p>创建时间：<time pubdate="pubdate">2017/04/17</time></p>
+		</header>
+		<p>
+			<b>article</b>是一个独立的区域
+		</p>
+		<section>
+			<h2>读者评论</h2>
+			<article>
+				<header>
+					<h3>读者：木木</h3>
+					<p><time pubdate="pubdate" datetime="2017/04/17T21:00">2小时前</time></p>
+				</header>
+				<p>文章很好！</p>
+			</article>
+			<article>
+				<header>
+					<h3>读者：木木</h3>
+					<p><time pubdate="pubdate" datetime="2017/04/17T22:00">1小时前</time></p>
+				</header>
+				<p>文章很好！</p>
+			</article>
+		</section>
+		<footer>
+			<p><small>@版权所有</small></p>
+		</footer>
+	</article>
+	<hr/>
+	<!-- section元素 -->
+	<section>
+		<h1>产品</h1>
+		<p>产品种类列表</p>
+		<article>
+			<h2>产品A</h2>
+			<p>产品A的介绍</p>
+		</article>
+		<article>
+			<h2>产品B</h2>
+			<p>产品B的介绍</p>
+		</article>
+	</section>
+	<hr/>
+	<!-- aside元素 -->
+	<aside>
+		<h1>公告：</h1>
+		<p>中秋放假通知</p>
+		<p>国庆放假通知</p>
+	</aside>
+	<hr/>
+	<!-- nav元素 -->
+	<nav>
+		<ul>
+			<li><a href="demo.html">首页</a></li>
+			<li><a href="demo.html">上一页</a></li>
+			<li><a href="demo.html">下一页</a></li>
+		</ul>
+	</nav>
+	<article>
+		<header>
+			<h2>nav1</h2>
+			<nav>
+				<ul>
+				<li><a href="demo.html">nav1</a></li>
+				<li><a href="demo.html">nav1</a></li>
+				<li><a href="demo.html">nav1</a></li>
+				</ul>
+			</nav>
+		</header>
+	</article>
+	<hr/>
+	<!-- time元素 -->
+	<!-- pubdate属性 -->
+	<p><time pubdate="pubdate" datetime="2017/04/17T22:00">2017年4月17号22:00</time></p>
+	<p><time pubdate="pubdate" datetime="2017/04/17T22:00+8:00">中国时间2017年4月17号22:00</time></p>
+	<hr/>
+	<!-- header元素 -->
+	<header>
+		<h1>网页标题</h1>
+	</header>
+	<article>
+		<header>
+			<h2>文章标题</h2>
+		</header>
+		<p>
+			文章正文
+		</p>
+	</article>
+	<hr/>
+	<div class="clearfloat"></div>
+	<header>
+		<hgroup>
+			<h1>HTML</h1>
+			<a href="/">[手机版]</a>
+			<a href="/">[HTML5论坛]</a>
+		</hgroup>
+		<nav class="nav">
+			<ul>
+				<li class="li"><a href="/">首页</a></li>
+				<li class="li"><a href="/">手机版</a></li>
+				<li class="li"><a href="/">论坛</a></li>
+			</ul>
+		</nav>
+	</header>
+	<hr/>
+	<!-- hgroup元素 -->
+	<article>
+		<header>
+			<hgroup>
+				<h1>文章主标题</h1>
+				<h2>文章子标题</h2>
+			</hgroup>
+			<p><time pubdate="pubdate" datetime="2017/04/17">2017年4月17日</time></p>
+		</header>
+		<p>
+			文章正文
+		</p>
+	</article>
+	<hr/>
+	<!-- footer元素 -->
+	<article>
+		<p>
+			文章内容
+		</p>
+		<footer>
+			文章注脚注释
+		</footer>
+	</article>
+	<hr/>
+	<!-- address元素 -->
+	<<header>
+		<h1>HTML标题</h1>
+	</header>
+	<p>
+		正文部分
+	</p>
+	<footer>
+		<address>
+			<a href="/">某某</a> 
+			<a href="/">上海东方明珠</a> 
+			上海市浦东新区
+		</address>
+	</footer>
+	<hr/>
+	<!-- figure元素、figcaption元素 -->
+	<figure>
+		<img src="1.jpg" title="image">
+		<img src="2.jpg" title="image">
+		<figcaption>image</figcaption>
+	</figure>
+	<hr/>
+	<!-- details元素(用于标识元素内部的子元素可以被展开、收缩的元素)、summary元素(从属details元素) -->
+	<details>
+		<summary>
+			HTML5+CSS3
+		</summary>
+		<p>
+			HTML5+CSS3详细内容
+		</p>
+	</details>
+	<hr/>
+	<!-- mark元素(表示页面中突出显示或高亮显示的元素) -->
+	<h2>以下是关于<mark>HTML5</mark>的搜索结果</h2>
+	<section>
+		<article>
+			<h2><a href="/demo.html"><mark>html5教程<mark></a></h2>
+			<p>万维网的核心语言、标准通用标记语言下的一个应用超文本标记语言</p>
+		</article>
+	</section>
+	<hr/>
+	<!-- progress元素(表任务完成进度的元素) -->
+	<p>
+		当前完成进度:<progress value="66" max="100"></progress>
+	</p>
+	<hr/>
+	<!-- meter元素(表规定范围内数量值的元素) -->
+	<p>
+		网盘使用情况:<meter min="0.0" value="60.0" max="100.0" low="10.0" high="90.0" optimum="68">80.0/100.0</meter>GB
+	</p>
+</body>
+</html>

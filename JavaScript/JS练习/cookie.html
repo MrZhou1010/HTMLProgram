@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>cookie</title>
+    <script type="text/javascript">
+        function getCookie(c_name) {
+            if (document.cookie.length>0) {
+                c_start = document.cookie.indexOf(c_name);
+                if (c_start!=-1) {
+                    c_start = c_start +c_name.length;
+                    c_end = document.cookie.indexOf(';',c_start);
+                    if (c_end!=-1)
+                        return document.cookie.substring(c_start+1,c_end);
+                    else
+                        return document.cookie.substring(c_start+1,document.cookie.length);
+                }
+                return '';
+            }
+            return '';
+        }
+
+        function setCookie(c_name,value,expiredays) {
+            var exdate = new Date();
+            exdate.setDate(exdate.getDate()+expiredays);
+            var temp = ((expiredays==null)?"":";expires="+exdate.toGMTString());
+            console.log(temp);
+            temp = c_name+"="+escape(value)+((expiredays==null)?"":";expires="+exdate.toGMTString());
+            console.log(temp);
+            document.cookie= temp;
+        }
+
+        function checkCookie()
+        {
+            var username = getCookie('username');
+            console.log(document.cookie);
+            if (username!="" &&username!=null) {
+                alert('Welcome,'+username+'!');
+            } else {
+                username = prompt('please enter your name:','');
+                if (username!="" &&username!=null) {
+                    setCookie('username', username, 365);
+                }
+            }
+        }
+    </script>
+</head>
+<body onload="checkCookie()">
+
+</body>
+</html>

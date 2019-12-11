@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript的内建对象之Date对象</title>
+</head>
+<body>
+    <script type="text/javascript">
+        var date = new Date();
+        console.log(date);
+        date = new Date(138578123459);
+        console.log(date);
+        date = new Date(2017,06,16,18,30,25);
+        console.log(date);
+
+        date = new Date(Date.now());
+        console.log(date);
+        var parse = Date.parse("Mon Jun 05 2017 16:06:35 GMT");
+        console.log(parse);
+        //date = new Date(Date.UTC(2017,06,05,16,10,36));
+        console.log('日期:'+date);
+        console.log('日:'+date.getDate());
+        console.log('星期:'+date.getDay());
+        console.log('年:'+date.getFullYear());
+        console.log('月:'+date.getMonth());
+        console.log('时:'+date.getHours());
+        console.log('分:'+date.getMinutes());
+        console.log('秒:'+date.getSeconds());
+        console.log('毫秒:'+date.getMilliseconds());
+        console.log('时间戳:'+date.getTime());
+
+        date.setDate('02');
+        console.log(date);
+        console.log(date.toString());
+        console.log(date.valueOf());
+        console.log(date.toJSON());
+    </script>
+</body>
+</html>

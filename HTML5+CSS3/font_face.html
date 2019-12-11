@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>服务器端字体和@font-face</title>
+	<style type="text/css">
+		@font-face {
+			font-family: webfont;
+			src:url(waltograph.otf);
+		}
+		@font-face {
+			font-family: webfont;
+			font-style: italic;
+			src:url(waltograph.otf);
+		}
+		h1 {
+			font-family: webfont;
+		}
+		.webfont {
+			font-family: webfont;
+			font-style: italic;
+		}
+		@font-face {
+			font-family: Aril;
+			src:local('Aril');
+		}
+		.localfont {
+			font-family: Aril;
+		}
+		.localfont {
+			font-variant: small-caps;/* 小型大写字体 */
+			font-weight: bolder;/* 粗体 */
+		}
+	</style>
+</head>
+<body>
+	<h1>@font-face</h1>
+	<p class="webfont">
+		Lu Fei, from the "One Piece" Road, flying sang energetic that is well known, as long as the meat he can not know what is tired, of course, no meat is the same, but no meat will not love. Straw hat pirates group is a wonderful work, except Lu Fei, Suolongshan governance are sturdy and energetic typical representative, to meet noisy, no noisy fight, endless, although playing is scolding is love but You can not do that!
+	</p>
+	<p class="localfont">
+		Lu Fei, from the "One Piece" Road, flying sang energetic that is well known, as long as the meat he can not know what is tired, of course, no meat is the same, but no meat will not love. Straw hat pirates group is a wonderful work, except Lu Fei, Suolongshan governance are sturdy and energetic typical representative, to meet noisy, no noisy fight, endless, although playing is scolding is love but You can not do that!
+	</p>
+</body>
+</html>

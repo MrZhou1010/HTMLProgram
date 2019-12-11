@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>multipleSelectList</title>
+    <style type="text/css">
+        *,body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .container {
+            width: 100px;
+            margin: 80px auto;
+            height: 300px;
+        }
+        .hint-input-span-container {
+            display: inline-block;
+            width: 100%;
+            padding: 3px;
+            color: #555;
+            line-height: 20px;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            vertical-align: middle;
+            max-width:100%;
+            -webkit-box-shadow: inset 0 1px 1px darkgray;
+            -moz-box-shadow: inset 0 1px 1px darkgray;
+            box-shadow: inset 0 1px 1px darkgray;
+        }
+        .hint-input-span-container .tag {
+            display: inline-block;
+            margin: 2px;
+            padding: 2px;
+            font-size: 12px;
+            font-family: serif;
+        }
+        .label {
+            font-size: 10px;
+            padding: 4px 6px;
+            border: none;
+            text-shadow: none;
+            border-radius: 3px;
+            font-weight: 200;
+        }
+
+        .label-primary {
+            background: #7dd6ff;
+            color: white;
+        }
+        .hint-input-span-container span i[data-role='remove'] {
+            cursor: pointer;
+        }
+        .tag {
+            margin-right: 2px;
+            color: white;
+        }
+
+        .tag [data-role="remove"] {
+            margin-left: 2px;
+            cursor: pointer;
+        }
+
+        input[name='hint-search'] {
+            border: none;
+            box-shadow: none;
+            outline: none;
+            background-color: transparent;
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            max-width: inherit;
+        }
+        .hint-block {
+            display: none;
+            position: absolute;
+            width: 100px;
+            max-height: 120px;
+            background-color: #fff;
+            overflow: auto;
+            z-index: 9999;
+        }
+        .hint-ul {
+            text-decoration: none;
+            list-style: none;
+            padding-left: 5px;
+        }
+        .hint-ul li{
+            font-size: 14px;
+            padding: 2px 4px;
+        }
+        .hint-ul li:hover{
+            background-color: #eee;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="hint-input-span-container">
+            <input class="hint-search" type="text" name="hint-search">
+        </div>
+        <div class="hint-block">
+            <!-- 根据json数据包动态添加li -->
+            <ul class="hint-ul">
+
+            </ul>
+        </div>
+    </div>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            // json数据包
+            var data = {data:['tt','ddd','test','com','sex','middle','zz']}
+
+            // 获取后面需要多次调用的dom对象
+            var $hintSearch = $(".hint-search");
+            var $hintSearchContainer = $(".hint-input-span-container");
+            var $hintBlock = $(".hint-block");
+            var $hintUl = $(".hint-ul");
+
+            // 初次调用添加词典
+            addDictionary(data.data,addUlListener);
+
+            // 设置词典列表宽度
+            setHintSearchContainerWidth();
+
+            // 实现响应式 监听resize事件
+            $(window).bind('resize', setHintSearchContainerWidth);
+            // 获得焦点
+            $hintSearch.on('focus',function () {
+                animteDown();
+            });
+            // 失去焦点
+            $hintSearch.on('blur',function () {
+                // 设置延迟为了可以监听到click的响应
+                setTimeout(function () {
+                    animateUp();
+                },200);
+            });
+
+            $hintSearch.on('keydown',function (e) {
+                switch (e.which) {
+                    case 9:
+                    case 13: {
+                        var text = $hintSearch.val();
+                        if (!$.trim(text)) {
+                            $hintSearch.val('');
+                            e.preventDefault();
+                            return;
+                        }
+                        if (!checkContainerHas(text)) {
+                            $hintSearch.before('<span class="tag label label-primary">'+ text +'<i class="fa fa-times" data-role="remove"></i><i>&nbsp;</i></span>');
+                            addSpanListenr();
+                        }
+                        $hintSearch.val("");
+                        $hintSearch.focus();
+                        e.preventDefault();
+                        break;
+                    }
+                    default:
+                        break;
+                }
+            })
+            $hintSearch.on('keyup',function(e) {
+                var text = $hintSearch.val();
+                if (!$.trim(text)){
+                    updateDictionary(data.data,addUlListener);
+                }
+                var tmparr = data.data.filter(function(x){
+                    return x.indexOf(text) != -1;
+                })
+                if (tmparr.length === 0) {
+                    tmparr.push("无匹配条目");
+                }
+                updateDictionary(tmparr,addUlListener);
+            })
+
+            //函数库
+            //添加用户常用字典库
+            function addDictionary(dataarr, callback) {
+                for(var i = 0; i < dataarr.length; i++) {
+                    $hintUl.append('<li>'+ dataarr[i] +'</li>');
+                }
+                callback();
+            }
+
+            //更新搜索内容
+            function updateDictionary(dataarr,callback) {
+                $hintUl.empty();
+                addDictionary(dataarr,callback);
+            }
+
+            //向下滑动动画
+            //封装改变样式边框
+            function animteDown()
+            {
+                $hintBlock.slideDown('fast').css({'border':'1px solid #96C8DA','border-top' : '0px', 'box-shadow' : '0 2px 3px 0 rgba(34,36,38,.15)'});
+                $hintSearchContainer.css({'border':'1px solid #96C8DA','border-bottom' : '0px', 'box-shadow' : '0 2px 3px 0 rgba(34,36,38,.15)'});
+
+            }
+
+            //向上滑动动画
+            function animateUp()
+            {
+                $hintBlock.slideUp('fast',function(){
+                    $hintSearchContainer.css({'border':'1px solid #ccc'});
+                });
+            }
+
+            //检验是否与输入的重复
+            function checkContainerHas(text)
+            {
+                var flag = 0;
+                $(".hint-input-span-container span").each(function(){
+                    if ($.trim(text) == $.trim($(this).text())) {
+                        flag = 1;
+                        return;
+                    }
+                });
+                return flag ? true : false;
+            }
+            //设置hint-input-span-container宽度
+            function setHintSearchContainerWidth()
+            {
+                var hint_width = $hintSearchContainer.width() + 2 * parseInt($hintSearchContainer.css('padding-left').match(/[0-9]+/)[0]) +  2 * parseInt($hintSearchContainer.css('border-left').match(/[0-9]+/)[0]) ;
+                $hintBlock.css({'width': hint_width});
+            }
+
+
+            // 绑定click事件
+            function addUlListener() {
+                $hintUl.delegate('li','click',function() {
+
+                    var text = $(this).text();
+                    // 不包含添加
+                    if(!checkContainerHas(text)) {
+                        $hintSearch.before('<span class="tag label label-primary">'+ text +' <i class="fa fa-times" data-role="remove"></i><i>&nbsp;</i></span>');
+
+                    } else {
+                        addSpanListener();
+                    }
+                    $hintSearch.val("");
+                    animateUp();
+                })
+            }
+
+            // 监听span事件
+            function addSpanListener() {
+                $(".hint-input-span-container span").delegate("i",'click',function () {
+                    $(this).parent().remove();
+                })
+            }
+        })
+    </script>
+</body>
+</html>

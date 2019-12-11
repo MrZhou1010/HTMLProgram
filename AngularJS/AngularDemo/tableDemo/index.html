@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>table</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular-route.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style/table.css"/>
+    <script type="text/javascript" src="script/tableController.js"></script>
+</head>
+<body>
+<div class="table-wrapper" ng-app="tableApp" ng-controller="tableController">
+    <div class="table-header">
+        <div class="table-nav">
+            <div>
+                <img src="images/first.gif" width="16" height="16" alt="First Page" ng-click="firstHandle()" />
+                <img src="images/previous.gif" width="16" height="16" alt="Previous Page" ng-click="previousHandle()" />
+                <input type="text" ng-model="currentPage" readonly/>
+                <span>of {{ totalPage }}</span>
+                <img src="images/next.gif" width="16" height="16" alt="Next Page" ng-click="nextHandle()" />
+                <img src="images/last.gif" width="16" height="16" alt="Last Page" ng-click="lastHandle()" />
+            </div>
+        </div>   
+        <div class="table-location">
+            <div class="page">Items from {{ currentFirstItem }} to {{ currentLastItem }} of {{ allData.length }}</div>
+            <div>
+                <select ng-change="rowChangeHandle()" ng-model="currentRow" ng-options="row for row in rows">
+                </select>
+            </div>
+        </div>
+        <div class="table-btnlist">
+            <span><a href="#">重置</a></span>
+            <span><a href="#">数据导出</a></span>
+            <span><a href="#">清空</a></span>
+        </div>
+    </div>
+
+    <table cellpadding="0" cellspacing="0" border="0" id="table" class="tinytable">
+        <thead>
+            <tr>
+                <th class="head" ng-repeat="(key, value) in allData[0]" ng-click="sortByKeyOfValue(key,isAsc = !isAsc)"><h3>{{ key }}</h3></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="row in currentData track by $index">
+                <td ng-repeat="(key, value) in row">{{ value }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

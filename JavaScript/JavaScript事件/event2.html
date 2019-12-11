@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript事件</title>
+</head>
+<body>
+    //事件流（冒泡和捕获，默认冒泡）
+    <div id="box1" style="background-color: #f2f;width: 200px;height: 200px;">
+        <input type="button" value="test1" id="btn1"/>
+    </div>
+    <script type="text/javascript">
+        /*
+        var btn1 = document.getElementById('btn1');
+        var box1 = document.getElementById('box1');
+        btn1.onclick = function (event) {
+            alert('button clicked');
+
+            event = event||window.event;//兼容浏览器
+            if (typeof event.cancelBubble=='undefined') {
+                //w3c取消冒泡
+                event.stopPropagation();
+            } else {
+                //ie取消冒泡
+                event.cancelBubble = true;
+            }
+        }
+        box1.onclick = function (event) {
+            alert('div clicked');
+        }
+        document.body.onclick = function (event) {
+            alert('body clicked');
+        }
+        document.documentElement.onclick = function (event) {
+            alert('html clicked');
+        }
+        document.onclick = function (event) {
+            alert('document clicked');
+        }
+        */
+        /*
+        //true表示冒泡事件流，false表示捕获事件流
+        var btn1 = document.getElementById('btn1');
+        var box1 = document.getElementById('box1');
+        btn1.addEventListener('click',function (event) {
+            alert('button clicked');
+            event = event||window.event;//兼容浏览器
+            if (typeof event.cancelBubble=='undefined') {
+                //w3c取消冒泡
+                event.stopPropagation();
+            } else {
+                //ie取消冒泡
+                event.cancelBubble = true;
+            }
+        },false);
+        box1.addEventListener('click',function (event) {
+            alert('div clicked');
+        },false);
+        document.body.addEventListener('click',function (event) {
+            alert('body clicked');
+        },false);
+        document.documentElement.addEventListener('click',function (event) {
+            alert('html clicked');
+        },false);
+        document.addEventListener('click',function (event) {
+            alert('document clicked');
+        },false);
+        */
+
+        //添加多个事件，按顺序执行
+        btn1.addEventListener('click',function (event) {
+            alert('button clicked 1');
+        },false);
+        var clickEvent = function (event) {
+            alert('button clicked 2');
+        }
+        btn1.addEventListener('click',clickEvent,false);
+        function clickEvent2(event) {
+            alert('button clicked 3');
+        }
+        btn1.addEventListener('click',clickEvent2,false);
+        btn1.removeEventListener('click',clickEvent2,false);
+
+        //ie浏览器
+        /*
+        var btn1 = document.getElementById('btn1');
+        btn1.attachEvent('onclick',function(){
+            alert('button clicked 1');
+        });
+        var handler = function(){
+            alert('button clicked 2');
+        }
+        btn1.attachEvent('onclick',handler);
+        */
+    </script>
+</body>
+</html>

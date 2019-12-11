@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>form表单</title>
+	<meta charset="utf-8" name="keywords" content="百度"/>
+</head>
+<body>
+	<!-- action传输目标的地址,method传输方式(默认get,会暴露信息)-->
+	<form action="top.html"  method="get">
+		<!-- value默认值,size空间长度,maxlength文本最大字符数 -->
+		账号：<input type="text" name="name" value="" size="20" maxlength="8"><br/>
+		密码：<input type="password" name="password"><br/>
+		性别：<input type="radio" name="sex" checked="checked">男<input type="radio" name="sex">女<br/>
+		爱好：<input type="checkbox" name="">体育<input type="checkbox" name="" checked="checked">音乐<br/>
+		<input type="submit" name="submit" value="提交">
+		<input type="reset" name="reset" value="重置"><
+		<input type="button" name="button" value="button"><br/>
+		<!-- hidden隐藏域(会被提交) -->
+		<input type="hidden" name="hidden" value="隐藏的内容"><br/>
+		<!-- textarea文本域 -->
+		<textarea cols="15" rows="10" name="textarea">默认内容</textarea><br/>
+		<!-- multiple支持多选 -->
+		<select name="select" multiple="multiple">
+			<option value="yi">星期一</option>
+			<option>星期二</option>
+			<option>星期三</option>
+			<option value="si" selected="selected">星期四</option>
+			<option>星期五</option>
+			<option>星期六</option>
+			<option>星期天</option>
+		</select>
+	</form>
+</body>
+</html>

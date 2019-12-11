@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/datalist.css">
+    <style type="text/css">
+        .datalist_ul {
+            background: #fff;
+            display: none;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            overflow: auto;
+            position: absolute;
+        }
+
+        .datalist_ul .datalist_li {
+            background: transparent;
+            color: #000;
+            padding: 0.5em 0.5em;
+            text-align: left;
+            font-size: 1.2em;
+            border-bottom: 0.1em dashed cornflowerblue;
+            box-sizing: border-box;
+        }
+
+        .datalist_ul .datalist_li_hover {
+            background: rgba(100, 149, 237,0.8);
+            color: #fff;
+        }
+
+        .detalist_ul .datalist_li_hide {
+            display: none;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        input {
+            height: 2em;
+            padding:0 0.5em;
+            box-sizing: border-box;
+            width:180px;
+        }
+
+        ::-webkit-scrollbar {
+            width: 0.5em;
+        }
+        /*
+                ::-webkit-scrollbar-button{
+                    height:0.5em;
+                    width:0.5em;
+                    background:#ccc;
+                }*/
+
+        ::-webkit-scrollbar:horizontal {
+            height: 0.2em;
+        }
+
+        ::-webkit-scrollbar-track {
+            -webkit-border-radius: 10px;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            -webkit-border-radius: 10px;
+            border-radius: 10px;
+            background: rgba(255, 0, 0, 0.6);
+            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+        }
+
+        ::-webkit-scrollbar-thumb:window-inactive {
+            background: rgba(169, 169, 169, 0.4);
+        }
+    </style>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script type="text/javascript">
+        (function ($) {
+            $.fn.extend({
+                datalist: function (options, func) {
+                    var ul, cur, count = 0, css, hover, visible, scroll;
+                    $(".datalist_li").hover(
+                        function () {
+                            $(".datalist_li").removeClass("datalist_li_hover");
+                            $(this).addClass("datalist_li_hover");
+                            count = $(this).index();
+                        }, function () {
+                            $(this).removeClass("datalist_li_hover");
+                        }
+                    );
+                    $("[data-list]").on({
+                        "click focus": function () {
+                            cur = $(this);
+                            ul = $("[data-list-id='" + cur.attr("id") + "']").eq(0);
+                            console.log(ul);
+                            if (!!ul) {
+                                css = {
+                                    "top": cur.css("height"),
+                                    "left": cur.position().left + "px",
+                                    "display": "block",
+                                    "width": cur.css("width")
+                                };
+                                !!options && (css = $.extend(css, options));                       //ul.show().css(css);
+                                for (var i in css) {
+                                    ul[0].style[i] = css[i];
+                                }
+                            }
+                        },
+                        "keyup": function (e) {
+                            ul.show();
+                            hover = ul.find(".datalist_li_hover");
+                            visible = ul.find(".datalist_li:visible");
+                            switch (e.keyCode) {
+                                case 13:
+                                    if (hover.length > 0) {
+                                        cur.val(hover.text());
+                                        ul.hide().find(".datalist_li").removeClass("datalist_li_hover");
+                                    }
+                                    !!func && func();
+                                    break;
+                                case 38:
+                                    if (hover.index() == 0) {
+                                        count = visible.length;
+                                    }
+                                    if (hover.length > 0) {
+                                        count--;
+                                        visible.removeClass("datalist_li_hover");
+                                        visible.eq(count).addClass("datalist_li_hover");
+                                    } else {
+                                        count = visible.length - 1;
+                                        visible.eq(count).addClass("datalist_li_hover");
+                                    }
+                                    break;
+                                case 40:
+                                    if (count == visible.length - 1) {
+                                        count = -1;
+                                    }
+                                    if (hover.length > 0) {
+                                        count++;
+                                        visible.removeClass("datalist_li_hover");
+                                        visible.eq(count).addClass("datalist_li_hover");
+                                    } else {
+                                        count = 0;
+                                        visible.eq(0).addClass("datalist_li_hover");
+                                    }
+                                    break;
+                                default:
+                                    ul.find(".datalist_li").hide().removeClass("datalist_li_hover").each(function () {
+                                        if ($(this).text().indexOf(cur.val()) >= 0 || $(this).text() == cur.val()) {
+                                            $(this).show();
+                                        }
+                                    });
+                            }
+                        },
+                        "blur": function () {
+                            hover = ul.find(".datalist_li_hover");
+                            if (hover.length != 0) {
+                                cur.val(hover.text());
+                                cur.attr("value", hover.text());
+                                ul.find(".datalist_li").each(function () {
+                                    $(this).removeClass("datalist_li_hover");
+                                });
+                                ul.hide();
+                                count = 0;
+                                !!func && func(hover);
+                            } else {
+                                ul.hide();
+                            }
+                        }
+                    });
+                }
+            })
+        })(jQuery);
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            $('[data-list-id="datalist"]').datalist({
+                "max-height": "15em"
+            }, function () {
+                console.log("callback function");
+            });
+        });
+    </script>
+</head>
+<body>
+<div>
+    <label for="datalist">select url</label>
+    <input id="datalist" type="text" data-list  placeholder="choose" readonly>
+    <ul class="datalist_ul" data-list-id="datalist">
+        <li class="datalist_li">google</li>
+        <li class="datalist_li">facebook</li>
+        <li class="datalist_li">twitch</li>
+        <li class="datalist_li">baidu</li>
+        <li class="datalist_li">youtube</li>
+        <li class="datalist_li">twitter</li>
+    </ul>
+</div>
+</body>
+</html>

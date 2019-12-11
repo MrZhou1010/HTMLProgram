@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>video和audio</title>
+	<style type="text/css">
+		body {
+			margin: 5px;
+		}
+	</style>
+</head>
+<body>
+	<h1>audio元素</h1>
+	<!-- 
+		controls属性,是否使用浏览器自带控制条
+		autoplay属性,自动播放
+		preload属性,是否预加载数据
+		loop,循环播放
+	 -->
+	<audio controls="controls" src="audio_01.mp3" preload="none" >
+		你的浏览器不支持HTML5！
+	</audio><br/>
+	<audio controls="controls" src="audio_01.mp3" preload="metadata">
+		你的浏览器不支持HTML5！
+	</audio><br/>
+	<audio controls="controls" src="audio_01.mp3" preload="auto" loop="loop">
+		你的浏览器不支持HTML5！
+	</audio>
+	<h1>video元素</h1>
+	<!-- 
+		controls属性,是否使用浏览器自带控制条
+		autoplay属性,自动播放
+		preload属性,是否预加载数据
+		poster属性,当视频不可以播放时使用一张图片代替视频
+		loop,循环播放
+	 -->
+	<video id="video" controls="controls" width="500" height="300" autoplay="autoplay" poster="*.jpg">
+		<source src="video_01.ogv" type="video/ogg" />
+		<source src="video_01.mov" type="video/mov" />
+		<source src="video_01.webm" type="video/webm" />
+		<source src="video_01.mp4" type="video/mp4" />
+		你的浏览器不支持HTML5！
+	</video>
+
+	<script type="text/javascript">
+		var video = document.getElementById('video');
+		video.addEventListener("error",function () {
+			var error = video.error;
+			switch (error.code) {
+				case 1:
+					alert("取回过程中用户终止");
+					break;
+				case 2:
+					alert("当下载时发生错误");
+					break;
+				case 3:
+					alert("当解码时发生错误");
+					break;
+				case 4:
+					alert("媒体不可以或者不支持音频/视频");
+					break;
+			}
+		},false);
+	</script>
+</body>
+</html>

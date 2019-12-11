@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue 测试实例</title>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.9/vue.min.js"></script>
+    <style type="text/css">
+
+    </style>
+</head>
+<body>
+    <div id="div_test1">
+        <button v-on:click="add">点击</button>
+        <p>这个按钮被点击了 {{ counter }} 次。</p>
+    </div>
+    <script>
+        new Vue({
+            el: "#div_test1",
+            data: {
+                counter: 0
+            },
+            methods:{
+                add: function (e) {
+                    this.counter++;
+                    alert(e.target.tagName);
+                    e.self
+                }
+            }
+        })
+    </script>
+    <div id="div_test2">
+        <button v-on:click="say('this is a test')">say</button>
+    </div>
+    <script>
+        new Vue({
+            el: "#div_test2",
+            data: {
+                counter: 0
+            },
+            methods:{
+                say: function (message) {
+                    alert(message);
+                }
+            }
+        })
+    </script>
+    <!--
+        .stop          event.stopPropagation()阻止事件冒泡
+        .prevent       event.preventDefault()阻止事件默认行为
+        .capture       event.captureEvents()添加事件侦听器时使用事件捕获模式
+        .self          只当事件在该元素本身（而不是子元素）触发时触发回调
+        .once          click 事件只能点击一次
+    -->
+    <!--
+        按键修饰符
+        keyup.enter
+             .tab
+             .delete (捕获 "删除" 和 "退格" 键)
+             .esc
+             .space
+             .up
+             .down
+             .left
+             .right
+             .ctrl
+             .alt
+             .shift
+             .meta
+             自定义按键修饰符别名：Vue.config.keycodes.f1 = 112
+
+             .exact修饰符应与其他修饰符组合使用,以指示处理程序只在精确匹配该按键组合时触发
+    -->
+</body>
+</html>

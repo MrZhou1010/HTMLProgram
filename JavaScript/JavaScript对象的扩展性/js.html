@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript对象的扩展性</title>
+</head>
+<body>
+    <script type="text/javascript">
+        var obj = {};
+        console.log(Object.isExtensible(obj));
+        obj.x = 1;
+        //preventExtensions()将对象设置为不可扩展,且无法再改为可扩展。
+        obj1 = Object.preventExtensions(obj);
+
+        console.log(Object.isExtensible(obj));
+        console.log(Object.isExtensible(obj1));
+        obj1.y = 2;
+        console.log(obj1.y);
+        //Object.defineProperty(obj1,'z',{value:3});//error
+
+        //密封对象,且无法解封
+        var obj = {x:1,y:2,username:'king'};
+        var obj2 = Object.seal(obj);
+        console.log(obj2===obj);
+        console.log(Object.isExtensible(obj2));
+        obj2.y = 22;
+        console.log(obj2.y);
+        obj2.z = 3;
+        console.log(obj2.z);
+        //Object.defineProperty(obj2,'x',{get function () {return 11;}});//error
+        console.log(Object.isSealed(obj2));
+
+        //冻结对象,且无法冻结
+        var obj = {x:1,y:2,username:'king'};
+        var obj3 = Object.freeze(obj);
+        console.log(obj3===obj);
+        console.log(Object.isFrozen(obj3));
+
+        //浅冻结
+         var obj4 = {
+             internal: {},
+         }
+         Object.freeze(obj4);
+         obj4.internal.x = 1;
+         console.log(obj4.internal.x);
+
+         //深冻结
+         function deepFreeze(obj) {
+             var prop,propkey;
+             Object.freeze(obj);//冻结最外层对象
+             for (propkey in obj) {
+                 prop = obj[propkey];
+                 if (!obj.hasOwnProperty(propkey)||!(typeof prop ==='object')||Object.isFrozen(prop)) {
+                     continue;
+                 }
+                 deepFreeze(prop);//递归
+             }
+         }
+         deepFreeze(obj4);
+         obj4.internal.y = 55;
+        console.log(obj4.internal.y);
+
+        //默认对象时可扩展的,也就是非冻结的;
+        //一个不可扩展的对象同时也是一个冻结的对象,一个不可扩展的空对象也是密封对象;
+        //一个非空对象默认也是非冻结的;
+        //一个不可扩展的对象,拥有一个不可写但可配置的属性,仍然是非冻结的;
+        //一个不可扩展的对象,拥有一个不可配置但可写的属性,仍然是非冻结的;
+        //一个不可扩展的对象,值拥有一个访问器,仍然是非冻结的;
+        //一个冻结对象也是一个密封对象;
+        //一个冻结对象也是一个不可扩展对象.
+    </script>
+</body>
+</html>

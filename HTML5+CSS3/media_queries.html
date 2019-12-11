@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Media Queries模块</title>
+	<style type="text/css">
+		@media screen and (min-width: 960px) {
+			div#divA {
+				width: 960px;
+				margin:0 auto;
+			}
+			div {
+				line-height: 600px;
+				text-align: center;
+				font-weight: bold;
+				font-size: 25px;
+				color: white;
+			}
+			div#left {
+				width: 200px;
+				background-color: #f60;
+				margin-right: 20px;
+				float: left;
+			}
+			div#center {
+				width: 520px;
+				background-color: blue;
+				margin-right: 20px;
+				float: left;
+			}
+			div#right {
+				width: 200px;
+				background-color: red;
+				float: right;
+			}
+		}
+		@media screen and (min-width: 640px) and (max-width: 960px){
+			div#divA {
+				width: 640px;
+				margin: 0 auto;
+			}
+			div {
+				line-height: 600px;
+				text-align: center;
+				font-weight: bold;
+				font-size: 25px;
+				color: white;
+				margin: 20px auto;
+			}
+			div#left {
+				width: 200px;
+				background-color: #f60;
+				margin-right: 10px;
+				float: left;
+			}
+			div#center {
+				width: 430px;
+				background-color: blue;
+				float: right;
+			}
+			div#right {
+				clear: both;
+				width: 100%;
+				line-height: 100px;
+				background-color: red;
+				margin-top: 20px;
+			}
+		}
+		@media screen and (max-width: 640px){
+			div#divA {
+				width: 100%;
+				margin: 0 auto;
+			}
+			div {
+				line-height: 300px;
+				text-align: center;
+				font-weight: bold;
+				font-size: 25px;
+				color: white;
+				margin: 0 auto 20px;
+			}
+			div#left {
+				width: 100%;
+				background-color: #f60;
+				margin-right: 10px;
+			}
+			div#center {
+				width: 100%;
+				background-color: blue;
+			}
+			div#right {
+				clear: both;
+				width: 100%;
+				background-color: red;
+			}
+		}
+	</style>
+</head>
+<body>
+	<div id="divA">
+		<div id="left">
+		left
+		</div>
+		<div id="center">
+		center
+		</div>
+		<div id="right">
+		right
+		</div>
+	</div>
+</body>
+</html>

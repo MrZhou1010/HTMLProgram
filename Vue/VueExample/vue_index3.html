@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue 测试实例</title>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.9/vue.min.js"></script>
+    <style type="text/css">
+        .active {
+            width: 100px;
+            height: 50px;
+            background: #f122f1;
+            color: #eee;
+        }
+        .text-danger {
+            background: red;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="div_test1">
+        <!-- class的值中带"-"时必须用引号 -->
+        <div v-bind:class="{active: isActive,'text-danger': error}"></div>
+    </div><br/>
+    <script type="text/javascript">
+       var vue = new Vue({
+           el: "#div_test1",
+           data:{
+               isActive:true,
+               error: true,
+           }
+       });
+    </script>
+    <div id="div_test2">
+        <!-- class的值中带"-"时需用引号 -->
+        <div v-bind:class="classObject"></div>
+    </div><br/>
+    <script type="text/javascript">
+        var vue = new Vue({
+            el: "#div_test2",
+            data:{
+                classObject: {
+                    active: true,
+                    'text-danger': true,
+                }
+            }
+        });
+    </script>
+    <div id="div_test3">
+        <!-- class的值中带"-"时需用引号 -->
+        <div v-bind:class="classObject"></div>
+    </div><br/>
+    <script type="text/javascript">
+        var vue = new Vue({
+            el: "#div_test3",
+            data:{
+                isActive:true,
+                error: true,
+            },
+            computed: {
+                classObject: function () {
+                    return {
+                        active: this.isActive,
+                        'text-danger': this.error,
+                    }
+                }
+            }
+        });
+    </script>
+    <div id="div_test4">
+        <!-- class的值中带"-"时需用引号 -->
+        <div v-bind:class="[activeClass,errorClass]"></div>
+    </div><br/>
+    <script type="text/javascript">
+        var vue = new Vue({
+            el: "#div_test4",
+            data:{
+                activeClass: 'active',
+                errorClass: 'text-danger',
+            },
+        });
+    </script>
+    <div id="div_test5">
+        <!-- class的值中带"-"时需用引号 -->
+        <div v-bind:class="[activeClass,isError? error :'']"></div>
+        <hr/>
+        <div v-bind:class="[activeClass,{'text-danger':isError}]">test</div>
+    </div>
+    <script type="text/javascript">
+        var vue = new Vue({
+            el: "#div_test5",
+            data:{
+                activeClass: 'active',
+                error: 'text-danger',
+                isError: true,
+            },
+        });
+    </script>
+    <div id="div_test6">
+        <!-- class的值中带"-"时需用引号 -->
+        <div v-bind:style="{color: activeColor, fontSize: fontSize + 'px'}">active text</div>
+    </div>
+    <script type="text/javascript">
+        var vue = new Vue({
+            el: "#div_test6",
+            data:{
+                activeColor: '#f122f1',
+                fontSize: 22,
+            },
+        });
+    </script>
+    <div id="div_test7">
+        <!-- class的值中带"-"时需用引号 -->
+        <div v-bind:style="styleObject">styleObject</div>
+    </div>
+    <script type="text/javascript">
+        var vue = new Vue({
+            el: "#div_test7",
+            data:{
+                styleObject: {
+                    color: 'blue',
+                    fontSize: '20px',
+                }
+            },
+        });
+    </script>
+    <div id="div_test8">
+        <!-- class的值中带"-"时需用引号 -->
+        <div v-bind:style="[colorStyles,fontStyles,transformStyles]">[colorStyles,fontStyles,transformStyles]</div>
+    </div>
+    <script type="text/javascript">
+        var vue = new Vue({
+            el: "#div_test8",
+            data:{
+                colorStyles: {
+                    color: 'blue',
+                },
+                fontStyles: {
+                    fontSize: '20px',
+                    'font-weight': 'bold'
+                },
+                transformStyles: {
+                    transform: 'rotate(180deg)'
+                }
+            },
+        });
+        /*
+         当v-bind:style使用需要特定前缀的CSS属性时,
+         如transform,Vue.js会自动侦测并添加相应的前缀.
+         */
+    </script>
+    <!--
+        从 2.3.0 起你可以为 style 绑定中的属性提供一个包含多个值的数组，常用于提供多个带前缀的值
+    -->
+    <div :style="{ display: ['-webkit-box', '-ms-flexbox', 'flex'] }"></div>
+</body>
+</html>

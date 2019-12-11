@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript事件</title>
+</head>
+<body>
+    <input type="button" value="test" id="btn1"/>
+    <a href="www.baidu.com" id="baidu">百度</a>
+    <script type="text/javascript">
+        var btn1 = document.getElementById('btn1');
+        var handler = function (event) {
+            switch(event.type) {
+                case 'click':
+                    alert('click!');
+                    break;
+                case 'mouseover':
+                    event.target.style.backgroundColor = 'red';
+                    break;
+                case 'mouseout':
+                    event.target.style.backgroundColor = '';
+                    break;
+            }
+        }
+        btn1.onclick = handler;
+        btn1.onmouseover = handler;
+        btn1.onmouseout = handler;
+
+        //阻止事件的默认行为
+        var baidu = document.getElementById('baidu');
+        baidu.onclick = function(e) {
+            e.preventDefault();//取消默认行为
+            alert(e.cancelable);//是否取消默认行为
+
+            //window.event.returnValue = true//ie取消默认行为
+        };
+
+        /*
+         * eventPhase属性,如果事件处理程序处于捕获阶段，eventPhase为1;
+         * 如果事件处理程序处于目标对象上,eventPhase为2;
+         * 如果事件处理程序处于冒泡阶段,eventPhase为3;
+         */
+
+    </script>
+</body>
+</html>

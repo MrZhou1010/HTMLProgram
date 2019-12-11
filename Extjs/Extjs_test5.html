@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Extjs_test5</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/extjs/6.2.0/classic/theme-classic/resources/theme-classic-all.css" rel="stylesheet" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet"  />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/extjs/6.2.0/ext-all.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/extjs/6.2.0/packages/charts/classic/charts.js"></script>
+    <script type="text/javascript">
+        Ext.onReady(function () {
+            Ext.create('Ext.container.Container',{
+                renderTo : 'panel',
+                layout : 'auto' ,
+                width : '100%',
+                items:[{
+                    xtype	: 'button',
+                    width : '25%',
+                    iconCls	: 'fa fa-car',
+                    text	: 'Browse Fil1e'
+                },{
+                    xtype	: 'button',
+                    width : '25%',
+                    iconCls	: 'fa fa-file',
+                    text	: 'Browse File3'
+                },{
+                    xtype	: 'button',
+                    width : '25%',
+                    iconCls	: 'fa fa-home',
+                    text	: 'Browse File4'
+                },{
+                    xtype	: 'button',
+                    width : '25%',
+                    iconCls	: 'fa fa-folder',
+                    text	: 'Browse File5'
+                }]
+            });
+            Ext.create({
+                renderTo:'cicle',
+                xtype: 'draw',
+                sprites: [{
+                    type: 'ellipticalArc',
+                    fillStyle: 'red',
+                    rx: 100,
+                    ry: 80,
+                    cx: 100,
+                    cy: 100,
+                    startAngle: 0,
+                    endAngle: Math.PI,
+                    anticlockwise: true
+                }],
+                height:205,
+                width:205,
+            });
+            Ext.create({
+                renderTo:'image',
+                xtype: 'draw',
+                sprites: [{
+                    /*
+                    type: 'image',
+                    src:'http://www.cwb11.com/e/upload/s1/product/image/2017/03/t_10153807.jpg'
+                    */
+                    /*
+                    type: 'text',
+                    x: 10,
+                    y: 30,
+                    text: 'ExtJS Tutorials',
+                    fontSize: 30,
+                    fillStyle: 'green'
+                    */
+                    type: 'rect',
+                    height : 200,
+                    width: 200,
+                    fill: 'red',
+                    translate: {
+                        x:50,
+                        y:50
+                    },
+                    rotate: {
+                        degrees: 45
+                    }
+                }],
+                height:300,
+                width:300,
+            });
+        });
+    </script>
+</head>
+    <div id="header" style="width: 800px;height: 50px;padding: 20px">
+        <div id = "panel" > </div>
+    </div>
+    <div id = "cicle" ></div>
+    <div id = "image" ></div>
+
+</body>
+</html>

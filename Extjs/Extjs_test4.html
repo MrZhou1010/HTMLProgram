@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Extjs_test4</title>
+    <!--
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/extjs/6.2.0/classic/theme-classic/resources/theme-classic-all.css" rel="stylesheet">
+    -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/extjs/6.0.0/classic/theme-neptune/resources/theme-neptune-all.css" rel="stylesheet">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/extjs/6.2.0/ext-all.js"></script>
+    <script type="text/javascript">
+        Ext.onReady(function () {
+            Ext.create('Ext.Button', {
+                renderTo: Ext.getElementById('helloWorldPanel'),
+                height: 50,
+                width: 200,
+                text:'my button',
+                listeners:{
+                    click:function () {
+                        Ext.MessageBox.alert('Alert box','button is clicked!');
+                    }
+                }
+            });
+
+            Ext.get('tag2').hide();
+            Ext.create('Ext.Button', {
+                renderTo: Ext.getElementById('btn_test'),
+                text: '隐藏',
+                listeners: {
+                    click: function () {
+                        this.hide();
+                    },
+                    hide: function () {
+                        Ext.get('tag1').hide();
+                        Ext.get('tag2').show();
+                        this.show();
+                    },
+                }
+            });
+            var btn = Ext.create('Ext.Button',{
+                renderTo:Ext.getElementById('btn_on'),
+                text:'on'
+            })
+            btn.on('click',function () {
+                Ext.MessageBox.alert(this.text,'button is clicked!');
+            })
+
+            var costumBtn = Ext.create('Ext.Button',{
+                renderTo:Ext.getElementById('btn_costum'),
+                text:'on',
+                height: 50,
+                width: 200,
+                listeners: {
+                    MyEvent:function (btn) {
+                        Ext.MessageBox.alert(this.text,'button is clicked!');
+                    }
+                }
+            })
+            Ext.defer(function () {
+                costumBtn.fireEvent('MyEvent');
+            },3000)
+        });
+
+    </script>
+</head>
+    <p> Please click the button to see event listener </p>
+    <div id = 'helloWorldPanel' ></div>  <!--  panel will be rendered here -->
+    <div id = "tag1">Please click the button to see event listener.</div>
+    <div id = "tag2">The button was clicked and now it is hidden.</div>
+    <div id = 'btn_test' ></div>  <!--  panel will be rendered here -->
+    <br/>
+    <div id = 'btn_on' ></div>  <!--  panel will be rendered here -->
+    <br/>
+    <div id = 'btn_costum' ></div>  <!--  panel will be rendered here -->
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React</title>
+    <script src="https://www.w3cschool.cn/statics/assets/react/react.min.js"></script>
+    <script src="https://www.w3cschool.cn/statics/assets/react/react-dom.min.js"></script>
+    <script src="https://www.w3cschool.cn/statics/assets/react/babel.min.js"></script>
+</head>
+<body>
+<section>
+    <div id="example"></div>
+</section>
+<script type="text/babel">
+    var LikeButton = React.createClass({
+        getInitialState: function () {
+            return {
+                liked: false
+            }
+        },
+        handleClick: function (event) {
+            this.setState({liked: !this.state.liked});
+        },
+        render: function () {
+            var text = this.state.liked ? "like" : "unlike";
+            return (<p onClick= { this.handleClick}>{text}</p>);
+        }
+    });
+    ReactDOM.render(
+        <LikeButton />,
+        document.getElementById('example')
+    );
+</script>
+</body>
+</html>

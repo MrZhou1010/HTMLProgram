@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"></script>
+    <title>intervalExample</title>
+</head>
+<body>
+    <div ng-app="intervalApp">
+        <div class="container" ng-controller="intervalController">
+            <label>Date format:<input type="text" ng-model="format"></label>
+            <hr/>
+            <div>Current time is:<span current-time="format"></span></div>
+            <hr/>
+            倒计时: <span style="color: red" ng-bind="min"></span>分<span style="color: red" ng-bind="sec"></span>秒
+            <button type="button" data-ng-click="fight()">Fight</button>
+            <button type="button" data-ng-click="stopFight()">StopFight</button>
+            <button type="button" data-ng-click="resetFight()">resetFight</button>
+        </div>
+    </div>
+
+    <script>
+        var app = angular.module('intervalApp',[]);
+        app.directive('currentTime',['$interval','dateFilter',function ($interval,dateFilter) {
+            return function (scope,element,attrs) {
+
+                var format,intervalTimer;
+
+                function updateTime() {
+                    element.text(dateFilter(new Date(),format));
+                }
+                scope.$watch(attrs.currentTime,function (value) {
+                    format = value;
+                    updateTime();
+                });
+
+                intervalTimer =  $interval(updateTime, 1000);
+
+                element.on('$destroy',function () {
+                    $interval.cancel(intervalTimer);
+                    intervalTimer = undefined;
+                });
+            }
+        }]);
+        app.controller('intervalController',['$scope','$interval',function ($scope,$interval) {
+
+            $scope.format = 'yyyy-MM-dd HH:mm:ss';
+            //倒计时120s
+            var time = 120;
+            $scope.min = time/60;
+            $scope.sec = time%60;
+
+            var timer;
+            $scope.fight = function() {
+                if (angular.isDefined(timer)) return;
+                timer = $interval(function () {
+                    if ($scope.min > 0 || $scope.sec > 0) {
+                        if ($scope.sec == 0) {
+                            $scope.sec = 60;
+                            $scope.min = $scope.min - 1;
+                        }
+                        $scope.sec = $scope.sec - 1;
+                    } else {
+                        $scope.stopFight();
+                    }
+                }, 1000);
+            };
+            $scope.stopFight = function () {
+                if(angular.isDefined(timer)) {
+                    $interval.cancel(timer);
+                    timer = undefined;
+                }
+            }
+            $scope.resetFight = function () {
+                $scope.min = time/60;
+                $scope.sec = time%60;
+            }
+            $scope.$on('$destroy',function () {
+                $scope.stopFight();
+            });
+        }]);
+    </script>
+</body>
+</html>

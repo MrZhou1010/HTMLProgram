@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React</title>
+    <script src="https://www.w3cschool.cn/statics/assets/react/react.min.js"></script>
+    <script src="https://www.w3cschool.cn/statics/assets/react/react-dom.min.js"></script>
+    <script src="https://www.w3cschool.cn/statics/assets/react/babel.min.js"></script>
+</head>
+<body>
+<section>
+    <div>
+        JSX 是一个看起来很像 XML 的 JavaScript 语法扩展。
+        我们不需要一定使用 JSX，但它有以下优点：
+        JSX 执行更快，因为它在编译为 JavaScript 代码后进行了优化。
+        它是类型安全的，在编译过程中就能发现错误。
+        使用 JSX 编写模板更加简单快速。
+    </div>
+    <div id="example"></div>
+</section>
+<script type="text/babel">
+    var i = 1;
+    var myStyle = {
+        fontSize: 18,
+        color: '#FF0000'
+    };
+    var arr = [
+        <h1>{ 'firstName'+' '+'lastName' }</h1>,
+        <h2 style= { myStyle }>{ i = 1 ? 'True' : 'False' }</h2>,
+    ];
+
+    ReactDOM.render(
+        <div>
+            {/* 注释 */}
+            <h1>{ 'firstName'+' '+'lastName' }</h1>
+            <h2 style= { myStyle }>{ i = 1 ? 'True' : 'False' }</h2>
+            { arr }
+        </div>,
+        document.getElementById('example')
+    );
+</script>
+</body>
+</html>

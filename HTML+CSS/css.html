@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>css</title>
+	<meta charset="utf-8">
+	<!--
+	<style type="text/css">
+		body{
+			background-color: red;
+			color: #00f;
+		}
+		p{
+			background-color: green;
+			color: #ffffff;
+		}
+	</style>
+	-->
+	<!--
+	<link rel="stylesheet" type="text/css" href="style.css">
+	-->
+	<!--
+	<style type="text/css">
+	/* class定义,用"." */
+		.p {
+			background-color: red;
+			color: #ffffff;
+			font-size: 12px;
+		}
+	/* id定义,用"#" 唯一性,只能出现一次 */
+		#pp {
+				background-color: blue;
+				color: #ffffff;
+				font-size: 18px;
+			}
+	/* 优先级:id > class > HTML */
+	/* 组合选择器,用","隔开 */
+
+	/* 伪元素选择器 */
+	a:link {
+		color: rgb(255,0,0);
+		color: rgba(0,0,255,0.6);
+		/* color: red; */
+	}
+	a:hover {
+		color: blue;
+	}
+	a:active {
+		color: gray;
+	}
+	a:visited {
+		color: green;
+	}
+	/* 字体相关属性font-size,font-family,font-weight,font-style,font-variant */
+	body {
+		font-size: 30px;
+		font-family: '微软雅黑'
+	}
+	h1 {
+		font-size: larger;/* 比父元素更大 */
+		font-family: '华文仿宋','宋体','微软雅黑';
+		font-weight: normal;
+		font-style: normal;
+		font-variant: small-caps;/* 小型大写字母显示文本 */
+		font-variant: inherit;/* 继承 */
+
+	}
+	h2 {
+		font-size: smaller;/* 比父元素更小 */
+		font-family: '宋体','微软雅黑';
+		font-weight: bold;
+		font-style: italic;/* 斜体 */
+		font-style: oblique;/* 倾斜 */
+		font-style: inherit;/* 继承 */
+	}
+	h3{
+		font-size: inherit;/* 继承父元素 */
+		font-weight: bolder;
+	}
+	a {
+		font-size: 50%;/* 父元素的百分比 */
+		font-weight: lighter;
+	}
+	</style>
+	-->
+	<!--
+	<style type="text/css">
+	/* 背景相关属性background-color,background-image(url(图片路径)),background-repeat(重复) */
+		div {
+			width: : 200px;
+			height:  500px;
+			/*
+			background-color: rgba(0,0,255,0.5);
+			*/
+			/*
+			background-image: url(https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3064196619,4273423839&fm=23&gp=0.jpg);
+			*/
+			/* background-repeat: no-repeat; */ /* repeat,repeat-x,repeat-y,no-repeat */
+			/* background-position: 30px 50px; */ /* background-position: (x) (y); */
+			background: #fff2ff url(https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3064196619,4273423839&fm=23&gp=0.jpg) no-repeat 30px 50px;
+		}
+	</style>
+	-->
+	<style type="text/css">
+		/* 文本相关属性*/
+		p {
+			text-align: left;
+			font-size: 15px;
+			/* line-height文本行高 */
+			line-height: 30px;
+			/* line-indent首行缩减 */
+			text-indent: 30px;
+			/* letter-spacing字符间距 */
+			letter-spacing: 2px;
+			/* word-spacing单词间距 */
+			word-spacing: 10px;
+			/* direction文本方向,默认ltr */
+			direction: rtl;
+			/* dtext-transform(capitalize首字母大写,uppercase大写,lowercase小写) */
+			text-transform: uppercase;
+		}
+		/* 边框相关属性border-style(边框风格)*/
+		div {
+			width: 200px;
+			height: 300px;
+			margin-top: 10px;
+			background-color: #f2f;
+			background-position: 20px 20px;
+
+			border-style: solid;
+			border-width: 5px;
+			border-width: thick;
+			border-color: red;
+		}
+		.div1 {
+			border-right-style: dotted;
+			border-right-width: 2px;
+			border-bottom-color: green;
+		}
+		.div2 {
+			border-left-style: dashed;
+			border-top-width: 1px;
+			border-left-color: yellow;
+		}
+		ul {
+			list-style-type: upper-alpha;
+			list-style-position: outside;
+		}
+		ol {
+			list-style-type: cjk-ideographic;
+			list-style-position: inside;
+		}
+		.ol {
+			list-style-image: url(http://img.lanrentuku.com/img/allimg/1506/5-150626150929-51.gif);
+		}
+		.ul {
+			list-style: circle inside url(img.png);
+		}
+	</style>
+</head>
+<!-- style="background-color: red;color: #00ff00" -->
+<body>
+	<!--	
+	<h1>
+		css样式使用方式
+	</h1>
+	<h2>
+		css样式使用方式
+	</h2>
+	<p style="background-color: green;color: #ffffff;">
+		css样式使用方式
+	</p>
+
+	<p id="pp" class="p">
+		css样式使用方式
+	</p>
+
+	<a href="https://www.baidu.com/">百度</a>
+	<a href="https://www.baidu.com/q">百度</a>
+	<a href="https://www.baidu.com/ad">百度</a>
+	<a href="https://www.baidu.com/ada">百度</a>
+	<div>
+		<p>css</p>
+	</div>
+	-->
+	<p>文本相关属性文本相关属性文本相关属性文本相关属性文本相关属性文本相关属性文本相关属性文本相关属性文本相关属性文本相关属性文本相关属性</p>
+	<p>this is word spacing example</p>
+	<div class="div1">
+		
+	</div>
+	<div class="div2">
+		
+	</div>
+
+	
+
+	<ol class="ol">
+		<li>列表</li>
+		<li>列表</li>
+		<li>列表</li>
+		<ul class="ul">
+			<li>1</li>
+			<li>1</li>
+			<li>1</li>
+			<li>1</li>
+			<li>1</li>
+			<li>1</li>
+		</ul>
+		<li>列表</li>	
+		<li>列表</li>
+		<li>列表</li>
+	</ol>
+</body>
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript中的特殊形式函数</title>
+</head>
+<body>
+    <script type="text/javascript">
+        //私有化的函数
+        function a(param) {
+            function b(param1) {
+                return param1 + 10;
+            }
+            return '在a函数调用b函数：' + b(param);
+        }
+        document.write(a(5)+'<br/>');
+
+        function a(param) {
+            var b = function(param1) {
+                return param1 + 10;
+            }
+            return '在a函数调用b函数：' + b(param);
+        }
+        document.write(a(5)+'<br/>');
+
+        //返回函数的函数
+        function aaa() {
+            document.write('aaa'+'<br/>');
+            return function () {
+                document.write('bbb'+'<br/>');
+            }
+        }
+        //var func = aaa();
+        //func();
+        aaa()();
+
+        //重写自己的函数
+        function c() {
+            document.write('c'+'<br/>');
+             c =function () {
+                document.write('ccc'+'<br/>');
+            }
+        }
+        c();
+        c();
+
+        var d = function () {
+            function setUp() {
+                var setUp = 'do';
+            }
+            function doWhat() {
+                document.write('ddd'+'<br/>');
+            }
+            setUp();
+            return doWhat();
+        };
+        d();
+
+        //scope chain作用域链
+        var x = 2;
+        function f1() {
+            var y = 5;
+            function f2() {
+                var z = 10;
+                document.write(x+'<br/>');
+                document.write(y+'<br/>');
+                document.write(z+'<br/>');
+                return z+x+y;
+            };
+            document.write(f2()+'<br/>');
+        };
+        f1();
+
+        //闭包(突破作用域链)
+        function f() {
+            var a1 = 23333;
+            return function () {
+                return a1;
+            }
+        }
+        //document.write(f()()+'<br/>');
+        var test = f();
+        document.write(test()+'<br/>');
+
+        var n;
+        function fn() {
+            var a = 'king';
+            n = function () {
+                return a;
+            };
+        }
+        fn();
+        document.write(n()+'<br/>');
+
+        function fp(param) {
+            var p = function () {
+                return param;
+            }
+            param++;
+            return p;
+        }
+        document.write(fp(5)()+'<br/>');
+
+        //闭包用途:一个是前面提到的可以读取函数内部的变量，另一个就是让这些变量的值始终保持在内存中，不会在f1调用后被自动清除。
+        function f3() {
+            var n = 1;
+            test = function () {
+                n+=1;
+            };
+            function f4() {
+                //alert(n);
+                return n;
+            };
+            return f4;
+        }
+        var res = f3();
+        document.write(res()+'<br/>');
+        test();
+        document.write(res()+'<br/>');
+        
+        var setValue,getValue;
+        (function () {
+            var n = 0;
+            getValue = function () {
+                return n;
+            }
+            setValue = function (x) {
+                n = x;
+            }
+        })();
+        document.write(getValue()+'<br/>');
+        setValue(666);
+        document.write(getValue()+'<br/>');
+
+        function conter(x) {
+            var i = 0;
+            return function () {
+                return x[i++];
+            };
+        };
+        var next = conter(['a','b','c','d']);
+        for (var i=0;i<4;i++) {
+            document.write(next()+'<br/>');
+        };
+
+        /*
+        function foo() {
+            var a =[],i;
+            for (i=0;i<3;i++) {
+                a[i] = function () {
+                    return i;
+                };
+            };
+            return a;
+        };
+        var test = foo();
+        alert(test[0]());
+        alert(test[1]());
+        alert(test[2]());
+        */
+
+        function foo1() {
+            var a =[],i;
+            for (i=0;i<3;i++) {
+                a[i] = (function (x) {
+                    return function () {
+                        return x;
+                    };
+                })(i);
+            };
+            return a;
+        };
+        var test1 = foo1();
+        //alert(test1[0]());
+        //alert(test1[1]());
+        //alert(test1[2]());
+
+        function foo2() {
+            function test2(x) {
+                return function () {
+                    return x;
+                };
+            };
+            var a = [],i;
+            for (i=0;i<3;i++) {
+                a[i] = test2(i);
+            }
+            return a;
+        };
+        var res = foo2();
+        alert(res[0]());
+        alert(res[1]());
+        alert(res[2]());
+    </script>
+
+</body>
+</html>

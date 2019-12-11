@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>CSS3的动画功能</title>
+	<style type="text/css">
+	div {
+		width: 500px;
+		height: 500px;
+	}
+	.div1 {
+		width: 150px;
+		height: 150px;
+		background-color: green;
+		/* transition:property(应用过度效果的CSS属性名称) duration(过渡时间) timeing-function(过渡速率ease、linear、ease-in、ease-out、ease-in-out、cubic-bezier(n,n,n,n)) delay(延时执行时间) */
+		transition: all 1s linear 0;
+		-ms-transition:all 1s linear 0;
+		-moz-transition:all 1s linear 0;
+		-o-transition:all 1s linear 0;
+		-webkit-transition:background-color 1s linear 0,width 2s ease-in 0,height 1s cubic-bezier(0,0,0.5,0.5) 2s;
+	}
+	.div1:hover {
+		background-color: orange;
+		width: 500px;
+		height: 500px;
+	}
+	.div2 {
+		width: 100px;
+		height: 100px;
+		background-color: green;
+		/*transform-origin: bottom right;*/
+	}
+	@-webkit-keyframes myAnimation {
+		0% {
+			background-color: green;
+			-webkit-transform:rotate(72deg);
+		}
+		25% {
+			background-color: blue;
+			-webkit-transform:rotate(144deg);
+		}
+		50% {
+			background-color: orange;
+			-webkit-transform:rotate(216deg);
+		}
+		75% {
+			background-color: red;
+			-webkit-transform:rotate(288deg);
+		}
+		100% {
+			background-color: green;
+			-webkit-transform:rotate(360deg);
+		}
+	}
+	.div2:hover {
+		/* animation属性 */
+		-webkit-animation-name: myAnimation;
+		-webkit-animation-duration: 3s;
+		-webkit-animation-timing-function: ease-out;
+		-webkit-animation-iteration-count: infinite;
+		-webkit-animation-delay: 0s;
+	}
+	</style>
+</head>
+<body>
+	<div>
+		<div class="div1">
+			transform属性
+		</div>
+	</div>
+	<hr/>
+	<div>
+		<div class="div2">
+			animation属性
+		</div>
+	</div>
+</body>
+</html>

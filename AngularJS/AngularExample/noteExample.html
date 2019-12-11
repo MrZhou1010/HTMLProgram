@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="noteApp">
+<head>
+    <meta charset="UTF-8">
+    <title>笔记</title>
+    <script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
+    <style>
+        * {
+            margin: 2px;
+            padding: 2px;
+        }
+        .note {
+            width: 360px;
+            height: 300px;
+            background-color: orange;
+            padding-left: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div ng-controller="noteController" class="note">
+        <h2>我的笔记</h2>
+        <textarea ng-model="message" cols="30" rows="10"></textarea>
+        <div>
+            <button ng-click="save()">保存</button>
+            <button ng-click="clear()">清除</button>
+        </div>
+        <p>剩余字数：<span ng-bind="left()"></span></p>
+    </div>
+    <script>
+        var app = angular.module('noteApp',[]);
+    </script>
+    <script>
+        app.controller('noteController',function ($scope) {
+            $scope.message = '';
+            $scope.left = function () {
+                return 100 - $scope.message.length;
+            };
+            $scope.save = function () {
+                if ($scope.message.length != 0) {
+                    alert("Note Saved");
+                } else {
+                    alert('please input some information');
+                }
+
+            };
+            $scope.clear = function () {
+                $scope.message = "";
+            }
+        })
+    </script>
+</body>
+</html>

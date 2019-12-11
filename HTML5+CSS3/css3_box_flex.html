@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>CSS3布局相关的样式-弹性盒布局</title>
+	<style type="text/css">
+		.area {
+			display: -webkit-box;
+			display: -moz-box;
+			-webkit-box-orient:vertical;/* 改变元素的排列方向 */
+			-moz-box-orient:vertical;
+		}
+		.left {
+			padding: 10px;
+			background-color: red;
+			box-sizing: border-box;
+			margin: 10px;
+			-webkit-box-ordinal-group:3;/* 改变元素的显示顺序 */
+			-moz-box-ordinal-group:3;
+		}
+		.right {
+			padding: 10px;
+			background-color: blue;
+			box-sizing: border-box;
+			margin: 10px;
+			-webkit-box-ordinal-group:2;
+			-moz-box-ordinal-group:2;
+		}
+		.center {
+			-webkit-box-flex:1;/* 弹性、自适应 */
+			-moz-box-flex:1;
+			background-color: orange;
+			box-sizing: border-box;
+			margin: 10px;
+			-webkit-box-ordinal-group:1;
+			-moz-box-ordinal-group:1;
+
+			-webkit-box-pack:end;/* 指定水平方向对齐方式 */
+			-moz-box-pack:end;
+			-webkit-box-align:end;/* 指定垂直方向对齐方式 */
+			-moz-box-align:end;
+		}
+	</style>
+</head>
+<body>
+	<div class="area">
+	<div class="left">
+		<h2>栏目列表</h2>
+		<ul>
+			<li>栏目名称</li>
+			<li>栏目名称</li>
+			<li>栏目名称</li>
+			<li>栏目名称</li>
+			<li>栏目名称</li>
+			<li>栏目名称</li>
+			<li>栏目名称</li>
+			<li>栏目名称</li>
+			<li>栏目名称</li>
+		</ul>
+	</div>
+	<div class="center">
+		布局相关的样式布局相关的样式布局相关的样式布局相关的样式布局相关的样式布局相关的样式布局相关的样式布局相关的样式布局相关的样式布局相关的样式布局相关的样式布局相关的样式布局相关的样式布局相关的样式布局相关的样式布局相关的样式布局相关的样式布局相关的样式布局相关的样式布局相关的样式布局相关的样式布局相关的样式布局相关的样式布局相关的样式布局相关的样式布局相关的样式布局相关的样式布局相关的样式布局相关的样式布局相关的样式布局相关的样式布局相关的样式布局相关的样式布局相关的样式布局相关的样式布局相关的样式布局相关的样式布局相关的样式布局相关的样式布局相关的样式布局相关的样式布局相关的样式
+	</div>
+	<div class="right">
+		<h2>栏目列表</h2>
+		<ul>
+			<li>栏目名称</li>
+			<li>栏目名称</li>
+			<li>栏目名称</li>
+			<li>栏目名称</li>
+			<li>栏目名称</li>
+			<li>栏目名称</li>
+			<li>栏目名称</li>
+			<li>栏目名称</li>
+			<li>栏目名称</li>
+			<li>栏目名称</li>
+			<li>栏目名称</li>
+		</ul>
+	</div>
+	</div>
+</body>
+</html>

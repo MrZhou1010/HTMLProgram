@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue 测试实例</title>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.9/vue.min.js"></script>
+    <style type="text/css">
+
+    </style>
+</head>
+<body>
+    <div id="div_test1">
+        <p>input元素:</p>
+        <input v-model.trim="message" placeholder="编辑我……">
+        <p>消息是:{{ message }}</p>
+
+        <p>textarea 元素：</p>
+        <textarea v-model="message2" placeholder="多行文本输入……"></textarea>
+        <p style="white-space: pre">{{ message2 }}</p>
+    </div>
+    <script type="text/javascript">
+        new Vue({
+            el: '#div_test1',
+            data: {
+                message: '',
+                message2: '',
+            }
+        });
+    </script>
+    <div id="div_test2">
+        <p>单个复选框:</p>
+        <input type="checkbox" id="checkbox" v-model="checked">
+        <label for="checkbox">{{ checked }}</label>
+
+        <p>多个复选框:</p>
+        <input type="checkbox" id="runoob" value="Runoob" v-model="checkedNames">
+        <label for="runoob">Runoob</label>
+        <input type="checkbox" id="google" value="Google" v-model="checkedNames">
+        <label for="google">Google</label>
+        <input type="checkbox" id="taobao" value="Taobao" v-model="checkedNames">
+        <label for="taobao">taobao</label>
+        <button v-on:click="selectedAll">全选</button>
+        <button v-on:click="cancelAll">取消</button>
+        <br>
+        <span>选择的值为: {{ checkedNames }}</span>
+    </div>
+    <script type="text/javascript">
+        new Vue({
+            el: '#div_test2',
+            data: {
+                checked: false,
+                checkedNames: [],
+                checkedArr:["Runoob", "Taobao", "Google"],
+            },
+            methods: {
+                selectedAll: function (e) {
+                    this.checkedNames = this.checkedArr;
+                },
+                cancelAll: function (e) {
+                    this.checkedNames = [];
+                }
+            }
+        });
+    </script>
+    <div id="div_test3">
+        <p>单选框:</p>
+        <input type="radio" id="male" value="male" v-model="picked">
+        <label for="male">male</label>
+        <input type="radio" id="female" value="female" v-model="picked">
+        <label for="female">female</label>
+        <br>
+        <span>选择的值为: {{ picked }}</span>
+    </div>
+    <script type="text/javascript">
+        new Vue({
+            el: '#div_test3',
+            data: {
+                picked: 'female',
+            }
+        });
+    </script>
+    <div id="div_test4">
+        <select v-model="selected" name="fruit">
+            <option value="">选择一个网站</option>
+            <option value="www.runoob.com">Runoob</option>
+            <option value="www.google.com">Google</option>
+        </select>
+        <span>选择的网站是: {{selected}}</span>
+    </div>
+    <script type="text/javascript">
+        new Vue({
+            el: '#div_test4',
+            data: {
+                selected: '',
+            }
+        });
+    </script>
+    <!--
+        .lazy   在 "change" 而不是 "input" 事件中更新
+        .number 如果想自动将用户的输入值转为 Number 类型（如果原值的转换结果为 NaN 则返回原值）
+        .trim   自动过滤用户输入的首尾空格
+    -->
+</body>
+</html>

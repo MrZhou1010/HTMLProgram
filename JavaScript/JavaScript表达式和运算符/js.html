@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript表达式和运算符</title>
+</head>
+<body>
+    <script type="text/javascript">
+        var r = 2;
+        var pi = 3.14;
+        var s = 2*r*pi;
+        //alert(s);
+        //运算符 ＋、－、＊、／、％
+        var i = 5,j = 36;
+        document.write(i+j);document.write('<br/>');
+        document.write(i-j);document.write('<br/>');
+        document.write(i*j);document.write('<br/>');
+        document.write(i/j);document.write('<br/>');
+        document.write(j%i);document.write('<br/>');
+        //字符连接符＋(注意js的执行顺序)
+        document.write(''+i+j);document.write('<br/>');
+        document.write(i+j+'');document.write('<br/>');
+        //自增自减
+        i++;//先执行在加一
+        ++j;//先加一在执行
+        document.write('i:'+(i++));document.write('<br/>');
+        document.write('i:'+(++j));document.write('<br/>');
+        //赋值运算符=、+=、-=、*=、/=、%=
+        var  a = 2;
+        a += 5;
+        document.write('a:'+(a));document.write('<br/>');
+        //比较运算符 >、<、==、!=、>=、<=、===、!===
+        var res = undefined===null;
+        //alert(res);
+        //逻辑运算符 &&、||、!
+        //&&如果第一个表达式为false，整个结果为false，第二个表达式短路
+        //||如果第一个表达式为true，整个结果为true，第二个表达式短路
+        var x = 1,y=0;
+        if (x-- || y++) {
+            document.write('aaaaa');
+        } else {
+            document.write('bbbbb');
+        }
+        //alert(x);
+        //alert(y);
+        //三目运算符
+        var test3 = i>j?'big':'small';
+        test3 = isNaN(x)?0:x;
+        //alert(test3);
+        //逗号表达式
+        var z = (x=2,y=5);
+        //void运算符，无返回值
+        z = void(x=2,y=5);
+        //alert(z);
+        //typeof运算符
+        var k = [1,2,3];
+        alert(typeof k);
+    </script>
+</body>
+</html>

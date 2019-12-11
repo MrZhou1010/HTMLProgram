@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>CSS3的属性选择器</title>
+	<style type="text/css">
+
+		[id *= section1] {
+			background-color: red;
+		}
+		[id ^= s] {
+			background-color: green;
+		}
+		[id $= n3e] {
+			background-color: #f60;
+		}
+		[id $= \-5] {
+			background-color: blue;
+		}
+		[id $= _1] {
+			background-color: gray;
+		}
+
+		/* 类选择器 */
+		p.left {
+			text-align: left;
+			color: red;
+		}
+		p.right  {
+			text-align: right;
+			color: blue;
+		}
+		/* 伪类选择器,CSS中已经定义好的选择器 */
+		a:link {
+			color: #f60;
+		}
+		a:visited {
+			color: gray;
+		}
+		a:hover {
+			color: green;
+		}
+		a:active {
+			color: blue;
+		}
+		/* 伪元素选择器,CSS中已经定义好的伪元素选择器 */
+		/* first-line第一行使用样式 */
+		p:first-line {
+			color: #f60;
+		}
+		/* fisrt-letter文字的首字母或第一个字使用样式 */
+		p:first-letter {
+			color: blue;
+			font-size: 12px;
+		}
+		/* before伪元素选择器在某个元素之前插入内容,after伪元素选择器在某个元素之后插入内容 */
+		li {
+			list-style: none;
+		}
+		li:before {
+			content: '$.';
+			color: red;
+		}
+		li:after {
+			content: '_追加';
+			color: green;
+		}
+
+		/* 结构性伪类选择器root、not、empty、target */
+		/* root页面的根元素 */
+		:root {
+			background-color: darkgray;
+		}
+		/* not */
+		body *:not(h1) {
+			margin: 5px;
+			background-color: white;
+		}
+		/* empty */
+		:empty {
+			background-color: yellow;
+		}
+		/* target */
+		:target {
+			background-color: yellow;
+		}
+		/* 结构性伪类选择器first-child、last-child、nth-child、nth-last-child */
+		/* first-child单独制定第一个子元素的样式,last-child单独制定最后一个子元素的样式 */
+		.child li:first-child {
+			background-color: #f60;
+		} 
+		.child li:last-child {
+			background-color: yellow;
+		}
+		/* nth-child(n)单独制定第n个子元素的样式,nth-child(odd)单独制定第奇数个子元素的样式,nth-child(n)单独制定第奇数个子元素的样式 */
+		/* nth-last-child(n)单独制定倒数第n个子元素的样式 */
+		.child li:nth-child(odd) {
+			background-color: blue;
+		}
+		.child li:nth-child(even) {
+			background-color: orange;
+		}
+		/* nth-of-type和nth-last-of-type 在统计时只针对同类型的子元素进行计算 */
+		/*
+		.nthOfType h2:nth-child(odd) {
+			background-color: orange;
+		}
+		用此样式时,h2和p元素都会被统计
+		*/
+		.nthOfType h2:nth-of-type(odd) {
+			background-color: orange;
+		}
+		.nthOfType h2:nth-of-type(even) {
+			background-color: blue;
+		}
+		/* nth-child(An+B),A表示循环中包括几种样式,B表示指定样式在循环中的位置*/
+		.xunhuan li:nth-child(4n+1) {
+			background-color: orange;
+		}
+		/* only-child只对唯一子元素的样式作用(子元素唯一才会有效) */
+	</style>
+</head>
+<body>
+	<h1>CSS3的属性选择器</h1>
+	<div id="section1-1">section1-1</div><br/>
+	<div id="section1-2">section1-2</div><br/>
+	<div id="section2">section2</div><br/>
+	<div id="section3">section3</div><br/>
+	<div id="lsection_1">lsection_1</div><br/>
+	<div id="lsection2-5">lsection2</div><br/>
+	<div id="lsection3e">lsection3</div><br/>
+	<div id="lsection4e">lsection4</div><br/>
+
+	<p class="left">CSS3的属性选择器</p>
+	<p class="right">CSS3的属性选择器</p>
+	<a href="CSS3.html">伪类选择器</a>
+	<br/>
+	<p>伪元素选择器,CSS中已经定义好的伪元素选择器<br/>伪元素选择器,CSS中已经定义好的伪元素选择器<br/>伪元素选择器,CSS中已经定义好的伪元素选择器</p>
+	<ul class="child">
+		<li>伪元素选择器1</li>
+		<li>伪元素选择器2</li>
+		<li>伪元素选择器3</li>
+		<li>伪元素选择器4</li>
+		<li>伪元素选择器5</li>
+		<li>伪元素选择器6</li>
+		<li>伪元素选择器7</li>
+	</ul>
+	<br/>
+	<table border="1" cellpadding="10" cellspacing="0">
+		<tr>
+			<td>123</td>
+			<td>456</td>
+			<td></td>
+			<td>789</td>
+			<td></td>
+		</tr>
+	</table>
+	<br/>
+	<a href="#target1">伪类选择器target1</a>
+	<a href="#target2">伪类选择器target2</a>
+	<a href="#target3">伪类选择器target3</a>
+	<div id="target1">
+		<h2>标题</h2>
+		<p>内容</p>
+	</div>
+	<div id="target2">
+		<h2>标题</h2>
+		<p>内容</p>
+	</div>
+	<div id="target3">
+		<h2>标题</h2>
+		<p>内容</p>
+	</div>
+	<div class="nthOfType">
+		<h2>标题</h2>
+		<p>内容</p>
+		<h2>标题</h2>
+		<p>内容</p>
+		<h2>标题</h2>
+		<p>内容</p>
+		<h2>标题</h2>
+		<p>内容</p>
+	</div>
+	<ul class="xunhuan">
+		<li>循环中1种样式</li>
+		<li>循环中2种样式</li>
+		<li>循环中3种样式</li>
+		<li>循环中4种样式</li>
+		<li>循环中5种样式</li>
+		<li>循环中6种样式</li>
+		<li>循环中7种样式</li>
+		<li>循环中8种样式</li>
+	</ul>
+</body>
+</html>

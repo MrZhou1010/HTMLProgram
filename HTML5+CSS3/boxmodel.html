@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>盒模型(盒布局)</title>
+	<style type="text/css">
+		div.div1 {
+			width: 400px;
+			height: 260px;
+			background-color: orange;
+			display: inline-block;
+		}
+		div.div2 {
+			width: 400px;
+			height: 230px;
+			background-color: purple;
+			display: inline-block;
+			/* vertical-align垂直对齐方式 */
+			vertical-align:top;
+		}
+		div.div3 {
+			width: 800px;
+			background-color: blue;
+			display: inline-block;
+		}
+		span {
+			background-color: darkred;
+			display: inline-block;
+		}
+		ul {
+			margin: 0;
+			padding: 0;
+		}
+		/*
+		li {
+			padding: 10px 20px;
+			background-color: #f60;
+			width: 120px;
+			border-right: solid 1px #f122f3;
+			text-align: center;
+			list-style: none;
+			float: left;
+		}
+		*/
+		li {
+			display: inline-block;
+			padding: 10px 20px;
+			background-color: #f60;
+			width: 120px;
+			border-right: solid 1px #f122f3;
+			text-align: center;
+		}
+		a {
+			color: #fff;
+			text-decoration: none;
+		}
+		/* inline-table */
+		table {
+			display: inline-table;
+			border: solid 2px #f122f3;
+			vertical-align: bottom;
+		}
+		td {
+			border: solid 1px #f122f3;
+		}
+		/* list-item */
+		div.list-item {
+			display: list-item;
+			list-style-type: circle;
+			margin-left: 15px;
+		}
+		/* run-in、 compact */
+		dl.run-in dt{
+			display: run-in;
+			border:solid 1px #f122f3;
+			background-color: orange;
+		}
+		dl.compact dt{
+			display: compact;
+			border:solid 1px #f122f3;
+			background-color: #aaa;
+		}
+		/* none类型 */
+		div.aa {
+			width: 500px;
+			height: 500px;
+			background-color: #f1f2f3;
+		}
+		div.none {
+			width: 220px;
+			height: 220px;
+			background-color: #f122f3;
+			display: none;
+		}
+		div.aa:hover div.none{
+			display: block;
+		}
+	</style>
+</head>
+<body>
+	<h1>盒模型</h1>
+	<div class="div1">
+		Lu Fei, from the "One Piece" Road, flying sang energetic that is well known, as long as the meat he can not know what is tired, of course, no meat is the same, but no meat will not love. Straw hat pirates group is a wonderful work, except Lu Fei, Suolongshan governance are sturdy and energetic typical representative, to meet noisy, no noisy fight, endless, although playing is scolding is love but You can not do that!
+	</div><div class="div2">
+		Lu Fei, from the "One Piece" Road, flying sang energetic that is well known, as long as the meat he can not know what is tired, of course, no meat is the same, but no meat will not love. Straw hat pirates group is a wonderful work, except Lu Fei, Suolongshan governance are sturdy and energetic typical representative, to meet noisy, no noisy fight, endless, although playing is scolding is love but You can not do that!
+	</div>
+	<div class="div3">
+		Lu Fei, from the "One Piece" Road, flying sang energetic that is well known, as long as the meat he can not know what is tired, of course, no meat is the same, but no meat will not love. Straw hat pirates group is a wonderful work, except Lu Fei, Suolongshan governance are sturdy and energetic typical representative, to meet noisy, no noisy fight, endless, although playing is scolding is love but You can not do that!
+	</div>
+	<hr/>
+	<span>
+		Lu Fei, from the "One Piece" Road, flying sang energetic that is well known, as long as the meat he can not know what is tired, of course, no meat is the same, but no meat will not love. Straw hat pirates group is a wonderful work, except Lu Fei, Suolongshan governance are sturdy and energetic typical representative, to meet noisy, no noisy fight, endless, although playing is scolding is love but You can not do that!
+	</span>
+	<hr/>
+	<ul>
+		<li>
+			<a href="CSS3.html">首页</a>
+		</li><li>
+			<a href="CSS3.html">新闻</a>
+		</li><li>
+			<a href="CSS3.html">视频</a>
+		</li><li>
+			<a href="CSS3.html">用户</a>
+		</li>
+		<hr/>
+		这是个表格
+		<table>
+			<tr>
+				<td>a</td>
+				<td>b</td>
+				<td>c</td>
+			</tr>
+			<tr>
+				<td>e</td>
+				<td>f</td>
+				<td>g</td>
+			</tr>
+			<tr>
+				<td>h</td>
+				<td>i</td>
+				<td>j</td>
+			</tr>
+		</table>
+		<hr/>
+		<div class="list-item">首页</div>
+		<div class="list-item">首页</div>
+		<div class="list-item">首页</div>
+		<div class="list-item">首页</div>
+		<hr/>
+		<dl class="run-in">
+			<dt>首页</dt>
+			<dd>首页的信息</dd>
+			<dt>首页</dt>
+			<dd>首页的信息</dd>
+		</dl>
+		<dl class="compact">
+			<dt>首页</dt>
+			<dd>首页的信息</dd>
+			<dt>首页</dt>
+			<dd>首页的信息</dd>
+		</dl>
+		<hr/>
+		<div class="aa">
+			<div class="none"></div>
+		</div>
+	</ul>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue 测试实例-key管理复用</title>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.9/vue.min.js"></script>
+    <style type="text/css">
+
+    </style>
+</head>
+<body>
+<div id="nokey-example">
+    <template v-if="loginType === 'username'">
+        <label>Username:</label>
+        <input placeholder="Enter your username">
+    </template>
+    <template v-else>
+        <label>Email:</label>
+        <input placeholder="Enter your email address">
+    </template>
+    <button type="button" v-on:click="toggleHandle">切换</button>
+</div>
+<div id="key-example">
+    <template v-if="loginType === 'username'">
+        <label>Username:</label>
+        <input placeholder="Enter your username" :key="username">
+    </template>
+    <template v-else>
+        <label>Email:</label>
+        <input placeholder="Enter your email address" :key="email">
+    </template>
+    <button type="button" v-on:click="toggleHandle">切换</button>
+</div>
+<script>
+    var nokeyVM = new Vue({
+        el: '#nokey-example',
+        data: {
+            loginType: 'username',
+        },
+        methods: {
+            toggleHandle: function () {
+                if (this.loginType === 'username') {
+                    this.loginType = 'email';
+                }
+                else
+                    this.loginType = 'username';
+            }
+        }
+    })
+    var keyVM = new Vue({
+        el: '#key-example',
+        data: {
+            loginType: 'username',
+            username: 'username-input',
+            email: 'email-input',
+        },
+        methods: {
+            toggleHandle: function () {
+                if (this.loginType === 'username') {
+                    this.loginType = 'email';
+                }
+                else
+                    this.loginType = 'username';
+            }
+        }
+    })
+    /*
+        key 属性表达“这两个元素是完全独立的，不要复用它们。
+        注意，<label> 元素仍然会被高效地复用，因为它们没有添加 key 属性。
+     */
+</script>
+
+<div id="todo-list-example">
+    <input v-model="newTodoText" v-on:keyup.enter="addNewTodo" placeholder="add a todo">
+    <ul>
+        <li is="todo-item"
+            v-for="(todo,index) in todos"
+            v-bind:key="todo.id"
+            v-bind:title="todo.title"
+            v-on:remove="remove(index)"
+        ></li>
+        <!--v-on:remove="todos.splice(index,1)"-->
+    </ul>
+</div>
+<script>
+    Vue.component('todo-item',{
+        props:['title'],
+        // template:'<li>{{ title }}<button v-on:click="$emit(\'remove\')">x</button></li>'
+        template:'<li>{{ title }}<button v-on:click="removeItem">x</button></li>',
+        methods:{
+            removeItem: function () {
+                this.$emit('remove');
+            }
+        }
+    })
+    var vue = new Vue({
+        data:{
+            newTodoText: '',
+            todos: [
+                {id:101,title:'item1'},
+                {id:102,title:'item2'},
+                {id:103,title:'item3'},
+                {id:104,title:'item4'},
+                {id:105,title:'item5'}
+            ],
+            newTodoId: 106,
+        },
+        methods:{
+            addNewTodo: function () {
+                this.todos.push({
+                    id:this.newTodoId++,
+                    title:this.newTodoText,
+                });
+                this.newTodoText = '';
+                // 按title排序
+                this.todos.sort(function (a,b) {
+                    return a.title > b.title;
+                })
+            },
+            remove: function (index) {
+                this.todos.splice(index,1);
+            }
+        }
+    }).$mount('#todo-list-example');
+</script>
+
+</body>
+</html>

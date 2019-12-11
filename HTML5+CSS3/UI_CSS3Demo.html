@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>UI元素状态伪类选择器</title>
+	<style type="text/css">
+		/* UI元素状态伪类选择器,默认不起作用,只有当元素处于某种状态下才起作用 */
+		/* hover当鼠标移动到元素上时元素使用的样式 */
+		.demo1 input[type="text"]:hover {
+			background-color: gray;
+		}
+		/* focus用来指定元素获得光标聚焦点使用的样式,主要在文本框控件获得聚焦点并进行文字输入时使用 */
+		.demo1 input[type="text"]:focus {
+			background-color: orange;
+		}
+		/* active用来指定元素被激活时使用的样式 */
+		.demo1 input[type="text"]:active {
+			background-color: red;
+		}
+		/* enabled用来指定元当素处于可用状态时使用的样式,disabled用来指定元当素处于可用状态时使用的样式 */
+		.demo2 input[type="text"]:enabled {
+			background-color: #f60;
+		}
+		.demo2 input[type="text"]:disabled {
+			background-color: darkgray;
+		}
+		/* read-only用来指定元当素处于只读状态时使用的样式,read-write用来指定元当素处于非只读状态时使用的样式 */
+		.demo3 input[type="text"]:read-only {
+			color: white;
+			background-color: #000;
+		}
+		.demo3 input[type="text"]:read-write {
+			color: white;
+			background-color: orange;
+		}
+		/* checked用来指定当表单中的radio或者checkbox处于选中状态时使用的样式 */
+		.demo4 input[type="radio"]:checked {
+			outline: 2px solid red;
+		}
+		/* default用来指定当页面打开默认处于选中状态的radio或者checkbox时使用的样式 */
+		.demo4 input[type="checkbox"]:default {
+			outline: 2px solid red;
+		}
+		/* IndetermInate用来指定当页面打开时,一组radio中没有任何一个radio被选中时,整组radio使用的样式 */
+		.demo4 input[type="radio"]:IndetermInate {
+			outline: 2px solid red;
+		}
+		/* selection伪类选择器用来指定当元素处于选中状态时的样式 */
+		.demo5::selection {
+			background-color: green;
+			color: white;
+		}
+		input[type="text"]::selection {
+			background-color: orange;
+			color: white;
+		}
+		/* invalid伪类选择器用来指定的检查或元素内容不符合元素规定格式时的样式,valid伪类选择器用来指定的检查或元素内容符合元素规定格式时的样式 */
+		.demo6 input[type="email"]:invalid {
+			color: red;
+		}
+		.demo6 input[type="email"]:valid {
+			color: green;
+		}
+		/* required伪选择器用来指定允使使用required属性,而且已经指定required属性的input元素、select元素及textarea元素的样式(必选项) */
+		.demo7 input[type="text"]:required {
+			background-color: orange;
+			color: #000;
+		}
+		/* optional伪选择器用来指定允使使用required属性,而且未指定required属性的input元素、select元素及textarea元素的样式(可选项) */
+		.demo7 input[type="text"]:optional {
+			background-color: green;
+			color: #fff;
+		}
+		/* in-range伪选择器用来指定当元素的有效值被限定在一段范围内,且实际输入的值在范围之内的样式 */
+		.demo8 input[type="number"]:in-range {
+			color: green;
+		}
+		/* out-of-range伪选择器用来指定当元素的有效值被限定在一段范围内,但实际输入的值超出范围之内的样式 */
+		.demo8 input[type="number"]:out-of-range {
+			color: red;
+		}
+
+		/* 通用兄弟元素选择器:位于同一个父元素之中的某个元素之后的所有其他某个种类的兄弟元素使用的样式 */
+		.demo9 span~p {
+			background-color: #f60;
+		}
+	</style>
+</head>
+<body>
+	<h1>hover、active、focus</h1>
+	<form class="demo1">
+		姓名：<input type="text" name="name"/><br/>
+		密码：<input type="text" name="password"/><br/>
+	</form>
+
+	<form class="demo2">
+		姓名：<input type="text"/><br/>
+		密码：<input type="text" disabled="disabled"/><br/>
+	</form>
+
+	<form class="demo3">
+		姓名：<input type="text"  placeholder="name" readonly="readonly"/><br/>
+		密码：<input type="text" placeholder="password"/><br/>
+	</form>
+
+	<form class="demo4">
+		性别:	<input type="radio" name="sex"/>男
+				<input type="radio" name="sex"/>女<br/>
+		房屋状态:<input type="checkbox" value="自来水" checked="checked"/>自来水
+				<input type="checkbox" value="电" />电
+				<input type="checkbox" value="气"/>气
+				<input type="checkbox" value="光" />光
+	</form>
+	<p class="demo5">selection伪类选择器用来指定当元素处于选中状态时的样式</p>
+	<input type="text" name="demo5"/><br/>
+
+	<form class="demo6">
+		邮箱：<input type="email" placeholder="请输入邮箱"/><br/>
+	</form>
+
+	<form class="demo7">
+		姓名：<input type="text" placeholder="请输入姓名" required="required" /><br/>
+		年龄：<input type="text" placeholder="年龄"/><br/>
+	</form>
+
+	<form class="demo8">
+		请输入10-100的数字：<input type="number" placeholder="请输入数字" min="10" max="100"/><br/>
+	</form>
+	<div class="demo9">
+		<p>通用兄弟元素选择器:位于同一个父元素之中的某个元素之后的所有其他某个种类的兄弟元素使用的样式</p>
+		<div>
+			<p>通用兄弟元素选择器:位于同一个父元素之中的某个元素之后的所有其他某个种类的兄弟元素使用的样式</p>
+			<span>
+				<p>通用兄弟元素选择器:位于同一个父元素之中的某个元素之后的所有其他某个种类的兄弟元素使用的样式</p>
+			</span>
+			<p>通用兄弟元素选择器:位于同一个父元素之中的某个元素之后的所有其他某个种类的兄弟元素使用的样式</p>
+		</div>
+		<p>通用兄弟元素选择器:位于同一个父元素之中的某个元素之后的所有其他某个种类的兄弟元素使用的样式</p>
+	</div>
+</body>
+</html>

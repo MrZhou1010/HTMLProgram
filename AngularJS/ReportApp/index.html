@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular-route.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .reportsConfigure {
+            position: relative;
+            width: 300px;
+            height: 400px;
+            margin-top: 50px;
+            margin-left: 20px;
+            border: solid 1px #9c9da1;
+            background-color: #e9ecef;
+        }
+        .configureItem {
+            width: 280px;
+            height: 40px;
+            margin-top: 10px;
+        }
+        .reportType {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+        .label {
+            float: left;
+            width: 100px;
+            height: 30px;
+        }
+        .wapper {
+            float: left;
+            width: 160px;
+            height: 30px;
+            z-index: 9999;
+        }
+        .select {
+            width: 120px;
+            height: 22px;
+            line-height: 22px;
+            border: 1px solid #2e3133;
+            padding-left: 8px;
+            border: solid 1px #2e3133;
+        }
+        .select input {
+            border: none;
+            background-color: #e9ecef;
+            outline: 0;
+            padding: 5px;
+        }
+        .reportTypeList ul {
+            list-style: none;
+            border: solid 1px #2e3133;
+
+        }
+        .reportDevice {
+            position: absolute;
+            top: 50px;
+            left: 10px;
+        }
+        .reportGroup {
+            position: absolute;
+            top: 90px;
+            left: 10px;
+        }
+        .reportMarker {
+            position: absolute;
+            top: 150px;
+            left: 10px;
+        }
+        .reportDateFrom {
+            position: absolute;
+            top: 190px;
+            left: 10px;
+        }
+        .reportTimeFrom {
+            position: absolute;
+            top: 230px;
+            left: 10px;
+        }
+        .reportDateTo {
+            position: absolute;
+            top: 270px;
+            left: 10px;
+        }
+        .reportTimeTo {
+            position: absolute;
+            top: 310px;
+            left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div ng-app="reportsApp">
+        <div ng-controller="reportsController">
+            <div class="container">
+                <div class="reportsConfigure">
+
+                    <div class="reportType configureItem">
+                        <div class="reportTypeLabel label">类型:</div>
+                        <div class="reportTypeWapper wapper">
+                            <div class="reportTypeSelect select" ng-click="showReportTypeList()">
+                                <input class="reportTypeInput" type="text" ng-model="type" readonly placeholder="搜索类型"／>
+                                <span>v</span>
+                            </div>
+                            <div class="reportTypeList" ng-show="isShowReportTypeList">
+                                <ul>
+                                    <li ng-repeat="item in typeItems" ng-bind="item" ng-click="selectTypeHandle(item)"></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="reportDevice configureItem">
+                        <div class="reportDeviceLabel label">设备:</div>
+                        <div class="reportDeviceWapper wapper">
+                            <div class="reportDeviceSelect select" ng-click="showReportDeviceList()">
+                                <input class="reportDeviceInput" type="text" ng-model="device" placeholder="选择设备"／>
+                            </div>
+                            <div class="reportDeviceList" ng-show="isShowReportDeviceList">
+                                <ul>
+                                    <li ng-repeat="item in deviceItems | filter:''" ng-bind="item" ng-click="selectDeviceHandle(item)"></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="reportGroup configureItem">
+                        <div class="reportGroupLabel label">群组:</div>
+                        <div class="reportGroupWapper wapper">
+                            <div class="reportGroupSelect select" ng-click="showReportGroupList()">
+                                <input class="reportGroupInput" type="text" ng-model="group" placeholder="选择群组"／>
+                            </div>
+                            <div class="reportGroupList" ng-show="isShowReportGroupList">
+                                <ul>
+                                    <li ng-repeat="item in groups | filter:group" ng-bind="item"></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="reportMarker">
+                        <div class="reportMarkerLabel label">显示标记:</div>
+                        <div class="reportMarkerWapper wapper">
+                            <div class="reportMarkerSelect">
+                                <input class="reportMarkerInput" type="checkbox" ng-model="maker"／>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="reportDateFrom">
+                        <div class="reportDateFromLabel label">开始:</div>
+                        <div class="reportDateFromWapper wapper">
+                            <div class="reportDateFromSelect select" ng-click="showReportDateFromList()">
+                                <input class="reportDateFromInput" type="text" ng-model="startdate"／>
+                            </div>
+                            <div class="reportDateFromList" ng-show="isShowReportDateFromList">
+                                <div>开始日期:{{ startdate }}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="reportTimeFrom">
+                        <div class="reportTimeFromLabel label"></div>
+                        <div class="reportTimeFromWapper wapper">
+                            <div class="reportTimeFromSelect select" ng-click="showReportTimeFromList()">
+                                <input class="reportTimeFromInput" type="text" ng-model="starttime"／>
+                            </div>
+                            <div class="reportTimeFromList" ng-show="isShowReportTimeFromList">
+                                <ul>
+                                    <li ng-repeat="item in timeItems" ng-bind="item"></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="reportDateTo">
+                        <div class="reportDateToLabel label">结束:</div>
+                        <div class="reportDateToWapper wapper">
+                            <div class="reportDateToSelect select" ng-click="showReportDateToList()">
+                                <input class="reportDateToInput" type="text" ng-model="enddate"／>
+                            </div>
+                            <div class="reportDateToList" ng-show="isShowReportDateToList">
+                                <div>结束日期{{ enddate }}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="reportTimeTo">
+                        <div class="reportTimeToLabel label"></div>
+                        <div class="reportTimeToWapper wapper">
+                            <div class="reportTimeToSelect select" ng-click="showReportTimeToList()">
+                                <input class="reportTimeToInput" type="text" ng-model="endtime"／>
+                            </div>
+                            <div class="reportTimeToList" ng-show="isShowReportTimeToList">
+                                <ul>
+                                    <li ng-repeat="item in timeItems" ng-bind="item"></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <input type="button" ng-click="" value="确认">
+                        <input type="button" ng-click="" value="清除">
+
+                    </div>
+                </div>
+                <div class="reportResult">
+
+                </div>
+            </div>
+            <!--<form class="navbar-form pull-left">-->
+                <!--<input type="text" class="span2" placeholder="Search" ng-model="search.id">&lt;!&ndash;这里设置按那块搜索项目&ndash;&gt;-->
+            <!--</form>-->
+            <!--<table class="table">-->
+                <!--<thead>-->
+                <!--<tr>-->
+                    <!--&lt;!&ndash;dropup：true 这个class就显示，即升序，否则不显示！&ndash;&gt;-->
+                    <!--&lt;!&ndash;注意，这里是ng-class，还有droupup:order中间是没有任何空格的！！！！&ndash;&gt;-->
+                    <!--<th ng-class="{dropup:order ===''}" ng-click="changeOrder('id')">产品编号<span class="caret"></span></th>-->
+                    <!--<th ng-class="{dropup:order ===''}" ng-click="changeOrder('name')">产品名称<span class="caret"></span></th>-->
+                    <!--<th ng-class="{dropup:order ===''}" ng-click="changeOrder('price')">产品价格<span class="caret"></span></th>-->
+                <!--</tr>-->
+                <!--</thead>-->
+                <!--<tbody>-->
+                <!--&lt;!&ndash;<tr ng-repeat="product in products | filter:{id:search}">&ndash;&gt;-->
+                <!--&lt;!&ndash;order+orderType注意这两个字段是有顺序的 不能反着写&ndash;&gt;-->
+                <!--<tr ng-repeat="product in products | filter:search | orderBy : order+orderType">-->
+                    <!--<td> {{ product.id }} </td>-->
+                    <!--<td> {{ product.name }} </td>-->
+                    <!--<td> {{ product.price | currency : "$" }} </td>-->
+                <!--</tr>-->
+                <!--</tbody>-->
+            <!--</table>-->
+        <!--</div>-->
+        <!--<hr>-->
+        <!--<div ng-controller="listController">-->
+            <!--<custom-select showList="showListHandle()"></custom-select>-->
+        </div>
+    </div>
+    <link type="text/css" href="./style/reports.css">
+    <script src="./script/app.js"></script>
+    <script src="./script/controller/reportsController.js"></script>
+    <!--<script src="./script/controller/listController.js"></script>-->
+    <!--<script src="./script/directive/customSelect.js"></script>-->
+</body>
+</html>

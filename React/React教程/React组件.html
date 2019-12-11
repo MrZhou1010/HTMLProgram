@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React</title>
+    <script src="https://www.w3cschool.cn/statics/assets/react/react.min.js"></script>
+    <script src="https://www.w3cschool.cn/statics/assets/react/react-dom.min.js"></script>
+    <script src="https://www.w3cschool.cn/statics/assets/react/babel.min.js"></script>
+</head>
+<body>
+<section>
+    <div id="example1"></div>
+    <div id="example2"></div>
+</section>
+<script type="text/babel">
+    var MyComponent = React.createClass({
+        render: function () {
+            return <div><p>this is a component, {this.props.name}</p></div>;
+        }
+    });
+    ReactDOM.render(
+        <div>
+            <MyComponent name="testName"/>
+        </div>,
+        document.getElementById('example1')
+    );
+    /*
+     实例解析：
+     React.createClass 方法用于生成一个组件类 HelloMessage。
+     <HelloMessage /> 实例组件类并输出信息。
+     */
+
+    var Name = React.createClass({
+        render: function() {
+            return (
+                <h1>{this.props.name}</h1>
+            );
+        }
+    });
+    var Link = React.createClass({
+        render: function() {
+            return (
+                <a href={this.props.site}>{this.props.site}</a>
+            );
+        }
+    });
+    var WebSite = React.createClass({
+        render: function () {
+            return (
+                <div>
+                    <Name name={this.props.name} />
+                    <Link site={this.props.site} />
+                </div>
+            );
+        }
+    });
+    ReactDOM.render(
+        <div>
+            <WebSite name="W3Cschool教程" site=" http://www.w3cschool.cn" />
+        </div>,
+        document.getElementById('example2')
+    );
+</script>
+</body>
+</html>

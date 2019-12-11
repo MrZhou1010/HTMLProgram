@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Validate－动态表单</title>
+    <link rel="stylesheet" media="screen" href="http://static.runoob.com/assets/jquery-validation-1.14.0/demo/css/screen.css">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+    <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
+    <style type="text/css">
+        form.cmxform {
+            width: 50em;
+        }
+        em.error {
+            background:url("http://www.runoob.com/try/jquery/plugins/images/unchecked.gif") no-repeat 0px 0px;
+            padding-left: 16px;
+            color: black;
+        }
+        em.success {
+            background:url("http://www.runoob.com/try/jquery/plugins/images/checked.gif") no-repeat 0px 0px;
+            padding-left: 16px;
+        }
+        form.cmxform label.error {
+            margin-left: auto;
+            width: 250px;
+        }
+        form.cmxform input.submit {
+            margin-left: 0;
+        }
+        #warning { display: none; }
+        select.error {
+            border: 1px dotted red;
+        }
+    </style>
+    <script type="text/javascript">
+        // 只用于演示
+        $.validator.setDefaults({
+            submitHandler: function() {
+                alert("submitted!");
+            }
+        });
+        $.validator.messages.max = $.validator.format("Your totals mustn't exceed {0}!");
+        $.validator.messages.min = $.validator.format("You must input number > {0}!");
+        $.validator.addMethod("quantity", function(value, element) {
+            return !this.optional(element) && !this.optional($(element).parent().prev().children("select")[0]);
+        }, "请选择项目和数量。");
+        $().ready(function () {
+            $("#orderform").validate({
+                errorPlacement: function (error, element) {
+                    error.appendTo(element.parent().next())
+                },
+                highlight: function (element, errorClass) {
+                    $(element).addClass(errorClass).parent().prev().children("select").addClass(errorClass);
+                }
+            });
+            // $.trim()去掉首尾的空白字符
+            var template = $.validator.format($.trim($("#template").val()));
+            function addRow() {
+                $(template(i++)).appendTo("#orderitems tbody");
+            }
+            var i = 1;
+            addRow();
+            $("#add").click(addRow);
+            // 检查 quantity 输入框的 keyup 动作，更新 totals 字段
+            $("#orderform").validateDelegate("input.quantity","keyup",function(event) {
+                var totals = 0;
+                $("#orderitems input.quantity").each(function () {
+                    totals+= +this.value;
+                });
+                $("#totals").attr("value",totals).valid();
+            });
+        })
+    </script>
+</head>
+<body>
+<div id="main">
+    <textarea style="display:none" id="template">
+        <tr>
+            <td>
+                <label>{0}. Item</label>
+            </td>
+            <td class='type'>
+                <select name="item-type-{0}">
+                    <option value="">请选择...</option>
+                    <option value="0">Learning jQuery</option>
+                    <option value="1">jQuery Reference Guide</option>
+                    <option value="2">jQuery Cookbook</option>
+                    <option vlaue="3">jQuery In Action</option>
+                    <option value="4">jQuery For Designers</option>
+                </select>
+            </td>
+            <td class='quantity'>
+                <input size='4' class="quantity" min="1" id="item-quantity-{0}" name="item-quantity-{0}" />
+            </td>
+            <td class='quantity-error'></td>
+        </tr>
+    </textarea>
+    <form id="orderform" class="cmxform" method="get" action="foo.html">
+        <fieldset>
+            <legend>动态表单</legend>
+            <table id="orderitems">
+                <tbody>
+
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="2"><label>总共（最多 25）</label></td>
+                        <td class="totals"><input id="totals" name="totals" value="0" max="25" readonly="readonly" size='4'/></td>
+                        <td class="totals-error"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">&nbsp;</td>
+                        <td><input class="submit" type="submit" value="提交"/></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </fieldset>
+    </form>
+    <button id="add">向表单添加输入框</button>
+</div>
+</body>
+</html>

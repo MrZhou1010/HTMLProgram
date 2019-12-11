@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>CSS3新增背景属性</title>
+	<style type="text/css">
+	/* background-clip属性指定背景显示区域(border-box、padding-box、content-box) */
+	.div1 {
+		width: 150px;
+		height: 100px;
+		border: dashed 20px #f122f1;
+		padding: 30px;
+		background-color: red;
+		background-clip: padding-box;
+	}
+	/* background-origin属性指定绘制背景图像绘制起点(border-box、padding-box、content-box) */
+	.div2 {
+		width: 150px;
+		height: 100px;
+		border: dashed 20px #f122f1;
+		padding: 30px;
+		background-image: url('http://wx1.sinaimg.cn/thumbnail/62eeaba5ly1ff19kkt0aej20b7090dfw.jpg');
+		background-repeat: no-repeat;/* 默认是重复绘制 */
+		background-origin: content-box;
+	}	
+	/* background-size属性指定背景图像的尺寸(auto、<length>、<percentage>、cover、contain) */
+	/*
+	.div3 {
+		width: 150px;
+		height: 100px;
+		border: dashed 20px #f122f1;
+		padding: 30px;
+		background-image: url('http://wx1.sinaimg.cn/thumbnail/62eeaba5ly1ff19kkt0aej20b7090dfw.jpg');
+		background-repeat: no-repeat;
+		background-origin: content-box;
+		background-size: cover;
+	}
+	*/
+	.div3 {
+		width: 150px;
+		height: 100px;
+		border: dashed 20px #f122f1;
+		padding: 30px;
+		background-image: url('http://cc.cocimg.com/api/uploads/20170507/1494135882551986.jpg');
+		background-repeat: no-repeat;/* 默认是重复绘制 */
+		background-origin: content-box;
+		background-size: contain;
+	}	
+	/* background-break属性指定內联元素的背景图像平铺循环方式(continuous、bounding-box、each-box) */
+	/* 显示多个背景图像 */
+	body {
+		background-image: url('http://img5.imgtn.bdimg.com/it/u=1671275728,1826195125&fm=23&gp=0.jpg'),url('http://pic26.nipic.com/20121227/9252150_202014506165_2.jpg');
+		background-repeat: no-repeat;
+		background-position: center;
+	}
+	</style>
+</head>
+<body>
+	<div class="div1">
+		background-clip属性
+	</div>
+	<hr/>
+	<div class="div2">
+		background-origin属性
+	</div>
+	<hr/>
+	<div class="div3">
+		background-origin属性
+	</div>
+</body>
+</html>

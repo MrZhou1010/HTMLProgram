@@ -1,0 +1,126 @@
+* {
+    margin:0;
+    padding:0;
+    outline:0;
+}
+
+.table-wrapper {
+    width:980px;
+    margin: 30px auto;
+}
+
+.table-header {
+    height: 20px;
+    border: 1px solid #c6d5e1;
+}
+
+.table-nav {
+    float: left;
+}
+.table-nav div {
+    float: left;
+    margin-right: 10px;
+    display: -webkit-flex;
+    display: flex;
+}
+.table-nav img {
+    margin-top: 2px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+.table-nav input {
+    margin-top: 2px;
+    margin-right: 3px;
+    width: 30px;
+    height: 12px;
+}
+.table-nav span {
+    margin-top: 2px;
+    margin-right: 10px;
+    height: 12px;
+}
+
+.table-location {
+    float:left;
+    font-size:12px;
+}
+.table-location select {
+    margin-top: 1px;
+    margin-right:10px;
+}
+.table-location div {
+    float:left;
+    margin-left:10px;
+}
+.table-location .page {
+    margin-top:2px;
+    font-size: 14px;
+}
+
+.table-btnlist {
+    float: right;
+    margin-right: 10px;
+}
+.table-btnlist a{
+    margin-right: 16px;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.tinytable {
+    width: 980px;
+    border-left: 1px solid #c6d5e1;
+    border-top: 1px solid #c6d5e1;
+    border-bottom: none;
+}
+.tinytable th {
+    background:url(../images/header-bg.gif);
+    text-align:left;
+    color:#cfdce7;
+}
+.tinytable th h3 {
+    font-size:10px;
+    padding:6px 8px 8px
+}
+.tinytable td {
+    padding:4px 6px 6px;
+    border-bottom: 1px solid #c6d5e1;
+    border-right: 1px solid #c6d5e1
+}
+.tinytable .head h3 {
+    background:url(../images/sort.gif) 7px center no-repeat;
+    cursor: pointer;
+    padding-left: 18px
+}
+.tinytable .desc, .sortable .asc {
+    background:url(../images/header-selected-bg.gif);
+}
+.tinytable .desc h3 {
+    background:url(../images/desc.gif) 7px center no-repeat;
+    cursor: pointer;
+    padding-left: 18px;
+}
+.tinytable .asc h3 {
+    background:url(../images/asc.gif) 7px center no-repeat;
+    cursor: pointer;
+    padding-left: 18px;
+}
+.tinytable .head:hover, .tinytable .desc:hover, .tinytable .asc:hover {
+    color: #fff;
+}
+.tinytable .evenrow td {
+    background: #fff;
+}
+.tinytable .oddrow td {
+    background: #ecf2f6;
+}
+.tinytable td.evenselected {
+    background: #ecf2f6;
+}
+.tinytable td.oddselected {
+    background: #dce6ee;
+}
+
+
+
+

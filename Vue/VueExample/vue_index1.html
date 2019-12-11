@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue 测试实例</title>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.9/vue.min.js"></script>
+    <style type="text/css">
+        .class1 {
+            background: #333;
+            color: #eee;
+        }
+    </style>
+</head>
+<body>
+    <!-- 数据绑定最常见的形式就是使用 {{...}}（双大括号）的文本插值 -->
+    <div id="div_test1">
+        <p>{{message}}</p>
+    </div>
+    <!-- 使用 v-html 指令用于输出 html 代码 -->
+    <div id="div_test2">
+        <div v-html="message"></div>
+    </div>
+    <!-- HTML 属性中的值应使用 v-bind 指令 -->
+    <div id="div_test3">
+        <label for="r1">修改颜色</label>
+        <input id="r1" type="checkbox" v-model="class1"/><br/>
+        <span v-bind:class="{'class1':class1}">directiva v-bind:class</span>
+        <!--<input v-model="message">-->
+    </div>
+    <script type="text/javascript">
+        new Vue({
+            el: "#div_test1",
+            data: {
+                message: "hello vue.js!",
+            }
+        });
+        new Vue({
+            el: "#div_test2",
+            data: {
+                message: "<h2>hello vue.js!</h2>",
+            }
+        });
+        new Vue({
+            el: "#div_test3",
+            data: {
+                class1: false,
+            }
+        });
+    </script>
+    <!-- Vue.js 都提供了完全的 JavaScript 表达式支持。-->
+    <div id="div_test4">
+        {{5+1}}<br/>
+        {{ok ? 'Yes' : 'No'}}<br/>
+        {{message.split('').reverse().join('')}}
+        <div v-bind:id="'list-' + row">test</div>
+    </div>
+    <script type="text/javascript">
+        new Vue({
+            el: "#div_test4",
+            data: {
+                ok:false,
+                message: "hello world!",
+                row: 1,
+            }
+        });
+    </script>
+    <!--  v-if 指令,条件判断;v-on 指令,它用于监听 DOM 事件 -->
+    <div id="div_test5">
+        <label for="r2">显示/隐藏:</label>
+        <input id="r2" type="checkbox" v-model="seen"/><br/>
+        <p v-if="seen">现在你看到我了</p>
+        <a v-if="seen" v-bind:href="url" v-on:click="doSomething">百度</a>
+    </div>
+    <script type="text/javascript">
+        new Vue({
+            el: "#div_test5",
+            data: {
+                seen: false,
+                url: "http://www.baidu.com",
+            },
+            methods: {
+                doSomething: function (e) {
+                    alert(this.url);
+                    e.preventDefault();
+                }
+            }
+        });
+    </script>
+    <!-- v-model 指令来实现双向数据绑定 -->
+    <div id="div_test6">
+        <label for="r3">{{message}}</label>
+        <input id="r3" type="text" v-model="message"/><br/>
+    </div>
+    <script type="text/javascript">
+        new Vue({
+            el: "#div_test6",
+            data: {
+                message: "双向绑定数据",
+            },
+        });
+    </script>
+    <!-- Vue.js 允许你自定义过滤器，被用作一些常见的文本格式化。由"管道符"指示 -->
+    <div id="div_test7">
+        <label>{{message | capitalize}}</label>
+    </div>
+    <script type="text/javascript">
+        new Vue({
+            el: "#div_test7",
+            data: {
+                message: "this is a test!",
+            },
+            filters: {
+                capitalize: function (value) {
+                    if (!value) return "";
+                    value = value.toString().charAt(0).toUpperCase() + value.toString().slice(1);
+                    return value;
+                }
+            }
+        });
+    </script>
+    <!-- v-bind 缩写,v-on 缩写-->
+    <div id="div_test8">
+        <a :href="url" @click="doSomething">百度</a>
+    </div>
+    <script>
+        var vue = new Vue({
+            el: "#div_test8",
+            data: {
+                url: "http://www.baidu.com",
+            },
+            methods: {
+                doSomething: function (e) {
+                    alert('百度:'+this.url);
+                    e.preventDefault();
+                }
+            }
+        });
+        //Vue实例都会代理其 data 对象里所有的属性,而前缀$代理这些属性与方法,以便与代理的 data 属性区分
+        console.log(vue.url);
+        console.log(vue.$el);
+        console.log(vue.$data.url);
+        // $watch 是一个实例方法
+        vue.$watch('url',function (newVal,oldVal) {
+            // 这个回调将在 `vm.url`  改变后调用
+            console.log(newVal+'-'+oldVal);
+        });
+        setTimeout(function () {
+            vue.url = "http://www.google.com"
+        },2000);
+    </script>
+    <div id="div_test9">
+        <div v-if="Math.random() > 0.5">{{message1}}</div>
+        <div v-else-if="Math.random() < 0.8">{{message2}}</div>
+        <div v-else>{{message3}}</div>
+    </div>
+    <script>
+        var vue = new Vue({
+            el: "#div_test9",
+            data: {
+                message1: 'Math.random > 0.5',
+                message2: 'Math.random < 0.8',
+                message3: 'Math.random >= 0.8',
+            },
+        });
+    </script>
+    <!--  v-show 指令来根据条件展示元素 -->
+    <div id="div_test10">
+        <div v-show="isShow">show</div>
+    </div>
+    <script>
+        var vue = new Vue({
+            el: "#div_test10",
+            data: {
+                isShow: true,
+            },
+        });
+        /*
+        v-if 与 v-show区别：
+            1、带有v-show的元素始终会被渲染并保留在DOM中。v-show 只是简单地切换元素的CSS属性display。而v-if为false时将从DOM中移除。
+            2、注意，v-show 不支持 <template> 元素，也不支持 v-else。
+            3、v-if 是“真正”的条件渲染，因为它会确保在切换过程中条件块内的事件监听器和子组件适当地被销毁和重建。
+               v-if 也是惰性的：如果在初始渲染时条件为假，则什么也不做——直到条件第一次变为真时，才会开始渲染条件块。
+               相比之下，v-show 就简单得多——不管初始条件是什么，元素总是会被渲染，并且只是简单地基于 CSS 进行切换。
+               一般来说，v-if 有更高的切换开销，而 v-show 有更高的初始渲染开销。
+               因此，如果需要非常频繁地切换，则使用 v-show 较好；如果在运行时条件很少改变，则使用 v-if 较好。
+
+
+        */
+    </script>
+    <!-- 循环使用 v-for 指令 -->
+    <div id="div_test11">
+        <ol>
+            <li  v-for="site in sites">
+                {{ site.name }}
+            </li>
+        </ol>
+        <ul>
+            <div v-for="(site,index) in sites">
+                <li>{{ index }}:{{ site.name }}</li>
+            </div>
+        </ul>
+        <ul>
+            <div v-for="(value, key) in object">
+                <li>{{ key }} : {{ value }}</li>
+            </div>
+        </ul>
+        <table border="1px sold #f122f1" cellpadding="5px">
+            <tr v-for="i in 5"><td v-for="j in 10">{{i}}-{{j}}</td></tr>
+        </table>
+    </div>
+    <script>
+        var vue = new Vue({
+            el: "#div_test11",
+            data: {
+                sites: [
+                    {'name':'king'},
+                    {'name':'test'},
+                    {'name':'gold'}
+                ],
+                object: {
+                    'name':'king',
+                    'address':'shanghai',
+                    'age':20
+                }
+            },
+        });
+        //当 v-if 与 v-for 一起使用时，v-for 具有比 v-if 更高的优先级。
+        /*
+         Vue 包含一组观察数组的变异方法，会改变被这些方法调用的原始数组:
+            push()
+            pop()
+            shift()
+            unshift()
+            splice()
+            sort()
+            reverse()
+         */
+        vue.sites.push({'name':'957'});
+        /*
+         当使用非变异方法时，可以用新数组替换旧数组:
+            filter()
+            concat()
+            slice()
+         */
+        var newSites = vue.sites.filter(function (site) {
+            return site.name.match(/king/g)
+        });
+        console.log(newSites);
+        /*
+         注意事项:
+             由于 JavaScript 的限制，Vue 不能检测以下变动的数组：
+                当你利用索引直接设置一个项时，例如：vm.items[indexOfItem] = newValue
+                当你修改数组的长度时，例如：vm.items.length = newLength
+            为了解决第一类问题，以下两种方式都可以实现和 vm.items[indexOfItem] = newValue 相同的效果，同时也将触发状态更新：
+                // Vue.set
+                Vue.set(vue.items, indexOfItem, newValue)
+                // Array.prototype.splice
+                vue.items.splice(indexOfItem, 1, newValue)
+            为了解决第二类问题，你可以使用 splice：
+                vue.items.splice(newLength)
+         */
+        /*
+            对于已经创建的实例，Vue 不能动态添加根级别的响应式属性。
+            可以使用 Vue.set(object, key, value) 方法向嵌套对象添加响应式属性
+            已有对象赋予多个新属性，比如使用 Object.assign() 或 _.extend()
+            this.userProfile = Object.assign({}, this.userProfile, {
+                age: 27,
+                favoriteColor: 'Vue Green'
+            })
+            this.userProfile = _.extend({},this.userProfile,{
+                age: 20,
+                favoriteColor: 'red'
+            })
+         */
+    </script>
+</body>
+</html>

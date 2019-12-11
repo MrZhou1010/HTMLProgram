@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular-route.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css">
+    <title>inputLabel</title>
+    <style>
+        * {
+            /*margin: 0;*/
+            /*padding: 0;*/
+            outline: none;
+        }
+        label {
+            width: 50px;
+        }
+        input {
+            width: 100px;
+            border: none;
+            padding-left: 10px;
+        }
+        .input-wapper {
+            width: 160px;
+            border-bottom: 1px solid #b3d7ff;
+        }
+    </style>
+</head>
+<body>
+<div ng-app="app">
+    <div class="container" ng-controller="controller">
+        <input-text>
+
+        </input-text>
+        <div input-text>
+            <div> adfafafadadad</div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var app = angular.module('app',[]);
+    app.directive('inputText',['$log',function ($log) {
+        return {
+            scope: false,               //默认值为 false 共享父作用域 值为true时共享父级作用域并创建指令自己的
+            retrict: 'AE',
+            template: '<div >' + '<div class="input-wapper">' +
+            '<label> {{label}}</label>' +
+            '<input ng-type="inputType" ng-model="text" placeholder="{{placeholder}}">' +
+            '</div>' +
+            '<span ng-bind="errorInfo"></span>' +'<div ng-transclude></div>' +
+            '</div>',
+            //templateUrl: 'xxx.html',    //值为string function 以id为xxx.html为 调用文件显示
+            replace: true,             // 默认值为false 当为true是直接替换指令所在的标签
+            transclude: true,          //移动一个标识符的原始字节带到一个新模块的位置
+            link:function (scope,ele,attrs) {          // 值为函数 用来定义指令行为从传入的参数中获取元素并进行处理
+
+            },
+        }
+    }]);
+    app.controller('controller',['$scope',function ($scope) {
+        $scope.user = '用户';
+        $scope.placeholder = '请输入用户名';
+        $scope.error = '密码必须6-12位';
+
+    }]);
+</script>
+</body>
+</html>
+
+

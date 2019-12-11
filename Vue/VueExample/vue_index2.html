@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue 测试实例</title>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.9/vue.min.js"></script>
+    <style type="text/css">
+        .class1 {
+            background: #333;
+            color: #eee;
+        }
+    </style>
+</head>
+<body>
+    <div id="div_test1">
+        {{message.split('').reverse().join('')}}
+    </div>
+    <script type="text/javascript">
+        new Vue({
+            el: '#div_test1',
+            data: {
+                message: "this is a test!"
+            }
+        })
+    </script>
+    <!-- 计算属性关键词: computed -->
+    <div id="div_test2">
+        使用computed:{{ message }} - {{ reversedMessage }}
+        <br/>
+        使用methods:{{message}} - {{ reversedMessage2() }}
+    </div>
+    <script type="text/javascript">
+        var vue = new Vue({
+            el: '#div_test2',
+            data: {
+                message: "this is a test!",
+            },
+            computed: {
+                /*
+                reversedMessage: function () {
+                    return this.message.split('').reverse().join('');
+                }
+                */
+                reversedMessage: {
+                    get: function () {
+                        return this.message.split('').reverse().join('');
+                    },
+                    set: function (newVal) {
+                        this.message = newVal.split('').reverse().join('');
+                    }
+                }
+            },
+            methods: {
+                reversedMessage2: function () {
+                    return this.message.split('').reverse().join('');
+                }
+            }
+        })
+        /*
+         computed 是基于它的依赖缓存，只有相关依赖发生改变时才会重新取值。
+         而使用 methods ，在重新渲染的时候，函数总会重新调用执行
+         */
+        vue.reversedMessage = 'this is a new test!'
+    </script>
+</body>
+</html>

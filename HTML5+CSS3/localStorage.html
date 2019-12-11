@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>local storage</title>
+	<script type="text/javascript" src="localStorage.js"></script>
+</head>
+<body >
+	<h1>local storage</h1>
+	<p id="msg"></p>
+	<input type="text" name="text" id="input">
+	<input type="button" name="save" value="保存数据" onclick="saveStorage('input')">
+	<input type="button" name="load" value="读取数据" onclick="loadStorage('msg')">
+	<input type="button" name="load" value="清除数据" onclick="clearStorage()">
+	<table></table>
+</body>
+</html>

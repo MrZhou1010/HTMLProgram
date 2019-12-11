@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>HTML5拖放</title>
+	<style type="text/css">
+		body {
+			margin: 5px;
+		}
+		#area {
+			width: 320px;
+			height: 230px;
+			border: 1px solid #f1f2f3;
+			box-shadow: 1px 4px 8px #666;
+		}
+		#image {
+			width: 320px;
+			height: 230px;
+			background: #f1f2f3;
+		}
+	</style>
+	<script type="text/javascript">
+		function allowDrop(event) {
+			// body...
+			//不执行默认处理(拒接被拖放)
+			event.preventDefault();
+			event.dataTransfer.dropEffect = 'copy';
+		}
+		function drag(event) {
+			// body...
+			event.dataTransfer.effectAllowed = 'all';
+			//使用setData(数据类型,数据), 将拖放的内容数据存入dataTransfer对象
+			event.dataTransfer.setData("text",event.target.id);
+		}
+		function drop(event) {
+			// body...
+			//不执行默认处理(拒接被拖放)
+			event.preventDefault();
+			//使用getData()获得到数据,给data
+			var	data = event.dataTransfer.getData("text",event.target.id);
+			//使用appendChild()方法把拖放的节点放到元素节点中成为其子节点
+			event.target.appendChild(document.getElementById(data));
+		}
+	</script>
+</head>
+<body>
+	<div id="area" ondrop="drop(event)" ondragover="allowDrop(event)"></div><br/>
+	<img id="image" src="https://ss1.bdstatic.com/5eN1bjq8AAUYm2zgoY3K/r/www/cache/holiday/habo/res/doodle/4.png" width="320" height="230" draggable="true" ondragstart="drag(event)" />
+</body>
+</html>

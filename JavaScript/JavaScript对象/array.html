@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript中的数组对象</title>
+</head>
+<body>
+<script type="text/javascript">
+    var arr = [];
+    arr = [1,2,3,true,null,undefined,[1,2,3],{x:1,y:2}];
+
+    var arr1 = new Array();
+    arr1 = new Array(5);//带长度
+    arr1 = new Array(1,2,2.3,false,'king',null);
+
+    arr1[0] = 66;
+    console.log(arr1);
+
+    var arr3 = [];
+    arr3[0] = 'a';
+    arr3[1] = 'b';
+    arr3.push('c','e','king');
+    console.log(arr3);
+    var res = arr3.pop();
+    console.log(res);
+    console.log(arr3);
+    arr3.unshift('前');
+    console.log(arr3);
+    res = arr3.shift();
+    console.log(res);
+    console.log(arr3);
+
+    var arr4 = [11,22,33,44,55];
+    delete arr4[1];
+    console.log(arr4);
+    console.log(arr4.length);//数组长度不变
+
+    //遍历数组
+    for (var i=0;i<arr4.length;i++) {
+        console.log(arr4[i]);
+    }
+    for(var res in arr4) {
+        console.log(arr4[res]);
+    }
+    arr4.forEach(function(x){
+        console.log(x);
+    })
+    function test(element,index,array){
+        console.log('要处理的数组'+array);
+        console.log('索引：'+index+'值为'+element);
+    };
+    arr4.forEach(test);
+
+    var arr5 = ['a','b','3','c','d',5,10,3];
+    res = arr5.join('');
+    console.log(res);
+
+    res = arr5.reverse();
+    console.log(res);
+
+    res = arr5.sort();
+    console.log(res);//默认unicode排序
+    res = arr5.sort(function(a,b){
+        return a-b;
+    });
+    console.log(res);
+
+    res = arr5.concat(12,34,56);
+    res = arr5.concat([12,34],[56,78]);
+    console.log(res);
+
+    res = arr5.slice(0,3);//截取
+    console.log(res);
+
+    res = arr5.splice(0,2);
+    res = arr5.splice(0,2,'...','...');
+    console.log(res);
+    console.log(arr5);
+
+    res = arr5.map(function(x){
+        if(/[a-z]/.test(x)){
+            return x.toUpperCase();
+        } else return null;
+    });
+    console.log(res);
+
+    res = arr5.filter(function(x){  //过滤
+        return x!==null && x!== undefined &&x!=='...';
+    });
+    console.log(res);
+
+    var arr6 = [1,2,3,4,5,6,7,8,6];
+    res = arr6.reduce(function(a,b){ //数组中每个元素依次执行回调函数
+        return a+b;
+    });
+    res = arr6.reduce(function(a,b){ //数组中每个元素依次执行回调函数,带初始值
+        return a-b;
+    },20);
+    console.log(res);
+
+    res = arr6.reduceRight(function(a,b){ //数组中每个元素从右到左依次执行回调函数
+        return a-b;
+    });
+    console.log(res);
+
+    res = arr6.every(function(x){//每个元素满足条件则为true
+        return x>6;
+    });
+    console.log(res);
+
+    res = arr6.some(function(x){//至少一个元素满足条件就为true
+        return x>6;
+    });
+    console.log(res);
+
+    res = arr6.indexOf(6);  //返回索引号
+    res = arr6.indexOf(6,7);  //返回索引号
+    res = arr6.lastIndexOf(6);  //返回最后一个的索引号
+    console.log(res);
+
+    console.log(Array.isArray(arr5));
+
+    console.log(arr6.toString());
+
+</script>
+</body>
+</html>

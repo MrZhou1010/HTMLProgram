@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Extjs_test6</title>
+    <!--
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/extjs/6.2.0/classic/theme-classic/resources/theme-classic-all.css" rel="stylesheet">
+    -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/extjs/6.0.0/classic/theme-neptune/resources/theme-neptune-all.css" rel="stylesheet">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/extjs/6.2.0/ext-all.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/extjs/6.0.0/classic/locale/locale-zh_CN.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/extjs/6.0.0/classic/locale/locale-ko.js"></script>
+
+    <script type="text/javascript">
+        Ext.onReady(function() {
+            var monthArray = Ext.Array.map(Ext.Date.monthNames, function (e) {
+                var monthNumber = 0;
+                switch (e) {
+                    case '一月' : monthNumber = 1;
+                        break;
+                    case '二月' : monthNumber = 2;
+                        break;
+                    case '三月' : monthNumber = 3;
+                        break;
+                    case '四月' : monthNumber = 4;
+                        break;
+                    case '五月' : monthNumber = 5;
+                        break;
+                    case '六月' : monthNumber = 6;
+                        break;
+                    case '七月' : monthNumber = 7;
+                        break;
+                    case '八月' : monthNumber = 8;
+                        break;
+                    case '九月' : monthNumber = 9;
+                        break;
+                    case '十月' : monthNumber = 10;
+                        break;
+                    case '十一月' : monthNumber = 11;
+                        break;
+                    case '十二月' : monthNumber = 12;
+                        break;
+                }
+                return [e,monthNumber];
+            });
+
+            var ds = Ext.create('Ext.data.Store', {
+                fields: ['month','number'],
+                remoteSort: true,
+                pageSize: 6,
+                proxy: {
+                    type: 'memory',
+                    enablePaging: true,
+                    data: monthArray,
+                    reader: {type: 'array'}
+                }
+            });
+            Ext.create('Ext.grid.Panel', {
+                renderTo: 'grid',
+                id : 'gridId',
+                width: 600,
+                height: 200,
+                title:'Month Browser',
+                columns:[{
+                    text: 'Month of the year',
+                    dataIndex: 'month',
+                    width: '50%',
+                },{
+                    text: 'Month of the year',
+                    dataIndex: 'number',
+                    width: '50%',
+                }],
+                store: ds,
+                bbar: Ext.create('Ext.toolbar.Paging', {
+                    pageSize: 6,
+                    store: ds,
+                    displayInfo: true
+                })
+            });
+            Ext.getCmp('gridId').getStore().load();
+
+            Ext.create('Ext.picker.Date', {
+                renderTo: 'datePicker'
+            });
+
+        });
+
+
+    </script>
+</head>
+<body>
+    <div id="grid"></div>
+    <div id="datePicker"></div>
+</body>
+</html>

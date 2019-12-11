@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery</title>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="jQueryTest.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("h1").click(function(){
+                $(this).hide();
+            });
+            $("#p1").click(function(){
+                $(this).hide();
+            });
+            $(".p2").click(function(){
+                $(this).hide();
+            });
+            $(":button").click(function(){
+                $(":button").hide();
+            });
+            $("tr:even").css("background-color","green");
+            $("tr:odd").css("background-color","red");
+
+            $("#test1").mouseenter(function(){
+                alert('您的鼠标移到了 id="test1" 的元素上!');
+            });
+            $("#test2").mouseleave(function(){
+                alert("再见，您的鼠标离开了该段落。");
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>header</h1>
+    <p id="p1">this is a id test</p>
+    <p class="p2">this is a class test</p>
+
+    <p id="test1">点进这里测试 <b>button</b></p>
+    <p id="test2">点进这里测试 <b>:button</b></p>
+    <button>Button 按钮</button>
+    <input type="button" value="Input 按钮">
+
+    <table border="1">
+        <tr>
+            <th>网站名</th>
+            <th>网址</th>
+        </tr>
+        <tr>
+            <td>Google</td>
+            <td>http://www.google.com</td>
+        </tr>
+        <tr>
+            <td>Baidu</td>
+            <td>http://www.baidu.com</td>
+        </tr>
+        <tr>
+            <td>菜鸟教程</td>
+            <td>http://www.runoob.com</td>
+        </tr>
+        <tr>
+            <td>淘宝</td>
+            <td>http://www.taobao.com</td>
+        </tr>
+        <tr>
+            <td>Facebook</td>
+            <td>http://www.facebook.com</td>
+        </tr>
+    </table>
+
+    /*
+        append/prepend和after/before区别(append/prepend 是在选择元素内部嵌入;after/before 是在元素外面追加.)
+    */
+    <p id="test_1_1" style="background-color: orange"><span class="s1">append</span></p>
+    <p id="test_1_2" style="background-color: blue"><span class="s1">after</span></p>
+    <p id="test_2_1" style="background-color: green"><span class="s1">prepend</span></p>
+    <p id="test_2_2" style="background-color: purple"><span class="s1">before</span></p>
+    <button id="append_after">追加</button>
+
+    <script>
+        $(function () {
+            $("#append_after").click(function () {
+                $("#test_1_1").append('<span class="s1">.s1</span>');
+                $("#test_1_2").after('<span class="s2">s2</span>');
+                $("#test_2_1").prepend('<span class="s3">s3.</span>');
+                $("#test_2_2").before('<span class="s4">s4</span>');
+            });
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reports</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+<aside>
+    <!-- reports 部分 -->
+    <div class="reports">
+        <div class="reports-nav">
+            <span class="reports-type-label">Type</span>
+            <div id="reports-type-dropdown" class="reports-type-dropdown" tabindex="100">
+                <div id="reports-type-wapper" class="reports-type-wapper">
+                    <div id="reports-type-text" class="reports-type-text">select type</div>
+                    <span id="reports-type-arrow" class="reports-type-arrow"></span>
+                </div>
+                <ul id="reports-type-list" class="reports-type-list">
+                    <li><a href="javascript:;">Route</a></li>
+                    <li><a href="javascript:;">Events</a></li>
+                    <li><a href="javascript:;">Trips</a></li>
+                    <li><a href="javascript:;">Simmany</a></li>
+                    <li><a href="javascript:;">Chart</a></li>
+                    <li><a href="javascript:;">Rawdata</a></li>
+                </ul>
+            </div>
+            <div>
+                <ul class="reports-operation">
+                    <li>
+                        <div class="configure-dropdown" tabindex="101">
+                            <a id="configure" class="configure" href="javascript:;">Configure</a>
+                            <div class="configure-list">
+                            </div>
+                        </div>
+                    </li>
+                    <li><a id="show" class="show" href="javascript:;">Show</a></li>
+                    <li><a id="export" class="export" href="javascript:;">Export</a></li>
+                    <li><a id="clear" class="clear" href="javascript:;">Clear</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="reports-body">
+            <table>
+                <thead id="reports-property" class="reports-property"></thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</aside>
+
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript">
+    (function ($) {
+        var reportsType;
+        $.fn.extend({
+            /* 禁用点击 */
+            disabledClick : function () {
+                this.css({'color':'#ececec','cursor':'pointer','pointer-events':'none'});
+            },
+            /* 启动点击 */
+            abledClick : function (el) {
+                this.css({'color':'#ffffff','cursor':'hand','pointer-events':'auto'});
+            }
+        })
+
+        $('#show').disabledClick();
+        $('#export').disabledClick();
+        $('#clear').disabledClick();
+
+        $("#reports-type-wapper").on('click',function(e) {
+            e.stopPropagation();
+            if($("#reports-type-list").css("display") == "none") {
+                $(this).css('border','1px solid #a9c9e2');
+                $("#reports-type-list").slideDown("fast");
+            } else{
+                $("#reports-type-list").slideUp("fast");
+            }
+        });
+
+        $("#reports-type-list li a").on('click',function(e) {
+            e.stopPropagation();
+            var txt = $(this).text();
+            $("#reports-type-text").text(txt).css('color','#ffffff');
+            reportsType = txt || 'Route';
+            if (reportsType) {
+                if (reportsType == 'Chart') {
+                    $('#show').abledClick();
+                    $('#export').disabledClick();
+                    $('#clear').abledClick();
+                } else {
+                    $('#show').abledClick();
+                    $('#export').abledClick();
+                    $('#clear').abledClick();
+                }
+            }
+            setReportPropertyWithType(reportsType);
+            $("#reports-type-list").slideUp("fast");
+        });
+
+        function setReportPropertyWithType(type) {
+            var tr = document.createElement('tr');
+            $(tr).addClass('propertylist');
+            $('#reports-property').append(tr);
+            switch (type) {
+                case 'Route':
+                    /* 处理Route */
+                    break;
+                case 'Events':
+                    /* 处理Events */
+                    break;
+                case 'Trips':
+                    /* 处理Trips */
+                    break;
+                case 'Simmany':
+                    /* 处理Simmany */
+                    break;
+                case 'Chart':
+                    /* 处理Chart */
+                    break;
+                case 'Rawdata':
+                    /* 处理Rawdata */
+                    break;
+                default:
+                    break;
+            }
+        }
+        $('#configure').on('click',function (e) {
+            e.stopPropagation();
+            console.log(reportsType);
+            $(this).parents(".reports-operation").find('a').removeClass('selected');
+            $(this).addClass('selected');
+            /* 配置参数 */
+            if($(".configure-list").css("display") == "none") {
+                $(".configure-list").slideDown("fast");
+            } else{
+                $(".configure-list").slideUp("fast");
+            }
+        })
+        $('.configure-list').click(function () {
+           console.log(123);
+        });
+        $('.configure-dropdown').on('focusout',function() {
+            if($(".configure-list").css("display") != "none") {
+                $(".configure-list").slideUp("fast");
+            }
+        })
+        $('#show').on('click',function (e) {
+            $(this).parents(".reports-operation").find('a').removeClass('selected');
+            $(this).addClass('selected');
+            console.log(reportsType);
+            /* 显示数据 */
+        })
+        $('#export').on('click',function (e) {
+            $(this).parents(".reports-operation").find('a').removeClass('selected');
+            $(this).addClass('selected');
+            console.log(reportsType);
+            /* 导出数据 */
+        })
+        $('#clear').on('click',function (e) {
+            $(this).parents(".reports-operation").find('a').removeClass('selected');
+            $(this).addClass('selected');
+            console.log(reportsType);
+            /* 清空数据 */
+        })
+        $('body').on('click',function () {
+           if ($(this).find('.reports-type-list').css('display') != 'none') {
+               $("#reports-type-wapper").css('border','1px solid #ffffff');
+               $("#reports-type-list").slideUp("fast");
+           }
+        })
+    })(jQuery);
+</script>
+</body>
+</html>

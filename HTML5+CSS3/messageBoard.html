@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>简单的网页留言板</title>
+	<style type="text/css">
+		body {
+			margin: 5px;
+		}
+	</style>
+	<script type="text/javascript" src="messageBoard.js"></script>
+</head>
+<body>
+	<h1>简单的网页留言板</h1>
+	<textarea id="messageBoard" cols="60" rows="10"></textarea>
+	<br/>
+	<input type="button" name="save" value="保存数据" onclick="saveStorage('messageBoard')">
+	<input type="button" name="load" value="读取数据" onclick="loadStorage('msg')">
+	<input type="button" name="clear" value="清除数据" onclick="clearStorage('msg')">
+	<hr/>
+	<p id="msg"></p>
+</body>
+</html>

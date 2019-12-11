@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript中的内建对象之Function对象</title>
+</head>
+<body>
+    <script type="text/javascript">
+        function test(x,y,z) {
+            return x+y+z;
+        }
+        console.log(test.constructor);
+        console.log(test.length);
+        function A() {
+            return A.caller;//返回调用的A函数的函数
+        }
+        function B() {
+            return A();
+        }
+        console.log(B());
+        console.log(A());
+        function test2() {
+            return arguments;//返回该函数执行时内置的argument对象
+        };
+        console.log(test2(1,2,3,'test',4,5));
+        //callee属性,这个属性引用的是当前被调用的函数对象
+        function test3() {
+            return arguments.callee;
+        }
+        console.log(test3());
+        
+        //匿名函数的递归调用
+        (
+            function (count) {
+                if (count<=3) {
+                    //alert(count);
+                    count++;
+                    arguments.callee(count);
+                }
+            }
+        )(0);
+        console.log(test.toString());
+        console.log(test.valueOf());
+
+        //call()、apply()调用当前Function对象
+        var obj = {
+            name:'King',
+            say: function (somebody) {
+                return 'hello '+somebody+','+'I\'m '+this.name;
+            }
+        }
+        console.log(obj.say('Tim'));
+        var obj1 = {
+            name :'Linda',
+        }
+        console.log(obj.say.call(obj1,'Tang'));
+        var obj2 = {
+            calc:function (x,y,z) {
+                return (x>y?x:y)>z?(x>y?x:y):z;
+            }
+        }
+        console.log(obj2.calc.call({},10,5,20));
+        console.log(obj2.calc.apply(null,[10,5,20]));
+    </script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript中的内建对象之RegExp对象</title>
+</head>
+<body>
+<script type="text/javascript">
+    var regExp = new RegExp('javascript');
+    var res = regExp.test('this is javascript excample');
+    console.log(res);
+
+    regExp = /javascript/;
+    var res = regExp.test('this is javascript excample');
+    console.log(res);
+
+    res = /[abc]/.test('blue');
+    res = /[^abc]/.test('blue');
+    res = /[0-9]/.test('adq55q6eq');
+    res = /[a-z]/.test('adq55q6eq');
+    res = /php|javascript|ios/.test('this is a test');
+    console.log(res);
+
+    res = /./.test('\n');//.代表除换行符之外的任意
+    res = /./.test('abc def');
+    res = /\w/.test('abc def');//同[a-zA-Z0-9]
+    res = /\W/.test('abcdef'); //同[^a-zA-Z0-9]
+    res = /\s/.test('abc def');//是否有空格
+    res = /\S/.test('abcdef');
+    console.log(res);
+
+    res = /o+/.test('abcdef oohh');//+表示至少出现1次
+    res = /o*/.test('abcdef oohh');//*表示至少出现0次
+    res = /o?/.test('abcdef oohh');//+表示出现0次或1次
+    res = /o{2}/.test('abcdef oohh');//+表示出现指定2次
+    res = /o{1,3}/.test('abcdef oohh');//+表示出现1-3次
+    res = /^k/.test('kabcdef oohh');//+表示以k开始
+    res = /i$/.test('kabcdef oohhi');//+表示以i结尾
+    console.log(res);
+
+    //搜索
+    res = /is/i.exec('this is a test');
+    console.log('res:'+res);
+
+    var patt = /i/ig;
+    var arr;
+    while((arr = patt.exec('this is a test'))!==null) {
+        var msg = '找到了'+arr[0]+'!';
+        msg+='下一个匹配从'+patt.lastIndex;
+        console.log(msg);
+    }
+
+    var str = 'this is a test';
+    res = str.match(/IS/ig);
+    console.log(res);
+    res = str.search(/IS/ig);
+    console.log(res);
+    res = str.replace(/IS/ig,'^');
+    console.log(res);
+
+    var str = '2017-06-02';
+    res = str.replace(/(\d{4})-(\d{2})-(\d{2})/ig,'$2/$3/$1');
+    console.log(res);
+    //替换
+    var str = 'This Is A TEST';
+    res = str.replace(/[A-Z]/g,func);
+    function func(result) {
+        console.log(result);
+
+        return result.toLowerCase()+'-';
+    }
+    console.log(res);
+    //拆分
+    res = str.split(/\s+/)
+    console.log(res);
+
+</script>
+</body>
+</html>

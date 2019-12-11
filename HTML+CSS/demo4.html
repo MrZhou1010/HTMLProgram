@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>HTML框架</title>
+	<meta charset="utf-8" name="keywords" content="百度"/>
+</head>
+<!-- rows分割上下窗口,cols分割左右窗口,frameborder是否显示边框(1显示,0不显示),border边框大小 -->
+<frameset rows="100px,*,100px" frameborder="1" border="1">
+<!-- src加载网页的url,noresize表示不能调整框架的大小,scrolling是否需要滚动条,frameborder是否显示边框(1显示,0不显示) -->
+	<frame name="top" src="top.html" noresize="noresize" />
+	<frameset cols="20%,80%" frameborder="1">
+		<frame name="left" src="left.html"/>
+		<frame name="right" src="right.html"/ scrolling="auto">
+	</frameset>
+	<frame name="bottom" src="bottom.html"/>
+</frameset>
+</html>

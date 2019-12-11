@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>onload事件</title>
+    <script type="text/javascript">
+        window.onload = function () {
+            var test1 = document.getElementById('test1');
+            alert(test1);
+        }
+    </script>
+</head>
+<body>
+    <input type="button" value="test1" id="test1"/>
+    <p><img src="https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png" alt="" id="img"/></p>
+    <script type="text/javascript">
+            var img = document.getElementById('img');
+            img.onload = function (e) {
+                alert(e.target.src);
+            }
+    </script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Extjs_test2</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/extjs/6.2.0/classic/theme-classic/resources/theme-classic-all.css" rel="stylesheet">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/extjs/6.2.0/ext-all.js"></script>
+    <script type="text/javascript">
+        Ext.application({
+            launch: function() {
+                var images = Ext.get('images').select('img');
+                Ext.each(images.elements, function(el) {
+                    var dd = Ext.create('Ext.dd.DD', el, 'imagesDDGroup', {
+                        isTarget: false
+                    });
+                });
+            }
+        });
+        var mainTarget = Ext.create('Ext.dd.DDTarget', 'mainRoom', 'imagesDDGroup', {
+            ignoreSelf: false
+        });
+    </script>
+    <style>
+        #content{
+            width:600px;
+            height:400px;
+            padding:10px;
+            border:1px solid #000;
+        }
+        #images{
+            float:left;
+            width:45%;
+            height:100%;
+            border:1px solid Black;
+            background-color:rgba(222, 222, 222, 1.0);
+        }
+        #mainRoom{
+            float:left;
+            width:52%;
+            height:100%;
+            margin-left:10px;
+            border:1px solid Black;
+            background-color:rgba(222, 222, 222, 1.0);
+        }
+        .image{
+            width:64px;
+            height:64px;
+            margin:10px;
+            cursor:pointer;
+            border:1px solid Black;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+<div id="content">
+    <div id="images">
+        <img src = "http://img.juimg.com/tuku/yulantu/120926/219049-12092612154377.jpg" class = "image" />
+        <img src = "http://img.taopic.com/uploads/allimg/110920/2443-1109200TK99.jpg" class = "image" />
+        <img src = "http://pic23.photophoto.cn/20120530/0020033092420808_b.jpg" class = "image" />
+        <img src = "http://img.taopic.com/uploads/allimg/140326/235113-1403260G01561.jpg" class = "image" />
+        <img src = "http://img1.3lian.com/2015/a1/84/d/102.jpg" class = "image" />
+        <img src = "http://img1.3lian.com/2015/a1/124/d/229.jpg" class = "image" />
+        <img src = "http://img05.tooopen.com/images/20150412/tooopen_sy_118141423291.jpg" class = "image" />
+        <img src = "http://img.taopic.com/uploads/allimg/130331/240460-13033106243430.jpg" class = "image" />
+    </div>
+    <div id="mainRoom"></div>
+</div>
+</body>
+</html>

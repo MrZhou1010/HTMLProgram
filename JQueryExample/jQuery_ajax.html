@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery</title>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="jQueryTest.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("button").click(function () {
+                /*
+                $("#div1").load("http://www.runoob.com/try/ajax/demo_test.txt",function (responseTxt,statusTxt,xhr) {
+                    if (statusTxt == "success") {
+                        alert(responseTxt);
+                    }
+                    else if (statusTxt == "error") {
+                        alert("Error: "+xhr.status+","+xhr.statusText);
+                    }
+                });
+                */
+                /*
+                $.get("http://www.runoob.com/try/ajax/demo_test.php",function(data,status){
+                        alert("数据: " + data + "\n状态: " + status);
+                });
+                */
+                /*
+                $.post("http://www.runoob.com/try/ajax/demo_test_post.php",
+                    {
+                        name:"菜鸟教程",
+                        url:"http://www.runoob.com"
+                    },
+                    function(data,status){
+                        alert("数据: \n" + data + "\n状态: " + status);
+                    });
+                    */
+                var param = {
+                    async:true,
+                    type:"get",
+                    url:"http://www.runoob.com/try/ajax/demo_test.txt",
+                    success:function(result,status,xhr) {
+                        $("#div1").html(result);
+                    },
+                    error:function(xhr,status,error){
+
+                    }
+                }
+                $.ajax(param);
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="div1"><h2>使用jQuery AJAX修改文本内容</h2></div>
+    <button>获取外部内容</button>
+</body>
+</html>

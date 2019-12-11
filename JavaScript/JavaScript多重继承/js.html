@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript多重继承</title>
+</head>
+<body>
+    <script type="text/javascript">
+        function Object(o) {
+            function F() {};
+            F.prototype = o;
+            return new F();
+        }
+        function object(o) {
+            function F() {};
+            F.prototype = o;
+            var n = new F();
+            n.uber = o;
+            return n;
+        }
+
+        var Shape = {
+            name:'shape',
+            toString:function () {
+                return this.name;
+            }
+        }
+        var TwoDShape = object(Shape);
+        TwoDShape.name = '2D Shape';
+        TwoDShape.toString = function () {
+            return this.uber.toString()+'--'+this.name;
+        }
+        var Triangle = object(TwoDShape);
+        Triangle.name = 'Triangle';
+        Triangle.getArea = function () {
+            return this.side*this.height/2;
+        }
+        console.log(Triangle.toString());
+        Triangle.side = 5;
+        Triangle.height =10;
+        console.log(Triangle.getArea());
+
+
+        function objectPlus(o,stuff) {
+            function F() {};
+            F.prototype = o;
+            var n = new F();
+            n.uber = o;
+            for (var i in stuff) {
+                n[i] = stuff[i];
+            }
+            return n;
+        }
+        var TwoDShape = objectPlus(Shape,{
+            name:'2D Shape',
+            toString:function () {
+                return this.uber.toString()+'--'+this.name;
+            }
+        });
+        var Triangle = objectPlus(TwoDShape,{
+            name:'Triangle',
+            getArea:function () {
+                return this.side*this.height/2;
+            },
+            side:0,
+            height:0
+        });
+        var myTriangle = objectPlus(Triangle,{
+            side:5,
+            height:10
+        })
+        console.log(myTriangle.getArea());
+        console.log(myTriangle.toString());
+
+        //多继承
+        function multiExtend() {
+            var n = {},stuff;
+            for (var j=0;j<arguments.length;j++) {
+                stuff = arguments[j];
+                for(var i in stuff) {
+                    n[i] = stuff[i];
+                }
+            }
+            return n;
+        }
+        var Shape = {
+            name:'shape',
+            toString:function () {
+                return this.name;
+            }
+        };
+        var TwoDShape = {
+            name:'2D Shape',
+            test:'this is a test'
+        };
+        var Triangle = multiExtend(Shape,TwoDShape,{
+            name:'Triangle',
+            getArea:function () {
+                return this.side*this.height/2;
+            },
+            side:5,
+            height:10
+        });
+        console.log(Triangle.getArea());
+        console.log(Triangle.name);
+        console.log(Triangle.toString());
+        console.log(Triangle.test);
+    </script>
+</body>
+</html>

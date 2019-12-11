@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>demo3</title>
+	<meta charset="utf-8" name="keywords" content="百度"/>
+</head>
+<!-- topmargin离上边的间距 leftmargin离左边的间距-->
+<body topmargin="0" leftmargin="0">
+	<!-- table表格标记 -->
+	<!-- caption表格的标题,tr表格的行标记,th和td表格的单元格标记,必须位于tr标签内,th表头标记(加粗),td数据标记 -->
+	<!-- cellspacing单元格的间距,默认2px--><!-- cellpadding单元格内容与边框的间距,默认2px-->
+	<!-- frame控制表格边框的四条线框void、above、below、lhs、rhs、hsides、vsides、box、border -->
+	<!-- rules控制单元格分割线none、all、rows、clos、groups -->
+	<table width="100%" height="200px" border="1" align="center" cellspacing="2" cellpadding="5" frame="box">
+	<!-- caption表格的标题--><!-- align标题的位置-->
+		<caption align="">表格的标题</caption>
+		<tr bgcolor="#ccc" align="left" valign="top">
+			<th>班级</th>
+			<th>姓名</th>
+			<th>年龄</th>
+			<th>成绩</th>
+		</tr>
+		<tr>
+		<!-- rowspan设置单元格所占行数,clospan设置单元格所占列数 -->
+			<td bgcolor="red">1</td>
+			<td align="center">张三</td>
+			<td>12</td>
+			<td>88</td>
+		</tr>
+		<tr>
+			<td>2</td>
+			<td>李四</td>
+			<td>13</td>
+			<td>66</td>
+		</tr>
+		<tr>
+			<td>1</td>
+			<td>赵武</td>
+			<td>13</td>
+			<td>60</td>
+		</tr>
+	</table>
+	<hr/>
+	<table width="960px" border="0" align="center" cellspacing="0" cellpadding="0">
+		<tr>
+			<td height="90px" bgcolor="red" align="center" colspan="2"><font size="6" color="white">网页的头部</font></td>
+		</tr>
+		<tr>
+			<td width="30%" height="500px" bgcolor="yellow" align="center"><font size="6" color="white">网页的左部分</font></td>
+			<td width="70%" height="500px" bgcolor="green" align="center"><font size="6" color="white">网页的右部分</font></td>
+		</tr>
+		<tr>
+			<td height="90px" bgcolor="red" align="center" colspan="2"><font size="6" color="white">网页的底部</font></td>
+		</tr>
+	</table>
+	<hr/>
+	<table width="960px" border="0" align="center" cellspacing="0" cellpadding="0">
+		<tr height="90px" bgcolor="red" align="center">
+			<td><b><font size="6" color="white">网页的头部</font></b></td>
+		</tr>
+		<tr>
+			<td>
+				<table width="30%" height="500px" bgcolor="yellow" align="left">
+					<tr align="center"><td><font size="6" color="white">网页的左部分</td></font></tr>
+				</table>
+				<table width="70%" height="500px" bgcolor="green" align="left">
+					<tr align="center"><td><font size="6" color="white">网页的右部分</font></td></tr>
+				</table>
+			</td>	
+		</tr>
+		<tr height="90px" bgcolor="red" align="center">
+			<td><b><font size="6" color="white">网页的底部</font></b></td>
+		</tr>
+	</table>
+</body>
+</html>

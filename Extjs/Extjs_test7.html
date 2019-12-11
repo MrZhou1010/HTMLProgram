@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Extjs_test7</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/extjs/6.0.0/classic/theme-neptune/resources/theme-neptune-all.css" rel="stylesheet">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/extjs/6.2.0/ext-all.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/extjs/6.0.0/classic/locale/locale-zh_CN.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/extjs/6.0.0/classic/locale/locale-ko.js"></script>
+    <script type="text/javascript">
+        Ext.require([
+            'Ext.grid.*',
+            'Ext.data.*'
+        ]);
+        // Creation of data model
+        Ext.define('StudentDataModel', {
+            extend: 'Ext.data.Model',
+            fields: [
+                {name: 'name', mapping : 'name'},
+                {name: 'age', mapping : 'age'},
+                {name: 'marks', mapping : 'marks'}
+            ]
+        });
+
+        Ext.onReady(function(){
+            // Store data
+            var myData = [
+                { name : "Asha", age : "16", marks : "90" },
+                { name : "Vinit", age : "18", marks : "95" },
+                { name : "Anand", age : "20", marks : "68" },
+                { name : "Niharika", age : "21", marks : "86" },
+                { name : "Manali", age : "22", marks : "57" }
+            ];
+            // Creation of first grid store
+            var firstGridStore = Ext.create('Ext.data.Store', {
+                model: 'StudentDataModel',
+                data: myData
+            });
+            // Creation of first grid
+            var firstGrid = Ext.create('Ext.grid.Panel', {
+                store            : firstGridStore,
+                columns          :
+                    [{
+                        header: "Student Name",
+                        dataIndex: 'name',
+                        id : 'name',
+                        flex:  1,
+                        sortable: true
+                    },{
+                        header: "Age",
+                        dataIndex: 'age',
+                        flex: .5,
+                        sortable: true
+                    },{
+                        header: "Marks",
+                        dataIndex: 'marks',
+                        flex: .5,
+                        sortable: true
+                    }],
+                stripeRows       : true,
+                title            : 'First Grid',
+                margins          : '0 2 0 0'
+            });
+
+            // Creation of a panel to show both the grids.
+            var displayPanel = Ext.create('Ext.Panel', {
+                width        : 600,
+                height       : 200,
+                layout       : {
+                    type: 'hbox',
+                    align: 'stretch',
+                    padding: 5
+                },
+                renderTo     : 'panel',
+                defaults     : { flex : 1 },
+                items        : [
+                    firstGrid
+                ]
+            });
+            Ext.create('Ext.Button', {
+                text      : 'Menu button',
+                renderTo  : Ext.getElementById('btn_menu'),
+                arrowAlign: 'right',
+                menu      : [
+                    {text: 'Item 1'},
+                    {text: 'Item 2'},
+                    {text: 'Item 3'},
+                    {text: 'Item 4'}
+                ]
+            });
+            Ext.create('Ext.Button', {
+                text     : 'Button',
+                renderTo : Ext.getElementById('btn_listeners'),
+                listeners: {
+                    click: function() {
+                        // this == the button, as we are in the local scope
+                        this.setText('I was clicked!');
+                    },
+                    mouseover: function() {
+                        // set a new config which says we moused over, if not already set
+                        if (!this.mousedOver) {
+                            this.mousedOver = true;
+                            alert('You moused over a button!\n\nI wont do this again.');
+                        }
+                    }
+                }
+            });
+            Ext.create('Ext.button.Cycle', {
+                showText: true,
+                prependText: 'View as ',
+                renderTo: Ext.getElementById('btn_cycle'),
+                menu: {
+                    id: 'view-type-menu',
+                    items: [{
+                        text: 'text only',
+                        iconCls: 'view-text',
+                        checked: true
+                    },{
+                        text: 'HTML',
+                        iconCls: 'view-html'
+                    }]
+                },
+                changeHandler: function(cycleBtn, activeItem) {
+                    Ext.Msg.alert('Change View', activeItem.text);
+                }
+            });
+            Ext.create('Ext.button.Split', {
+                renderTo: Ext.getElementById('btn_split'),
+                text: 'Options',
+                // handle a click on the button itself
+                handler: function() {
+                    alert("The button was clicked");
+                },
+                menu: new Ext.menu.Menu({
+                    items: [
+                        // these will render as dropdown menu items when the arrow is clicked:
+                        {text: 'Item 1', handler: function(){ alert("Item 1 clicked"); }},
+                        {text: 'Item 2', handler: function(){ alert("Item 2 clicked"); }}
+                    ]
+                })
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id = "panel" > </div>
+    <br/>
+    <div id="btn_menu"></div>
+    <br/>
+    <div id="btn_listeners"></div>
+    <br/>
+    <div id="btn_cycle"></div>
+    <br/>
+    <div id="btn_split"></div>
+</body>
+</html>

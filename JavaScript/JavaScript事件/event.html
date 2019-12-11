@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript事件</title>
+</head>
+<body>
+    <input type="button" value="test1" onclick="alert('hello');"/>
+    <input type="button" value="test2" onclick="test();"/>
+    <input type="button" value="test3" id="btn1"/>
+    <input type="button" value="test4" id="btn2"/>
+    <input type="button" value="test5" id="btn3"/>
+    <input type="button" value="test6" id="btn4"/>
+    <script type="text/javascript">
+        function test() {
+            alert('this is a test');
+        }
+
+        var btn1 = document.getElementById('btn1');
+        btn1.onclick = function () {
+            alert('btn1 clicked');
+        }
+
+        var btn2 = document.getElementById('btn2');
+        btn2.onclick = test2;
+        function test2() {
+            alert('btn2 clicked');
+        }
+
+        var btn3 = document.getElementById('btn3');
+        var count = 0;
+        btn3.onclick = function () {
+            //alert(this.tagName);
+            alert(count++);
+            if (count == 3)
+                btn3.onclick = null;
+        }
+
+        var btn4 = document.getElementById('btn4');
+        btn4.onclick = function (event) {
+            event = event||window.event;//兼容浏览器
+            alert(event);
+        }
+    </script>
+</body>
+</html>

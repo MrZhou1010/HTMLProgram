@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+    <script>
+        function myTestFunction()//将首字母转换为大写
+        {
+            var x = document.getElementById("fname");
+            var firstStr = x.value.substring(0,1);
+            firstStr = firstStr.toUpperCase();
+            var otherStr = x.value.substr(1,x.value.length-1);
+            x.value = firstStr + otherStr;
+        }
+        function myTestFunction2()//将首字母转换为大写
+        {
+            var x = document.getElementById("test2");
+            x.innerHTML = "think you!";
+        }
+        function myTestFunction3()//将首字母转换为大写
+        {
+            var x = document.getElementById("test2");
+            x.innerHTML = "把鼠标移到上面";
+        }
+        function showWeekday() {
+            var d = new Date();
+            var weekday = new Array();
+            switch (d.getDay()) {
+                case 0:weekday[0] = "星期日";
+                    break;
+                case 1:weekday[1] = "星期一";
+                    break;
+                case 2:weekday[2] = "星期二";
+                    break;
+                case 3:weekday[3] = "星期三";
+                    break;
+                case 4:weekday[4] = "星期四";
+                    break;
+                case 5:weekday[5] = "星期五";
+                    break;
+                case 6:weekday[6] = "星期六";
+                    break;
+            }
+            var x = document.getElementById('weekday');
+            x.innerHTML ="今天是"+weekday[d.getDay()];
+        }
+        function startTime() {
+            var d = new Date();
+            var h = d.getHours();
+            var m = d.getMinutes();
+            m = checkTime(m);
+            var s = d.getSeconds();
+            s = checkTime(s);
+            document.getElementById('time').innerHTML = h+":"+m+":"+s;
+            t = setTimeout('startTime()',500);
+        }
+        function checkTime(i) {
+            if (i<10) {
+                i = "0"+i;
+            }
+            return i;
+        }
+    </script>
+</head>
+<body onload="startTime()">
+
+    请输入英文字符：<input type="text" id="fname" onchange="myTestFunction()">
+    <p>当您离开输入字段时，会触发将输入文本转换为大写的函数。</p>
+
+    <div style="background-color: green;color: #fff;width: 100px;height: 100px;" onmouseover="myTestFunction2()" onmouseout="myTestFunction3()">
+        <p id="test2" style="color: #fff;text-align: center;padding-top: 30px">把鼠标移到上面</p>
+    </div>
+
+    <div id="weekday" onmouseover="showWeekday()">星期</div>
+
+    <div id="time"></div>
+</body>
+</html>

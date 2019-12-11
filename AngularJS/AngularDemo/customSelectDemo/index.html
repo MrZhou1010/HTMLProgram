@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>customSelect</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular-route.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./style/customSelect.css">
+    <style>
+        label {
+            display: inline-block;
+            margin-left: 100px;
+            margin-top: 20px;
+            width: 100px;
+        }
+        .t-select {
+            width: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div ng-app="customSelectApp" ng-controller="customSelectController">
+        <span>类型:</span>
+        <custom-select class="t-select" items="typeData" placeholder="typePlaceholder" readonly="readonly"></custom-select>
+        <span>设备:</span>
+        <custom-select class="t-select" items="devices" placeholder="placeholder"></custom-select>
+        <span>分组:</span>
+        <custom-select class="t-select" items="groups" placeholder="placeholder"></custom-select>
+    </div>
+
+    <script src="./script/directive/customSelect.js"></script>
+    <script src="./script/controller/customSelectController.js"></script>
+</body>
+</html>

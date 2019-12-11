@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        .reports-type-wapper {
+            position: absolute;
+            width: 150px;
+            height: 30px;
+            border: 1px solid #b3d7ff;
+
+        }
+        .reports-type-text {
+
+        }
+        .reports-type-wapper .reports-type-arrow {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 30px;
+            height: 100%;
+            cursor: pointer;
+            text-align: center;
+            font-size: 14px;
+            color: #999999;
+            background-color: orange;
+        }
+        .reports-type-wapper .reports-type-arrow:before {
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 0;
+            margin: auto;
+            content: " ";
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 5px solid #cccccc;
+        }
+    </style>
+</head>
+<body>
+<div id="reports-type-wapper" class="reports-type-wapper">
+    <div id="reports-type-text" class="reports-type-text">select type</div>
+    <span id="reports-type-arrow" class="reports-type-arrow"></span>
+</div>
+</body>
+</html>

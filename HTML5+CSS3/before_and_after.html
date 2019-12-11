@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>使用选择器插入内容</title>
+	<style type="text/css">
+		/* before伪元素选择器在某个元素之前插入内容,after伪元素选择器在某个元素之后插入内容 */
+		h2:before {
+			content: '$.';
+			color: red;
+		}
+		h3:after {
+			content: '_追加';
+			color: green;
+		}
+		.nocontent:after {
+			content: none;
+		}
+		.image:before {
+			content: url('https://ss1.bdstatic.com/kvoZeXSm1A5BphGlnYG/icon/weather/aladdin/png_18/a1.png');
+			margin-right: 5px;
+		}
+		/*
+		.counter li:before {
+			content: counter(count);
+			margin-right: 8px;
+		}
+		*/
+		/*
+		.counter li:before {
+			content: '第'counter(count)'号.';
+			margin-right: 8px;
+			background-color: orange;
+		}
+		*/
+		/*
+		.counter li:before {
+			content: '第'counter(count,upper-alpha)'号.';
+			margin-right: 8px;
+			background-color: orange;
+		}
+		*/
+		.counter li {
+			list-style: none;
+			counter-increment: count;
+		}
+		.counter li:before {
+			content: '第'counter(count)'号.';
+			margin-right: 8px;
+			color: orange;
+		}
+		.counter2 li {
+			list-style: none;
+			counter-increment: count2;
+		}
+		.counter2 li:before {
+			content: counter(count)'.'counter(count2);
+			margin-right: 2px;
+			color: blue;
+		}		
+		/*
+		.counter {
+			list-style: none;
+			counter-reset: count;
+		}
+		.counter li:before {
+			content: '第'counter(count)'号.';
+			counter-increment: count;
+			margin-right: 8px;
+			color: orange;
+		}
+		.counter2  {
+			list-style: none;
+			counter-reset: subcount;
+		}
+		.counter2 li:before {
+			content: counter(count)'.'counter(subcount);
+			counter-increment: subcount;
+			margin-right: 2px;
+			color: blue;
+		}
+		*/
+		.quote h2:before,.quote h3:before {
+			content: open-quote;
+		}
+		.quote h2:after,.quote h3:after {
+			content: close-quote;
+		}
+		.quote h2 {
+			quotes: "("")";
+		}
+		.quote h3 {
+			quotes: "\"""\"";
+		}
+	</style>
+</head>
+<body>
+	<h1>使用选择器插入内容</h1>
+	<h2>使用before伪元素选择器在某个元素之前插入内容</h2>
+	<h3>使用after伪元素选择器在某个元素之后插入内容</h3>
+	<h2>使用before伪元素选择器在某个元素之前插入内容</h2>
+	<h3 class="nocontent">使用after伪元素选择器在某个元素之后插入内容</h3>
+	<h2 class="image">使用before伪元素选择器在某个元素之前插入内容</h2>
+	<h3>使用after伪元素选择器在某个元素之后插入内容</h3>
+
+	<ul class="counter">
+		<li>追加编号1</li>
+		<li>追加编号2</li>
+		<ul class="counter2">
+			<li>追加编号2+1</li>
+			<li>追加编号2+2</li>
+			<li>追加编号2+3</li>
+			<li>追加编号2+4</li>
+		</ul>
+		<li>追加编号3</li>
+		<ul class="counter2">
+			<li>追加编号3+1</li>
+			<li>追加编号3+2</li>
+		</ul>
+		<li>追加编号4</li>
+	</ul>
+
+	<div class="quote">
+		<h2>使用before伪元素选择器在某个元素之前插入内容</h2>
+		<h3>使用after伪元素选择器在某个元素之后插入内容</h3>
+	</div>
+</body>
+</html>
